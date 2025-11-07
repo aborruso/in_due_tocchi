@@ -1,6 +1,6 @@
 # Riformula
 
-**Riformula** è una Progressive Web App (PWA) che permette di trasformare rapidamente link condivisi da altre app in messaggi curati secondo template personalizzabili.
+**Riformula** è una Progressive Web App (PWA) che trasforma link in testo curato da inviare direttamente a un LLM (ChatGPT, Claude, etc.). Scegli il template, condividi. Due tocchi, zero copia-incolla.
 
 ## Caratteristiche
 
@@ -55,15 +55,29 @@ Oppure usa uno strumento online come:
 
 ## Come Funziona
 
-### 1. Condivisione in Ingresso
+Il flusso è in **due share**:
+
+```
+[Leggi articolo/post]
+    ↓ share (Android)
+[Riformula + scegli template]
+    ↓ share (Android)
+[LLM: ChatGPT, Claude, Ollama, etc]
+    ↓
+[Risposta strutturata]
+```
+
+### 1. Condivisione in Ingresso (dal lettore)
 
 L'app è configurata come **Share Target** nel file `manifest.webmanifest`. Quando condividi un link da un'altra app Android e selezioni "Riformula":
 
 1. L'app si apre con i parametri URL: `?title=...&text=...&url=...`
 2. I dati vengono estratti e popolati nei campi
-3. Il template selezionato viene applicato automaticamente
+3. Scegli il template adatto (es: "Analizza film", "Riassumi articolo", "Crea domanda")
 
 ### 2. Template
+
+I template sono la **chiave del valore**: trasformano il contenuto grezzo in un prompt strutturato per l'LLM.
 
 I template supportano tre segnaposto:
 - `{title}` - Titolo del contenuto condiviso
@@ -74,15 +88,21 @@ I template supportano tre segnaposto:
 
 **Template personalizzati**: Creati e modificati via UI, salvati in `localStorage` per persistenza locale.
 
-Esempio di template:
+Esempio di template per film:
 ```
-Ho trovato questo articolo interessante:
+Analismi questo film:
 
-"{title}"
+Titolo: {title}
 
-{text}
+Trama/Descrizione: {text}
 
-Leggi di più: {url}
+Ulteriori info: {url}
+
+Mi piacerebbe sapere:
+- Genere principale e sottogeneri
+- Pubblico consigliato
+- Trama breve
+- Giudizio critico
 ```
 
 #### Gestione Template YAML
@@ -102,10 +122,14 @@ Modifica template di default in `src/data/templates.yaml`:
 
 I template custom creati dall'utente tramite UI rimangono in localStorage e vengono mostrati assieme ai template di default.
 
-### 3. Condivisione in Uscita
+### 3. Condivisione in Uscita (verso LLM)
 
-- **Web Share API**: Condividi verso qualsiasi app (Telegram, WhatsApp, Email, ecc.)
-- **Clipboard Fallback**: Se Web Share non è disponibile, copia negli appunti
+Il testo riformulato viene ricondiviso verso qualsiasi app LLM installata:
+
+- **Web Share API**: Condividi verso ChatGPT app, Claude app, browser con LLM, Ollama locale, etc.
+- **Clipboard Fallback**: Se Web Share non è disponibile, copia negli appunti per incollare manualmente
+
+Zero copia-incolla nel flusso ideale: tutto passa via Android share intent.
 
 ## Struttura Progetto
 

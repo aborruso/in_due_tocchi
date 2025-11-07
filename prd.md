@@ -1,13 +1,15 @@
 # PRD: Riformula
 
 ## Visione
-Riformula è una web app installabile (PWA) pensata per chi condivide spesso link da app diverse (browser, social, news) e vuole trasformare rapidamente quell’URL in un messaggio curato secondo un template. L’app
-- riceve automaticamente titolo, testo e URL tramite la funzione di Condivisione di Android,
-- permette di scegliere un template personalizzabile,
-- genera un testo compiuto,
-- consente di ricondividerlo verso qualsiasi app.
+Riformula è una web app installabile (PWA) che **trasforma contenuti web in prompt strutturati per LLM** con un flusso di due share. L'utente legge un articolo, lo condivide, sceglie il template (che riformula il contenuto in base al contesto), e lo ricondivide direttamente verso ChatGPT/Claude/Ollama/etc per ottenere risposte intelligenti.
 
-L’obiettivo è **ridurre il tempo tra "condividi link" e "testo pronto da inviare"** a meno di 5 secondi.
+L'app
+- riceve automaticamente titolo, testo e URL tramite la funzione di Condivisione di Android,
+- permette di scegliere un template personalizzabile (specifico per ogni tipo di analisi),
+- genera un prompt strutturato ottimizzato per l'LLM,
+- consente di ricondividerlo via share intent verso qualsiasi app LLM.
+
+L'obiettivo è **ridurre il tempo tra "leggo qualcosa" e "chiedo all'LLM"** a meno di 5 secondi, eliminando copia-incolla manuale.
 
 ## Obiettivi
 - Consentire all’utente di **comporre testi coerenti** e leggibili partendo da contenuti condivisi.
@@ -17,18 +19,26 @@ L’obiettivo è **ridurre il tempo tra "condividi link" e "testo pronto da invi
 - Essere **leggera** (caricamento rapido, nessun backend).
 
 ## Utenti Target
-- Giornalisti, content creator, ricercatori, attivisti.
-- Chi condivide articoli e post per creare sintesi o commenti.
-- Utenti che vogliono messaggi coerenti senza riscrivere ogni volta.
+- **Power user di LLM** (giornalisti, ricercatori, analyst, developer).
+- Chi legge continuamente e vuole **chiedere all'AI** per riassunti, analisi, idee.
+- Utenti che vogliono **prompt coerenti** senza riscrivere ogni volta.
+- Chi vuole flusso **reading → AI analysis → risposta** senza copia-incolla né context-switching.
 
-## Contesto d’Uso
-1. L’utente legge un contenuto in un’app.
-2. Tappa “Condividi”.
-3. Sceglie **Riformula** come destinazione.
-4. L’app si apre già con *titolo*, *testo* e *URL* precompilati.
-5. L’utente sceglie un template.
-6. L’app genera il testo.
-7. L’utente lo **condivide verso Telegram, WhatsApp, Mastodon, Email…**
+## Contesto d'Uso
+
+**Flusso di due share (da articolo a LLM)**
+
+1. L'utente **legge** un articolo/news/post in un browser o app lettore.
+2. Tappa **Condividi**.
+3. Sceglie **Riformula** come destinazione. ← *primo share*
+4. L'app si apre già con *titolo*, *testo* e *URL* precompilati.
+5. L'utente **sceglie un template** adatto al tipo di analisi (es: "Riassumi", "Analizza film", "Estrai domande").
+6. L'app **genera il prompt strutturato**.
+7. L'utente tappa **Condividi** di nuovo.
+8. Sceglie un'app LLM (ChatGPT, Claude, Ollama, browser con AI, etc). ← *secondo share*
+9. **Riceve la risposta** senza mai lasciare il flusso di lettura.
+
+**Alternativa**: copia negli appunti se il flusso share non è disponibile per l'LLM specifico.
 
 ## Requisiti Funzionali
 1. **Ricezione di dati da Condividi**

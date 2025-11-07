@@ -1,5 +1,11 @@
 ## 2025-11-07
 
+**Added 3 new templates + refactored docs for LLM-focused positioning**
+- Aggiunti template: SEO Brief, Thread Twitter, Fact-Check (tutti attivi)
+- README riscritto: flusso di due share (articolo → Riformula → LLM)
+- Enfatizzato valore core: "smart preprocessor per prompt strutturati"
+- PRD aggiornato: contesto d'uso, utenti target, visione allineati a "reading → AI analysis"
+
 **Fixed PWA update mechanism for smartphones**
 - Implementato cache versioning dinamico basato su timestamp
 - Creato script automatico `update-cache-version.js` che aggiorna la versione cache ad ogni build

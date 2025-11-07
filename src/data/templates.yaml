@@ -68,3 +68,72 @@
        - livello di strutturazione (da 1 a 5)
        - passi pratici per ottenerli/normalizzarli
        - eventuali rischi o attenzioni
+
+- id: seo-brief
+  name: SEO Brief
+  emoji: "🔍"
+  active: true
+  template: |
+    Analizza questo URL: {url}
+
+    Crea un SEO brief strutturato:
+
+    1. **Topic principale**: identifica l'argomento primario della pagina
+    2. **Keywords primarie e secondarie**: estrai le keyword più rilevanti (presenti nel titolo, headings, prime righe)
+    3. **Struttura contenuto**: analizza titoli, sottotitoli, lunghezza, presenza di liste/tabelle
+    4. **Valutazione on-page**:
+       - Qualità del titolo meta (lunghezza, keyword, appeal)
+       - Meta description presente e ottimizzata?
+       - Headings logici (H1, H2)?
+       - Readability (lunghezza paragrafi, uso di formatting)
+    5. **Suggerimenti di ottimizzazione**:
+       - 3 keyword da aggiungere/enfatizzare
+       - Miglioramenti strutturali (headings mancanti, sezioni da aggiungere)
+       - Elementi mancanti (schema markup, immagini, internal links)
+
+- id: twitter-thread
+  name: Thread Twitter
+  emoji: "🧵"
+  active: true
+  template: |
+    Leggi il contenuto da questo URL: {url}
+
+    Crea un thread Twitter (5-7 tweet) che sintetizza le idee principali:
+
+    1. **Tweet 1 (Hook)**: titolo accattivante + domanda che cattura attenzione
+    2. **Tweet 2-5**: sviluppa idee principali (uno per tweet)
+       - Usa **grassetto** per concetti chiave
+       - Aggiungi emoji rilevanti
+       - Mantieni tono conversazionale
+    3. **Tweet finale**: call-to-action (leggi l'articolo, condividi, replica)
+
+    Numera i tweet: 1/7, 2/7, ecc.
+    Rendi il thread autonomo (no necessità di leggere articolo per capire).
+
+- id: fact-check
+  name: Fact-Check
+  emoji: "✓"
+  active: true
+  template: |
+    Analizza il contenuto da: {url}
+
+    Esegui fact-checking strutturato:
+
+    1. **Estrai claim principali**: identifica le 5-7 affermazioni chiave (numeriche, scientifiche, di policy)
+
+    2. **Per ogni claim**:
+       - Valuta il livello di evidenza (verifiable from URL source? Cita ricerche/dati?)
+       - Verifica coerenza con fonti pubbliche affidabili (ISTAT, ricerche peer-review, organismi ufficiali)
+       - Segnala se claim è opinione mascherata da fatto
+
+    3. **Identifica red flags**:
+       - Dati privi di fonte
+       - Cherry-picking (dati veri ma fuori contesto)
+       - Affermazioni non supportate
+       - Conflitti di interesse impliciti
+
+    4. **Output finale**:
+       - Claim verificati ✓
+       - Claim dubbi/parziali ⚠️
+       - Claim falsi ✗
+       - Raccomandazione: affidabilità generale (alta/media/bassa)
