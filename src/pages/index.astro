@@ -90,6 +90,7 @@ const templates = (() => {
     // App state
     let currentTemplateId = null;
     let currentData = { title: '', text: '', url: '' };
+    let isPopulating = false; // Flag to prevent event handlers during populate
 
     // DOM elements
     const templateSelect = document.getElementById('template-select');
@@ -150,9 +151,11 @@ const templates = (() => {
 
     // Populate input fields with current data
     function populateInputs() {
+      isPopulating = true;
       inputTitle.value = currentData.title;
       inputText.value = currentData.text;
       inputUrl.value = currentData.url;
+      isPopulating = false;
     }
 
     // Update current data from inputs
@@ -197,18 +200,24 @@ const templates = (() => {
     });
 
     inputTitle.addEventListener('input', () => {
-      updateDataFromInputs();
-      updatePreview();
+      if (!isPopulating) {
+        updateDataFromInputs();
+        updatePreview();
+      }
     });
 
     inputText.addEventListener('input', () => {
-      updateDataFromInputs();
-      updatePreview();
+      if (!isPopulating) {
+        updateDataFromInputs();
+        updatePreview();
+      }
     });
 
     inputUrl.addEventListener('input', () => {
-      updateDataFromInputs();
-      updatePreview();
+      if (!isPopulating) {
+        updateDataFromInputs();
+        updatePreview();
+      }
     });
 
     appendUrlCheckbox.addEventListener('change', updatePreview);
