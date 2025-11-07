@@ -83,10 +83,25 @@ export function parseSharedData() {
 
   const params = new URLSearchParams(window.location.search);
 
+  let title = params.get('title') || '';
+  let text = params.get('text') || '';
+  let url = params.get('url') || '';
+
+  // Android workaround: if url is empty, try to extract it from text
+  // Many Android apps put the URL in the text field instead of url field
+  if (!url && text) {
+    const urlMatch = text.match(/https?:\/\/[^\s]+/);
+    if (urlMatch) {
+      url = urlMatch[0];
+      // Remove the URL from text to avoid duplication
+      text = text.replace(url, '').trim();
+    }
+  }
+
   return {
-    title: params.get('title') || '',
-    text: params.get('text') || '',
-    url: params.get('url') || ''
+    title,
+    text,
+    url
   };
 }
 
