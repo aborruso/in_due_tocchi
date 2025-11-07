@@ -2,6 +2,8 @@ import yaml from 'js-yaml';
 import templatesYamlRaw from '../data/templates.yaml?raw';
 
 const STORAGE_KEY = 'riformula-templates';
+const VERSION_KEY = 'riformula-templates-version';
+const CURRENT_VERSION = 2; // Increment when adding new default templates
 
 // Load default templates from YAML file
 const DEFAULT_TEMPLATES = (() => {
@@ -23,22 +25,29 @@ export function getTemplates() {
   }
 
   try {
+    const storedVersion = localStorage.getItem(VERSION_KEY);
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) {
-      // Initialize with default templates
-      saveTemplates(DEFAULT_TEMPLATES);
-      return DEFAULT_TEMPLATES;
+
+    // If no stored data or version mismatch, force sync
+    if (!stored || parseInt(storedVersion) !== CURRENT_VERSION) {
+      console.log('Template version mismatch or first load, syncing with defaults');
+      const merged = stored ? mergeTemplates(JSON.parse(stored)) : DEFAULT_TEMPLATES;
+      saveTemplates(merged);
+      localStorage.setItem(VERSION_KEY, String(CURRENT_VERSION));
+      return merged;
     }
 
     const storedTemplates = JSON.parse(stored);
 
-    // Sync with default templates: add any new default templates that aren't in localStorage
+    // Regular sync: add any new default templates
     const storedIds = new Set(storedTemplates.map(t => t.id));
     const newDefaults = DEFAULT_TEMPLATES.filter(t => !storedIds.has(t.id));
 
     if (newDefaults.length > 0) {
+      console.log('Found new default templates, adding them');
       const merged = [...storedTemplates, ...newDefaults];
       saveTemplates(merged);
+      localStorage.setItem(VERSION_KEY, String(CURRENT_VERSION));
       return merged;
     }
 
@@ -47,6 +56,17 @@ export function getTemplates() {
     console.error('Error loading templates:', error);
     return DEFAULT_TEMPLATES;
   }
+}
+
+/**
+ * Merge stored templates with defaults, preserving custom templates
+ */
+function mergeTemplates(storedTemplates) {
+  const customTemplates = storedTemplates.filter(t => t.id.startsWith('custom-'));
+  const defaultIds = new Set(DEFAULT_TEMPLATES.map(t => t.id));
+
+  // Keep custom templates and all current defaults
+  return [...DEFAULT_TEMPLATES, ...customTemplates];
 }
 
 /**
