@@ -9,6 +9,7 @@
 - Modale informativa per utenti non Android/mobile
 - Avvisa che l'app è ottimizzata per dispositivi mobili
 - Modale chiudibile con persistenza localStorage
+- Rilevamento automatico dispositivo via user agent
 
 **Rewritten Telegram template**
 - Riscritto per analizzare contenuto URL invece di testo fornito
