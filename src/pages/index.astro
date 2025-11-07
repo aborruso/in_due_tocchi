@@ -51,11 +51,11 @@ const templates = (() => {
     </footer>
   </div>
 
-  <script define:vars={{ templatesFromYaml: templates }}>
-    // Templates loaded at build time, passed from Astro
-    // Expose to window so the module script can access it
-    window.DEFAULT_TEMPLATES = templatesFromYaml;
-  </script>
+  <script is:inline set:html={`
+    // Templates loaded at build time, embedded as JSON
+    // Using direct JSON assignment instead of define:vars for better Android compatibility
+    window.DEFAULT_TEMPLATES = ${JSON.stringify(templates)};
+  `}></script>
 
   <script>
     import {
