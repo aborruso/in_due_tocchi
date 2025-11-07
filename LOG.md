@@ -1,13 +1,18 @@
 ## 2025-11-07
 
+**Refactor: template completamente staticizzati (come pa_mi_senti)**
+- Rimosso localStorage per template
+- Template caricati da YAML a build-time con `define:vars`
+- Template inline nell'HTML, zero sync issues
+- Rimosse funzionalità gestione custom template (nuovo/modifica/elimina/import/export)
+- Template ora read-only dal file `src/data/templates.yaml`
+- Fix definitivo per Android PWA: reload garantisce sempre template aggiornati
+- Ridotto bundle JS (-200 righe codice)
+
 **Added "Film Filtrati" template**
-- New template for filtering movies/series by streaming platform + IMDb rating
-- Build verified
+- Nuovo template per filtrare film/serie per piattaforma streaming + voto IMDb
 
 **Template system migrated to YAML**
-- Created `src/data/templates.yaml` for default templates (Semplice, Formale, Breve)
-- Installed js-yaml dependency for parsing YAML at build-time
-- Updated `src/lib/templates.js` to load default templates from YAML
-- Two-tier system: YAML defaults + localStorage custom templates
-- Updated documentation (README, openspec/project.md) with YAML patterns
-- Build verified, all templates loading correctly from YAML source
+- Creato `src/data/templates.yaml` per template di default
+- Installato js-yaml per parsing YAML a build-time
+- Pattern simile a pa_mi_senti: YAML → build → static HTML
