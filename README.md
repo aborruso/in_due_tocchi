@@ -15,8 +15,9 @@
 
 - **Astro** - Framework per build statico
 - **Tailwind CSS** - Styling
+- **js-yaml** - Parser YAML per template di default
 - **Service Worker** - Cache offline
-- **LocalStorage** - Salvataggio template
+- **LocalStorage** - Salvataggio template personalizzati
 
 ## Installazione e Sviluppo
 
@@ -64,10 +65,14 @@ L'app è configurata come **Share Target** nel file `manifest.webmanifest`. Quan
 
 ### 2. Template
 
-I template sono salvati in `localStorage` e supportano tre segnaposto:
+I template supportano tre segnaposto:
 - `{title}` - Titolo del contenuto condiviso
 - `{text}` - Testo o descrizione
 - `{url}` - URL del contenuto
+
+**Template di default**: Gestiti tramite file YAML (`src/data/templates.yaml`), facili da manutenere e versionare nel codice.
+
+**Template personalizzati**: Creati e modificati via UI, salvati in `localStorage` per persistenza locale.
 
 Esempio di template:
 ```
@@ -80,6 +85,23 @@ Ho trovato questo articolo interessante:
 Leggi di più: {url}
 ```
 
+#### Gestione Template YAML
+
+Modifica template di default in `src/data/templates.yaml`:
+
+```yaml
+- id: mio-template
+  name: Nome Template
+  template: |
+    {title}
+
+    {text}
+
+    {url}
+```
+
+I template custom creati dall'utente tramite UI rimangono in localStorage e vengono mostrati assieme ai template di default.
+
 ### 3. Condivisione in Uscita
 
 - **Web Share API**: Condividi verso qualsiasi app (Telegram, WhatsApp, Email, ecc.)
@@ -90,6 +112,8 @@ Leggi di più: {url}
 ```
 project/
 ├── src/
+│   ├── data/
+│   │   └── templates.yaml       # Template di default in YAML
 │   ├── pages/
 │   │   └── index.astro          # Pagina principale
 │   ├── components/

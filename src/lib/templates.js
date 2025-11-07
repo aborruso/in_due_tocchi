@@ -1,23 +1,18 @@
+import yaml from 'js-yaml';
+import templatesYamlRaw from '../data/templates.yaml?raw';
+
 const STORAGE_KEY = 'riformula-templates';
 
-// Default templates
-const DEFAULT_TEMPLATES = [
-  {
-    id: 'simple',
-    name: 'Semplice',
-    template: '{title}\n\n{text}\n\n{url}'
-  },
-  {
-    id: 'formal',
-    name: 'Formale',
-    template: 'Ho trovato questo contenuto interessante:\n\n"{title}"\n\n{text}\n\nMaggiori informazioni: {url}'
-  },
-  {
-    id: 'brief',
-    name: 'Breve',
-    template: '{title} - {url}'
+// Load default templates from YAML file
+const DEFAULT_TEMPLATES = (() => {
+  try {
+    const data = yaml.load(templatesYamlRaw);
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error('Error parsing templates.yaml:', error);
+    return [];
   }
-];
+})();
 
 /**
  * Get all templates from localStorage

@@ -1,0 +1,31 @@
+- id: simple
+  name: Semplice
+  template: |
+    {title}
+
+    {text}
+
+    {url}
+
+- id: formal
+  name: Formale
+  template: |
+    Ho trovato questo contenuto interessante:
+
+    "{title}"
+
+    {text}
+
+    Maggiori informazioni: {url}
+
+- id: brief
+  name: Breve
+  template: "{title} - {url}"
+
+- id: movies-filtered
+  name: Film Filtrati
+  template: |
+    Prendi i titoli di film/serie da questo URL: {url}.
+    Filtra solo quelli presenti su Amazon Prime Video o Netflix.
+    Per ciascuno: trova il voto IMDb e restituisci un elenco puntato in questa forma:
+    • Piattaforma – Voto – Titolo
