@@ -46,13 +46,13 @@
   template: |
     Leggi questo URL: {url}
 
-    Sintetizza in max 2 tweet (280 caratteri cadauno):
-    - Titolo accattivante
-    - Idea principale in 1-2 righe
+    Sintetizza in max 560 caratteri (lunghezza di 2 tweet):
+    - Titolo accattivante + idea principale
     - Emoji e **grassetto** per enfasi
     - URL come ultima riga
+    - Tono conversazionale, no formalismi
 
-    Mantieni tono conversazionale, niente formalismi.
+    Scrivi tutto in UN UNICO BLOCCO, senza numerazioni.
 
 - id: open-data-analysis
   name: Dati aperti
