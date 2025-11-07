@@ -203,11 +203,6 @@ const templates = (() => {
         button.addEventListener('click', () => selectTemplate(template.id));
 
         templateButtons.appendChild(button);
-
-        if (index === 0) {
-          currentTemplateId = template.id;
-          updateButtonStyles();
-        }
       });
     }
 
@@ -258,11 +253,28 @@ const templates = (() => {
 
     // Update preview text
     function updatePreview() {
-      const template = getTemplate(currentTemplateId);
-      if (!template) return;
+      let result = '';
 
-      const appendUrl = appendUrlCheckbox.checked;
-      const result = applyTemplate(template.template, currentData, appendUrl);
+      if (currentTemplateId) {
+        // Apply selected template
+        const template = getTemplate(currentTemplateId);
+        if (!template) return;
+
+        const appendUrl = appendUrlCheckbox.checked;
+        result = applyTemplate(template.template, currentData, appendUrl);
+      } else {
+        // Free text mode - combine non-empty fields
+        const parts = [];
+        if (currentData.title) parts.push(currentData.title);
+        if (currentData.text) parts.push(currentData.text);
+
+        result = parts.join('\n\n');
+
+        // Add URL if checkbox is checked and URL is provided
+        if (appendUrlCheckbox.checked && currentData.url) {
+          result = result ? result + '\n\n' + currentData.url : currentData.url;
+        }
+      }
 
       previewText.value = result;
       charCount.textContent = `${result.length} caratteri`;
