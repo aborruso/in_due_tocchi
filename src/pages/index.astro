@@ -53,6 +53,23 @@ const templates = (() => {
     </footer>
   </div>
 
+  <!-- Device Warning Modal -->
+  <div id="device-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-6 max-w-md mx-4 shadow-xl">
+      <div class="text-center">
+        <div class="text-4xl mb-4">⚠️</div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">Attenzione</h3>
+        <p class="text-gray-600 mb-4">
+          Questa app è pensata per Android e dispositivi mobili.
+          Su desktop alcune funzionalità potrebbero non essere disponibili.
+        </p>
+        <button id="dismiss-modal" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">
+          Ho capito
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script is:inline set:html={`
     // Templates loaded at build time, embedded as JSON
     // Using direct JSON assignment instead of define:vars for better Android compatibility
@@ -88,6 +105,44 @@ const templates = (() => {
           });
       });
     }
+
+    // Device detection and modal logic
+    function isAndroidMobile() {
+      const userAgent = navigator.userAgent;
+      return /Android/i.test(userAgent) && /Mobile/i.test(userAgent);
+    }
+
+    function shouldShowDeviceModal() {
+      return !isAndroidMobile() && !localStorage.getItem('deviceModalDismissed');
+    }
+
+    function showDeviceModal() {
+      const modal = document.getElementById('device-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+      }
+    }
+
+    function hideDeviceModal() {
+      const modal = document.getElementById('device-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        localStorage.setItem('deviceModalDismissed', 'true');
+      }
+    }
+
+    // Show modal if needed
+    if (shouldShowDeviceModal()) {
+      // Delay to ensure DOM is ready
+      setTimeout(showDeviceModal, 1000);
+    }
+
+    // Modal dismissal handler
+    document.addEventListener('click', (e) => {
+      if (e.target.id === 'dismiss-modal') {
+        hideDeviceModal();
+      }
+    });
 
     // App state
     let currentTemplateId = null;

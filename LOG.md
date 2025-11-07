@@ -5,6 +5,11 @@
 - Precisato filtro esclusivo per Amazon Prime Video e Netflix
 - Migliorata chiarezza istruzioni per AI
 
+**Added device warning modal**
+- Modale informativa per utenti non Android/mobile
+- Avvisa che l'app è ottimizzata per dispositivi mobili
+- Modale chiudibile con persistenza localStorage
+
 **Rewritten Telegram template**
 - Riscritto per analizzare contenuto URL invece di testo fornito
 - Sintesi italiana ottimizzata per condivisione Telegram

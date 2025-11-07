@@ -18,6 +18,7 @@
 - Added "Film" template for filtering movies/series by streaming platform + IMDb rating
 - Added "Telegram" template for creating Italian summaries optimized for Telegram group sharing with markdown formatting and emojis
 - Added `active` boolean field to template schema for enabling/disabling templates
+- Added device warning modal for non-Android/non-mobile users
 
 ## Tech Stack
 
