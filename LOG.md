@@ -1,5 +1,13 @@
 ## 2025-11-07
 
+**Fixed PWA update mechanism for smartphones**
+- Implementato cache versioning dinamico basato su timestamp
+- Creato script automatico `update-cache-version.js` che aggiorna la versione cache ad ogni build
+- Aggiunto banner di notifica "Nuova versione disponibile" con pulsante reload
+- Service Worker ora controlla aggiornamenti ogni 5 minuti
+- Risolto problema di app non aggiornata dopo push su GitHub
+- Vedi `APP_UPDATE_FIX.md` per dettagli tecnici completi
+
 **Updated Film template**
 - Aggiunto ordinamento decrescente per voto IMDb
 - Precisato filtro esclusivo per Amazon Prime Video e Netflix
