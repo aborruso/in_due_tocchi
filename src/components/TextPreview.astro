@@ -1,0 +1,35 @@
+---
+// TextPreview component - shows the generated text
+---
+
+<div class="preview-section bg-white rounded-lg shadow-md p-6 mb-6">
+  <h2 class="text-xl font-bold mb-4 text-gray-800">Testo Generato</h2>
+
+  <div class="relative">
+    <textarea
+      id="preview-text"
+      rows="10"
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-none bg-gray-50"
+      readonly
+      placeholder="Il testo generato apparirà qui..."
+    ></textarea>
+
+    <div class="absolute top-2 right-2">
+      <span id="char-count" class="text-xs text-gray-500 bg-white px-2 py-1 rounded">
+        0 caratteri
+      </span>
+    </div>
+  </div>
+
+  <div class="mt-4 flex items-center">
+    <input
+      type="checkbox"
+      id="append-url-checkbox"
+      class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+      checked
+    />
+    <label for="append-url-checkbox" class="ml-2 text-sm text-gray-700">
+      Aggiungi URL in coda (se non già presente nel template)
+    </label>
+  </div>
+</div>

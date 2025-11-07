@@ -1,0 +1,365 @@
+---
+import TemplateSelect from '../components/TemplateSelect.astro';
+import TextPreview from '../components/TextPreview.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+---
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Trasforma link condivisi in messaggi curati secondo template personalizzabili" />
+  <meta name="theme-color" content="#3b82f6" />
+
+  <title>Riformula</title>
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <!-- Header -->
+    <header class="mb-8 text-center">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Riformula</h1>
+      <p class="text-gray-600">Trasforma link in messaggi curati</p>
+    </header>
+
+    <!-- Main content -->
+    <main>
+      <TemplateSelect />
+      <TextPreview />
+      <ShareButtons />
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 text-center text-sm text-gray-500">
+      <p>Riformula v1.0 - PWA Offline-First</p>
+    </footer>
+  </div>
+
+  <script>
+    import {
+      getTemplates,
+      getTemplate,
+      addTemplate,
+      updateTemplate,
+      deleteTemplate,
+      applyTemplate,
+      exportTemplates,
+      importTemplates
+    } from '../lib/templates.js';
+
+    import {
+      parseSharedData,
+      isSharedContent,
+      clearSharedDataFromUrl,
+      shareText,
+      copyToClipboard,
+      canShare
+    } from '../lib/share.js';
+
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('Service Worker registered:', registration);
+          })
+          .catch(error => {
+            console.error('Service Worker registration failed:', error);
+          });
+      });
+    }
+
+    // App state
+    let currentTemplateId = null;
+    let currentData = { title: '', text: '', url: '' };
+    let editorMode = null; // 'new' or 'edit'
+
+    // DOM elements
+    const templateSelect = document.getElementById('template-select');
+    const previewText = document.getElementById('preview-text');
+    const charCount = document.getElementById('char-count');
+    const appendUrlCheckbox = document.getElementById('append-url-checkbox');
+
+    const inputTitle = document.getElementById('input-title');
+    const inputText = document.getElementById('input-text');
+    const inputUrl = document.getElementById('input-url');
+
+    const newTemplateBtn = document.getElementById('new-template-btn');
+    const editTemplateBtn = document.getElementById('edit-template-btn');
+    const deleteTemplateBtn = document.getElementById('delete-template-btn');
+    const exportTemplatesBtn = document.getElementById('export-templates-btn');
+    const importTemplatesInput = document.getElementById('import-templates-input');
+
+    const shareBtn = document.getElementById('share-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const feedbackMessage = document.getElementById('feedback-message');
+
+    const editorModal = document.getElementById('template-editor-modal');
+    const editorTitle = document.getElementById('editor-title');
+    const templateName = document.getElementById('template-name');
+    const templateContent = document.getElementById('template-content');
+    const saveTemplateBtn = document.getElementById('save-template-btn');
+    const cancelEditorBtn = document.getElementById('cancel-editor-btn');
+
+    // Initialize
+    function init() {
+      // Check if content was shared
+      if (isSharedContent()) {
+        currentData = parseSharedData();
+        populateInputs();
+        clearSharedDataFromUrl();
+      }
+
+      // Load templates into select
+      loadTemplates();
+
+      // Update preview
+      updatePreview();
+
+      // Show/hide share button based on API availability
+      if (!canShare()) {
+        shareBtn.style.display = 'none';
+      }
+    }
+
+    // Load templates into select dropdown
+    function loadTemplates() {
+      const templates = getTemplates();
+      templateSelect.innerHTML = '';
+
+      templates.forEach((template, index) => {
+        const option = document.createElement('option');
+        option.value = template.id;
+        option.textContent = template.name;
+        templateSelect.appendChild(option);
+
+        if (index === 0) {
+          currentTemplateId = template.id;
+        }
+      });
+    }
+
+    // Populate input fields with current data
+    function populateInputs() {
+      inputTitle.value = currentData.title;
+      inputText.value = currentData.text;
+      inputUrl.value = currentData.url;
+    }
+
+    // Update current data from inputs
+    function updateDataFromInputs() {
+      currentData = {
+        title: inputTitle.value,
+        text: inputText.value,
+        url: inputUrl.value
+      };
+    }
+
+    // Update preview text
+    function updatePreview() {
+      const template = getTemplate(currentTemplateId);
+      if (!template) return;
+
+      const appendUrl = appendUrlCheckbox.checked;
+      const result = applyTemplate(template.template, currentData, appendUrl);
+
+      previewText.value = result;
+      charCount.textContent = `${result.length} caratteri`;
+    }
+
+    // Show feedback message
+    function showFeedback(message, type = 'success') {
+      feedbackMessage.textContent = message;
+      feedbackMessage.className = `mt-4 p-3 rounded-lg ${
+        type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+      }`;
+      feedbackMessage.classList.remove('hidden');
+
+      setTimeout(() => {
+        feedbackMessage.classList.add('hidden');
+      }, 3000);
+    }
+
+    // Template editor functions
+    function openEditor(mode, templateId = null) {
+      editorMode = mode;
+
+      if (mode === 'new') {
+        editorTitle.textContent = 'Nuovo Template';
+        templateName.value = '';
+        templateContent.value = '';
+      } else if (mode === 'edit' && templateId) {
+        const template = getTemplate(templateId);
+        if (template) {
+          editorTitle.textContent = 'Modifica Template';
+          templateName.value = template.name;
+          templateContent.value = template.template;
+        }
+      }
+
+      editorModal.classList.remove('hidden');
+      editorModal.classList.add('flex');
+    }
+
+    function closeEditor() {
+      editorModal.classList.add('hidden');
+      editorModal.classList.remove('flex');
+    }
+
+    function saveTemplate() {
+      const name = templateName.value.trim();
+      const content = templateContent.value.trim();
+
+      if (!name || !content) {
+        alert('Nome e contenuto sono obbligatori');
+        return;
+      }
+
+      if (editorMode === 'new') {
+        const newTemplate = addTemplate(name, content);
+        currentTemplateId = newTemplate.id;
+        loadTemplates();
+        templateSelect.value = currentTemplateId;
+        showFeedback('Template creato con successo');
+      } else if (editorMode === 'edit') {
+        const success = updateTemplate(currentTemplateId, name, content);
+        if (success) {
+          loadTemplates();
+          templateSelect.value = currentTemplateId;
+          showFeedback('Template aggiornato con successo');
+        } else {
+          showFeedback('Errore durante l\'aggiornamento', 'error');
+        }
+      }
+
+      updatePreview();
+      closeEditor();
+    }
+
+    // Event listeners
+    templateSelect.addEventListener('change', (e) => {
+      currentTemplateId = e.target.value;
+      updatePreview();
+    });
+
+    inputTitle.addEventListener('input', () => {
+      updateDataFromInputs();
+      updatePreview();
+    });
+
+    inputText.addEventListener('input', () => {
+      updateDataFromInputs();
+      updatePreview();
+    });
+
+    inputUrl.addEventListener('input', () => {
+      updateDataFromInputs();
+      updatePreview();
+    });
+
+    appendUrlCheckbox.addEventListener('change', updatePreview);
+
+    newTemplateBtn.addEventListener('click', () => {
+      openEditor('new');
+    });
+
+    editTemplateBtn.addEventListener('click', () => {
+      if (currentTemplateId) {
+        openEditor('edit', currentTemplateId);
+      }
+    });
+
+    deleteTemplateBtn.addEventListener('click', () => {
+      if (!currentTemplateId) return;
+
+      const template = getTemplate(currentTemplateId);
+      if (!template) return;
+
+      if (confirm(`Eliminare il template "${template.name}"?`)) {
+        const success = deleteTemplate(currentTemplateId);
+        if (success) {
+          loadTemplates();
+          currentTemplateId = templateSelect.value;
+          updatePreview();
+          showFeedback('Template eliminato con successo');
+        } else {
+          showFeedback('Errore durante l\'eliminazione', 'error');
+        }
+      }
+    });
+
+    exportTemplatesBtn.addEventListener('click', () => {
+      exportTemplates();
+      showFeedback('Template esportati con successo');
+    });
+
+    importTemplatesInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      try {
+        const count = await importTemplates(file);
+        loadTemplates();
+        showFeedback(`Importati ${count} template`);
+      } catch (error) {
+        showFeedback('Errore durante l\'importazione: ' + error.message, 'error');
+      }
+
+      // Reset input
+      importTemplatesInput.value = '';
+    });
+
+    saveTemplateBtn.addEventListener('click', saveTemplate);
+    cancelEditorBtn.addEventListener('click', closeEditor);
+
+    // Close modal on outside click
+    editorModal.addEventListener('click', (e) => {
+      if (e.target === editorModal) {
+        closeEditor();
+      }
+    });
+
+    shareBtn.addEventListener('click', async () => {
+      const text = previewText.value;
+      if (!text) {
+        showFeedback('Nessun testo da condividere', 'error');
+        return;
+      }
+
+      const success = await shareText(text, 'Riformula');
+      if (success) {
+        showFeedback('Testo condiviso con successo');
+      } else {
+        // Fallback to copy
+        const copied = await copyToClipboard(text);
+        if (copied) {
+          showFeedback('Condivisione non disponibile. Testo copiato negli appunti');
+        } else {
+          showFeedback('Errore durante la condivisione', 'error');
+        }
+      }
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      const text = previewText.value;
+      if (!text) {
+        showFeedback('Nessun testo da copiare', 'error');
+        return;
+      }
+
+      const success = await copyToClipboard(text);
+      if (success) {
+        showFeedback('Testo copiato negli appunti');
+      } else {
+        showFeedback('Errore durante la copia', 'error');
+      }
+    });
+
+    // Initialize app
+    init();
+  </script>
+</body>
+</html>

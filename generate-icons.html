@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Icon Generator - Riformula</title>
+</head>
+<body>
+  <h1>Icon Generator</h1>
+  <p>This page will generate PWA icons. Open it in a browser and click the button below.</p>
+  <button onclick="generateIcons()">Generate Icons</button>
+  <div id="output"></div>
+
+  <script>
+    const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+
+    function generateIcons() {
+      const output = document.getElementById('output');
+      output.innerHTML = '<h2>Generated Icons (Right-click to save):</h2>';
+
+      sizes.forEach(size => {
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+
+        // Blue background
+        ctx.fillStyle = '#3b82f6';
+        ctx.fillRect(0, 0, size, size);
+
+        // White letter R
+        ctx.fillStyle = 'white';
+        ctx.font = `bold ${size * 0.6}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('R', size / 2, size / 2);
+
+        // Convert to image and add to page
+        const img = document.createElement('img');
+        img.src = canvas.toDataURL('image/png');
+        img.alt = `Icon ${size}x${size}`;
+        img.style.margin = '10px';
+
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = `icon-${size}x${size}.png`;
+        link.appendChild(img);
+
+        const label = document.createElement('p');
+        label.textContent = `${size}x${size}`;
+        label.style.display = 'inline-block';
+        label.style.margin = '10px';
+
+        const container = document.createElement('div');
+        container.style.display = 'inline-block';
+        container.appendChild(link);
+        container.appendChild(label);
+
+        output.appendChild(container);
+      });
+    }
+  </script>
+</body>
+</html>
