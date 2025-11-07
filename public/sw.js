@@ -1,7 +1,7 @@
 const CACHE_NAME = 'riformula-v1';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/manifest.webmanifest',
+  '/in_due_tocchi/',
+  '/in_due_tocchi/manifest.webmanifest',
 ];
 
 // Install event - cache assets
