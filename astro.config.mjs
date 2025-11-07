@@ -4,7 +4,8 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://riformula.app',
+  site: 'https://aborruso.github.io',
+  base: '/in_due_tocchi',
   output: 'static',
   vite: {
     build: {
