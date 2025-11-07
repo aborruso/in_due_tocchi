@@ -53,8 +53,11 @@ const templates = (() => {
 
   <script define:vars={{ templatesFromYaml: templates }}>
     // Templates loaded at build time, passed from Astro
-    const DEFAULT_TEMPLATES = templatesFromYaml;
+    // Expose to window so the module script can access it
+    window.DEFAULT_TEMPLATES = templatesFromYaml;
+  </script>
 
+  <script>
     import {
       applyTemplate
     } from '../lib/templates.js';
@@ -67,6 +70,9 @@ const templates = (() => {
       copyToClipboard,
       canShare
     } from '../lib/share.js';
+
+    // Get templates from inline script
+    const DEFAULT_TEMPLATES = window.DEFAULT_TEMPLATES || [];
 
     // Register service worker
     if ('serviceWorker' in navigator) {
