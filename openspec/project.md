@@ -6,10 +6,18 @@
 
 **Core Goals:**
 - Receive shared content from other Android apps via Web Share Target
-- Apply customizable templates with placeholders (title, text, url)
+- Apply predefined templates with placeholders (title, text, url)
 - Support offline-first functionality after initial load
 - Enable quick sharing via Web Share API or clipboard fallback
-- Provide import/export for template backup and sync
+- Provide static, reliable template system with no sync issues
+
+**Recent Changes (2025-11-07):**
+- Migrated to completely static template system (no localStorage for templates)
+- Templates loaded from YAML at build-time and embedded in HTML
+- Removed custom template management features (create/edit/delete/import/export)
+- Added "Film" template for filtering movies/series by streaming platform + IMDb rating
+- Added "Telegram" template for creating Italian summaries optimized for Telegram group sharing with markdown formatting and emojis
+- Added `active` boolean field to template schema for enabling/disabling templates
 
 ## Tech Stack
 
@@ -17,8 +25,8 @@
 - **Styling**: Tailwind CSS 3.x
 - **Runtime**: Vanilla JavaScript (ES6 modules)
 - **PWA**: Service Worker for offline caching
-- **Storage**: localStorage (client-side only), YAML for default templates
-- **YAML Parser**: js-yaml for loading default templates at build-time
+- **Storage**: localStorage (client-side only for user data), YAML for static templates
+- **YAML Parser**: js-yaml for parsing templates at build-time and embedding in HTML
 - **Hosting**: GitHub Pages
 - **Build Tool**: npm with Astro CLI
 - **Node Version**: 18+ (20 in CI/CD)
@@ -51,11 +59,12 @@ export function functionName(param1, param2) {
 
 - **Component-Based**: Astro components for structural UI (TemplateSelect, TextPreview, ShareButtons)
 - **Module Separation**: Business logic in `src/lib/` (templates.js, share.js), data in `src/data/`
-- **YAML Data Source**: Default templates in `src/data/templates.yaml`, parsed at build-time via js-yaml
-- **Two-Tier Template System**: Default templates (YAML, read-only at runtime) + Custom templates (localStorage, user-editable via UI)
+- **YAML Data Source**: Static templates in `src/data/templates.yaml` with emoji icons, parsed at build-time and embedded in HTML
+- **Button-Based Selection**: Touch-friendly button grid instead of dropdown for mobile-first design
+- **Static Template System**: All templates are read-only, loaded at build-time, zero runtime sync issues
 - **Astro Hybrid**: Static HTML with inline script blocks for interactivity
-- **State Management**: Single page app state in index.astro script block (currentTemplateId, currentData, editorMode)
-- **localStorage Strategy**: User-created/modified templates persisted in localStorage, no backend
+- **State Management**: Single page app state in index.astro script block (currentTemplateId, currentData)
+- **Build-Time Template Loading**: Templates converted to JSON and embedded in HTML (like pa_mi_senti pattern)
 - **Progressive Enhancement**: Service Worker registers on load, gracefully handles offline
 - **API Fallbacks**: Web Share API with clipboard fallback for broader compatibility
 - **Lazy Loading**: Service Worker caches on demand
@@ -90,20 +99,20 @@ export function functionName(param1, param2) {
 
 **User Flows:**
 1. User shares link from another app → Riformula receives via Share Target → fills input fields → applies template → shares/copies result
-2. User creates/edits custom templates → stored in localStorage → templates persist across sessions
-3. User exports templates → downloads JSON → can import on another device
+2. User taps template button (with emoji + name) → applies to shared content → shares/copies formatted result
 
 ## Important Constraints
 
 - **HTTPS Only**: PWA requires HTTPS for production (GitHub Pages provides this)
 - **Android Requirements**: Must be installed as PWA on Android to function as Share Target
-- **Storage Limits**: localStorage has ~5-10MB limit per origin (sufficient for templates)
+- **Storage Limits**: localStorage has ~5-10MB limit per origin (used only for user data, not templates)
 - **No Backend**: Static-only deployment, no server-side processing
 - **Browser Support**: Requires modern browser with Service Worker support (Chrome 40+, Firefox 44+)
 - **Offline Limitation**: Cannot fetch fresh content offline, only cached assets available
 - **Base Path**: Deployed to `/in_due_tocchi/` subpath on GitHub Pages (affects manifest and SW paths)
-- **YAML Templates**: Default templates are baked into build, not editable at runtime. User modifications via UI only affect localStorage
+- **Static Templates**: All templates are read-only and embedded in HTML at build-time, no runtime modifications
 - **Build-Time Parsing**: Template YAML must be valid during build, errors will fail the build process
+- **Android PWA Fix**: Page reload ensures templates are always up-to-date (no sync issues)
 
 ## External Dependencies
 

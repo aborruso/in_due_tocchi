@@ -9,7 +9,9 @@ import templatesYamlRaw from '../data/templates.yaml?raw';
 const templates = (() => {
   try {
     const data = yaml.load(templatesYamlRaw);
-    return Array.isArray(data) ? data : [];
+    const allTemplates = Array.isArray(data) ? data : [];
+    // Filter only active templates
+    return allTemplates.filter(template => template.active !== false);
   } catch (error) {
     console.error('Error parsing templates.yaml:', error);
     return [];
@@ -41,8 +43,8 @@ const templates = (() => {
     <!-- Main content -->
     <main>
       <TemplateSelect />
-      <TextPreview />
       <ShareButtons />
+      <TextPreview />
     </main>
 
     <!-- Footer -->
@@ -93,7 +95,7 @@ const templates = (() => {
     let isPopulating = false; // Flag to prevent event handlers during populate
 
     // DOM elements
-    const templateSelect = document.getElementById('template-select');
+    const templateButtons = document.getElementById('template-buttons');
     const previewText = document.getElementById('preview-text');
     const charCount = document.getElementById('char-count');
     const appendUrlCheckbox = document.getElementById('append-url-checkbox');
@@ -128,18 +130,50 @@ const templates = (() => {
       }
     }
 
-    // Load templates into select dropdown
+    // Load templates as buttons
     function loadTemplates() {
-      templateSelect.innerHTML = '';
+      templateButtons.innerHTML = '';
 
       DEFAULT_TEMPLATES.forEach((template, index) => {
-        const option = document.createElement('option');
-        option.value = template.id;
-        option.textContent = template.name;
-        templateSelect.appendChild(option);
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'template-btn flex flex-col items-center justify-center p-4 rounded-xl bg-gray-50 border-2 border-gray-200 text-gray-800 font-medium shadow-sm hover:bg-gray-100 active:bg-gray-200 transition-colors';
+        button.dataset.templateId = template.id;
+
+        button.innerHTML = `
+          <span class="text-3xl mb-2">${template.emoji}</span>
+          <span class="text-sm text-center">${template.name}</span>
+        `;
+
+        button.addEventListener('click', () => selectTemplate(template.id));
+
+        templateButtons.appendChild(button);
 
         if (index === 0) {
           currentTemplateId = template.id;
+          updateButtonStyles();
+        }
+      });
+    }
+
+    // Select a template
+    function selectTemplate(templateId) {
+      currentTemplateId = templateId;
+      updateButtonStyles();
+      updatePreview();
+    }
+
+    // Update button styles based on selection
+    function updateButtonStyles() {
+      const buttons = templateButtons.querySelectorAll('.template-btn');
+      buttons.forEach(button => {
+        const isSelected = button.dataset.templateId === currentTemplateId;
+        if (isSelected) {
+          button.classList.remove('bg-gray-50', 'border-gray-200', 'text-gray-800');
+          button.classList.add('bg-blue-50', 'border-blue-200', 'text-blue-800');
+        } else {
+          button.classList.remove('bg-blue-50', 'border-blue-200', 'text-blue-800');
+          button.classList.add('bg-gray-50', 'border-gray-200', 'text-gray-800');
         }
       });
     }
@@ -194,10 +228,6 @@ const templates = (() => {
 
 
     // Event listeners
-    templateSelect.addEventListener('change', (e) => {
-      currentTemplateId = e.target.value;
-      updatePreview();
-    });
 
     inputTitle.addEventListener('input', () => {
       if (!isPopulating) {
