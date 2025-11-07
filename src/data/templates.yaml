@@ -61,17 +61,26 @@
   template: |
     Analizza questo URL: {url}
 
-    1. Individua eventuali dati presenti (tabelle, numeri, liste, riferimenti normativi, dataset citati).
+    1. **Estrai dati presenti**:
+       - Tabelle, grafici, numeri, elenchi
+       - Riferimenti normativi, dataset citati
+       - Formati visibili (PDF, HTML, Excel, immagini)
 
-    2. Valuta se possono essere pubblicati come dati aperti (formato, licenza implicita, rischio privacy).
+    2. **Strutturazione e rilascio**:
+       - Livello di strutturazione (1=testo grezzo, 5=database strutturato)
+       - Formato ideale per open data (CSV, JSON, RDF, API)
+       - Licenza implicita e ostacoli legali (copyright, privacy)
+       - Rischi specifici (PII, segreti commerciali, dati sensibili)
 
-    3. Suggerisci fonti esterne correlate da cui recuperare dati simili o complementari (es. ISTAT, ANAC, ARERA, OpenStreetMap, Geoportali).
+    3. **Estrazione pratica**:
+       - Strumenti per estrarre (web scraping, OCR, API)
+       - Normalizzazione richiesta (encoding, pulizia, validazione)
+       - Effort stimato (basso/medio/alto)
 
-    4. Restituisci:
-       - potenziali dataset estraibili
-       - livello di strutturazione (da 1 a 5)
-       - passi pratici per ottenerli/normalizzarli
-       - eventuali rischi o attenzioni
+    4. **Fonti correlate affidabili**:
+       - ISTAT, ANAC, ARERA, OpenStreetMap, Geoportali, ISPRA
+       - Dati EU (data.europa.eu, Eurostat)
+       - Alternative pubbliche già disponibili
 
 - id: seo-brief
   name: SEO Brief
