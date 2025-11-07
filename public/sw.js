@@ -1,4 +1,6 @@
-const CACHE_NAME = 'riformula-v1';
+// Dynamic cache name based on timestamp - changes with each deployment
+const CACHE_VERSION = '20251107-2050';  // Update this with each deployment
+const CACHE_NAME = `riformula-v${CACHE_VERSION}`;
 const ASSETS_TO_CACHE = [
   '/in_due_tocchi/',
   '/in_due_tocchi/manifest.webmanifest',
@@ -6,12 +8,13 @@ const ASSETS_TO_CACHE = [
 
 // Install event - cache assets
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing...');
+  console.log('[Service Worker] Installing...', CACHE_NAME);
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[Service Worker] Caching app shell');
       return cache.addAll(ASSETS_TO_CACHE);
     }).then(() => {
+      // Skip waiting to activate immediately
       return self.skipWaiting();
     })
   );
@@ -19,7 +22,7 @@ self.addEventListener('install', (event) => {
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activating...');
+  console.log('[Service Worker] Activating...', CACHE_NAME);
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -31,7 +34,18 @@ self.addEventListener('activate', (event) => {
         })
       );
     }).then(() => {
+      // Take control of all clients immediately
       return self.clients.claim();
+    }).then(() => {
+      // Notify all clients about the update
+      return self.clients.matchAll().then(clients => {
+        clients.forEach(client => {
+          client.postMessage({
+            type: 'SW_UPDATED',
+            version: CACHE_VERSION
+          });
+        });
+      });
     })
   );
 });
