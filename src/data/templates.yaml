@@ -44,11 +44,15 @@
   emoji: "📱"
   active: true
   template: |
-    Analizza il contenuto della pagina a questo URL: {url}.
-    Sintetizza i concetti principali in italiano per un messaggio Telegram.
-    Proponi un titolo originale in italiano (non tradotto).
-    Scrivi una sintesi breve, usando markdown (**grassetto** per punti chiave, emoji dove rilevanti, `code` per termini tecnici).
-    Stampa l'URL come ultima riga.
+    Leggi questo URL: {url}
+
+    Sintetizza in max 2 tweet (280 caratteri cadauno):
+    - Titolo accattivante
+    - Idea principale in 1-2 righe
+    - Emoji e **grassetto** per enfasi
+    - URL come ultima riga
+
+    Mantieni tono conversazionale, niente formalismi.
 
 - id: open-data-analysis
   name: Dati aperti
