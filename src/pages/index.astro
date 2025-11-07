@@ -2,6 +2,19 @@
 import TemplateSelect from '../components/TemplateSelect.astro';
 import TextPreview from '../components/TextPreview.astro';
 import ShareButtons from '../components/ShareButtons.astro';
+import yaml from 'js-yaml';
+import templatesYamlRaw from '../data/templates.yaml?raw';
+
+// Load templates at build time (like pa_mi_senti)
+const templates = (() => {
+  try {
+    const data = yaml.load(templatesYamlRaw);
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error('Error parsing templates.yaml:', error);
+    return [];
+  }
+})();
 ---
 
 <!DOCTYPE html>
@@ -38,16 +51,12 @@ import ShareButtons from '../components/ShareButtons.astro';
     </footer>
   </div>
 
-  <script>
+  <script define:vars={{ templatesFromYaml: templates }}>
+    // Templates loaded at build time, passed from Astro
+    const DEFAULT_TEMPLATES = templatesFromYaml;
+
     import {
-      getTemplates,
-      getTemplate,
-      addTemplate,
-      updateTemplate,
-      deleteTemplate,
-      applyTemplate,
-      exportTemplates,
-      importTemplates
+      applyTemplate
     } from '../lib/templates.js';
 
     import {
@@ -75,7 +84,6 @@ import ShareButtons from '../components/ShareButtons.astro';
     // App state
     let currentTemplateId = null;
     let currentData = { title: '', text: '', url: '' };
-    let editorMode = null; // 'new' or 'edit'
 
     // DOM elements
     const templateSelect = document.getElementById('template-select');
@@ -87,22 +95,10 @@ import ShareButtons from '../components/ShareButtons.astro';
     const inputText = document.getElementById('input-text');
     const inputUrl = document.getElementById('input-url');
 
-    const newTemplateBtn = document.getElementById('new-template-btn');
-    const editTemplateBtn = document.getElementById('edit-template-btn');
-    const deleteTemplateBtn = document.getElementById('delete-template-btn');
-    const exportTemplatesBtn = document.getElementById('export-templates-btn');
-    const importTemplatesInput = document.getElementById('import-templates-input');
 
     const shareBtn = document.getElementById('share-btn');
     const copyBtn = document.getElementById('copy-btn');
     const feedbackMessage = document.getElementById('feedback-message');
-
-    const editorModal = document.getElementById('template-editor-modal');
-    const editorTitle = document.getElementById('editor-title');
-    const templateName = document.getElementById('template-name');
-    const templateContent = document.getElementById('template-content');
-    const saveTemplateBtn = document.getElementById('save-template-btn');
-    const cancelEditorBtn = document.getElementById('cancel-editor-btn');
 
     // Initialize
     function init() {
@@ -127,10 +123,9 @@ import ShareButtons from '../components/ShareButtons.astro';
 
     // Load templates into select dropdown
     function loadTemplates() {
-      const templates = getTemplates();
       templateSelect.innerHTML = '';
 
-      templates.forEach((template, index) => {
+      DEFAULT_TEMPLATES.forEach((template, index) => {
         const option = document.createElement('option');
         option.value = template.id;
         option.textContent = template.name;
@@ -140,6 +135,11 @@ import ShareButtons from '../components/ShareButtons.astro';
           currentTemplateId = template.id;
         }
       });
+    }
+
+    // Get template by ID
+    function getTemplate(id) {
+      return DEFAULT_TEMPLATES.find(t => t.id === id);
     }
 
     // Populate input fields with current data
@@ -183,61 +183,6 @@ import ShareButtons from '../components/ShareButtons.astro';
       }, 3000);
     }
 
-    // Template editor functions
-    function openEditor(mode, templateId = null) {
-      editorMode = mode;
-
-      if (mode === 'new') {
-        editorTitle.textContent = 'Nuovo Template';
-        templateName.value = '';
-        templateContent.value = '';
-      } else if (mode === 'edit' && templateId) {
-        const template = getTemplate(templateId);
-        if (template) {
-          editorTitle.textContent = 'Modifica Template';
-          templateName.value = template.name;
-          templateContent.value = template.template;
-        }
-      }
-
-      editorModal.classList.remove('hidden');
-      editorModal.classList.add('flex');
-    }
-
-    function closeEditor() {
-      editorModal.classList.add('hidden');
-      editorModal.classList.remove('flex');
-    }
-
-    function saveTemplate() {
-      const name = templateName.value.trim();
-      const content = templateContent.value.trim();
-
-      if (!name || !content) {
-        alert('Nome e contenuto sono obbligatori');
-        return;
-      }
-
-      if (editorMode === 'new') {
-        const newTemplate = addTemplate(name, content);
-        currentTemplateId = newTemplate.id;
-        loadTemplates();
-        templateSelect.value = currentTemplateId;
-        showFeedback('Template creato con successo');
-      } else if (editorMode === 'edit') {
-        const success = updateTemplate(currentTemplateId, name, content);
-        if (success) {
-          loadTemplates();
-          templateSelect.value = currentTemplateId;
-          showFeedback('Template aggiornato con successo');
-        } else {
-          showFeedback('Errore durante l\'aggiornamento', 'error');
-        }
-      }
-
-      updatePreview();
-      closeEditor();
-    }
 
     // Event listeners
     templateSelect.addEventListener('change', (e) => {
@@ -261,66 +206,6 @@ import ShareButtons from '../components/ShareButtons.astro';
     });
 
     appendUrlCheckbox.addEventListener('change', updatePreview);
-
-    newTemplateBtn.addEventListener('click', () => {
-      openEditor('new');
-    });
-
-    editTemplateBtn.addEventListener('click', () => {
-      if (currentTemplateId) {
-        openEditor('edit', currentTemplateId);
-      }
-    });
-
-    deleteTemplateBtn.addEventListener('click', () => {
-      if (!currentTemplateId) return;
-
-      const template = getTemplate(currentTemplateId);
-      if (!template) return;
-
-      if (confirm(`Eliminare il template "${template.name}"?`)) {
-        const success = deleteTemplate(currentTemplateId);
-        if (success) {
-          loadTemplates();
-          currentTemplateId = templateSelect.value;
-          updatePreview();
-          showFeedback('Template eliminato con successo');
-        } else {
-          showFeedback('Errore durante l\'eliminazione', 'error');
-        }
-      }
-    });
-
-    exportTemplatesBtn.addEventListener('click', () => {
-      exportTemplates();
-      showFeedback('Template esportati con successo');
-    });
-
-    importTemplatesInput.addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      try {
-        const count = await importTemplates(file);
-        loadTemplates();
-        showFeedback(`Importati ${count} template`);
-      } catch (error) {
-        showFeedback('Errore durante l\'importazione: ' + error.message, 'error');
-      }
-
-      // Reset input
-      importTemplatesInput.value = '';
-    });
-
-    saveTemplateBtn.addEventListener('click', saveTemplate);
-    cancelEditorBtn.addEventListener('click', closeEditor);
-
-    // Close modal on outside click
-    editorModal.addEventListener('click', (e) => {
-      if (e.target === editorModal) {
-        closeEditor();
-      }
-    });
 
     shareBtn.addEventListener('click', async () => {
       const text = previewText.value;
