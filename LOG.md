@@ -1,5 +1,15 @@
 ## 2025-11-07
 
+**Updated Film template**
+- Aggiunto ordinamento decrescente per voto IMDb
+- Precisato filtro esclusivo per Amazon Prime Video e Netflix
+- Migliorata chiarezza istruzioni per AI
+
+**Rewritten Telegram template**
+- Riscritto per analizzare contenuto URL invece di testo fornito
+- Sintesi italiana ottimizzata per condivisione Telegram
+- Mantenuto formato markdown con emoji e grassetto
+
 **Added template active flag**
 - Campo `active` booleano aggiunto allo schema YAML dei template
 - Possibilità di abilitare/disabilitare template senza rimuoverli dal codice
