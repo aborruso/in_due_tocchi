@@ -29,7 +29,20 @@ export function getTemplates() {
       saveTemplates(DEFAULT_TEMPLATES);
       return DEFAULT_TEMPLATES;
     }
-    return JSON.parse(stored);
+
+    const storedTemplates = JSON.parse(stored);
+
+    // Sync with default templates: add any new default templates that aren't in localStorage
+    const storedIds = new Set(storedTemplates.map(t => t.id));
+    const newDefaults = DEFAULT_TEMPLATES.filter(t => !storedIds.has(t.id));
+
+    if (newDefaults.length > 0) {
+      const merged = [...storedTemplates, ...newDefaults];
+      saveTemplates(merged);
+      return merged;
+    }
+
+    return storedTemplates;
   } catch (error) {
     console.error('Error loading templates:', error);
     return DEFAULT_TEMPLATES;
