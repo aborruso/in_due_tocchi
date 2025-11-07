@@ -49,3 +49,22 @@
     Proponi un titolo originale in italiano (non tradotto).
     Scrivi una sintesi breve, usando markdown (**grassetto** per punti chiave, emoji dove rilevanti, `code` per termini tecnici).
     Stampa l'URL come ultima riga.
+
+- id: open-data-analysis
+  name: Dati aperti
+  emoji: "📊"
+  active: true
+  template: |
+    Analizza questo URL: {url}
+
+    1. Individua eventuali dati presenti (tabelle, numeri, liste, riferimenti normativi, dataset citati).
+
+    2. Valuta se possono essere pubblicati come dati aperti (formato, licenza implicita, rischio privacy).
+
+    3. Suggerisci fonti esterne correlate da cui recuperare dati simili o complementari (es. ISTAT, ANAC, ARERA, OpenStreetMap, Geoportali).
+
+    4. Restituisci:
+       - potenziali dataset estraibili
+       - livello di strutturazione (da 1 a 5)
+       - passi pratici per ottenerli/normalizzarli
+       - eventuali rischi o attenzioni
