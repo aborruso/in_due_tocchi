@@ -14,8 +14,8 @@ import ShareButtons from '../components/ShareButtons.astro';
 
   <title>Riformula</title>
 
-  <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/in_due_tocchi/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/in_due_tocchi/favicon.svg" />
 </head>
 <body class="bg-gray-100 min-h-screen">
   <div class="container mx-auto px-4 py-8 max-w-4xl">
@@ -62,7 +62,7 @@ import ShareButtons from '../components/ShareButtons.astro';
     // Register service worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('/in_due_tocchi/sw.js')
           .then(registration => {
             console.log('Service Worker registered:', registration);
           })
