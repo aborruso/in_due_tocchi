@@ -150,3 +150,42 @@
        - Claim dubbi/parziali ⚠️
        - Claim falsi ✗
        - Raccomandazione: affidabilità generale (alta/media/bassa)
+
+- id: comprendi-apprendi
+  name: Comprendi e Apprendi
+  emoji: "🧠"
+  active: true
+  template: |
+    Leggi e analizza approfonditamente il contenuto da: {url}
+
+    Produce un'analisi strutturata in italiano che faciliti comprensione e apprendimento:
+
+    1. **Sintesi esecutiva**: 3-5 frasi che catturano le idee fondamentali e il valore centrale del contenuto
+
+    2. **Concetti principali**: organizza gerarchicamente i concetti chiave
+       - Concetto primario
+         - Sottoconcetti correlati
+       - Ripeti per ogni area principale
+
+    3. **Terminologia e definizioni**: per ogni termine tecnico/specializzato presente
+       - Definizione chiara in linguaggio semplice
+       - Contesto di utilizzo
+
+    4. **Contesto disciplinare/storico**:
+       - Sfondo necessario per capire il contenuto
+       - Evoluzione storica del tema (se rilevante)
+       - Scuole di pensiero o correnti diverse
+
+    5. **Implicazioni e applicazioni pratiche**:
+       - Come questi insegnamenti si applicano nella realtà
+       - Conseguenze immediate e a lungo termine
+       - Casi d'uso o esempi concreti
+
+    6. **Punti di collegamento interdisciplinari**:
+       - Connessioni con altri campi di conoscenza
+       - Paralleli o contrasti con idee correlate
+       - Dove approfondire ulteriormente
+
+    7. **Domande di riflessione**: 3-5 domande che stimolano pensiero critico e approfondimento successivo
+
+    Sii esaustivo ma organizzato. Output in italiano.

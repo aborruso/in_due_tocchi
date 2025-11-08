@@ -1,5 +1,11 @@
 ## 2025-11-08
 
+**Added "Comprendi e Apprendi" template (🧠)**
+- Nuovo template per analisi approfondita di qualsiasi contenuto web
+- Strutturato in 7 sezioni: sintesi esecutiva, concetti, terminologia, contesto, implicazioni, collegamenti, domande
+- Ottimizzato per apprendimento profondo (20+ minuti) con output sempre in italiano
+- Attivo subito, pronto per testing con vari tipi di contenuti
+
 **Added mobile landing page + redesigned desktop warning**
 - Creata pagina landing `/mobile` elegante e professionale (design magazine-style)
 - Modale desktop riscritta: tono diretto, emoji 📱, link a landing page
