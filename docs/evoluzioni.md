@@ -1,0 +1,197 @@
+# Evoluzioni del Progetto Riformula
+
+## 📋 Indice
+- [Evoluzioni a breve termine](#evoluzioni-a-breve-termine)
+- [Evoluzioni a medio termine](#evoluzioni-a-medio-termine)
+- [Visione a lungo termine](#visione-a-lungo-termine)
+- [Idee specifiche](#idee-specifiche)
+
+---
+
+## 🚀 Evoluzioni a breve termine
+
+### Template specializzati
+- **Business Intelligence**: Analisi report aziendali, KPI, dashboard
+- **Academico**: Estrazione citazioni, bibliografia, riassunti paper
+- **Legal**: Analisi contratti, clausole, normative
+- **Marketing**: Copywriting, analisi competitor, social media
+
+### Miglioramenti UX
+- **Template recenti**: Ordinamento per uso frequente
+- **Preview migliorata**: Formattazione markdown live
+- **Ricerca template**: Filtri per categoria/emoji
+
+---
+
+## 🎯 Evoluzioni a medio termine
+
+### Intelligenza artificiale
+- **Suggerimento template**: AI rileva tipo contenuto e propone template ottimale
+- **Template adattivi**: Si modificano in base al contenuto rilevato
+- **Validazione prompt**: AI verifica qualità del prompt generato
+
+### Estensioni piattaforma
+- **Desktop app**: Electron per Windows/macOS/Linux
+- **Browser extension**: Integrato direttamente in Chrome/Firefox
+- **API pubblica**: Per integrazioni terze
+
+---
+
+## 🌟 Visione a lungo termine
+
+### Ecosistema Riformula
+- **Marketplace template**: Community condivide template premium
+- **Team collaboration**: Template condivisi tra team aziendali
+- **Analytics**: Statistiche d'uso, performance template
+
+### Piattaforma low-code
+- **Visual template builder**: Drag-and-drop per creare template
+- **Conditional logic**: Template che si adattano a condizioni
+- **Multi-language**: Supporto internazionale
+
+---
+
+## 💡 Idee Specifiche
+
+### 📂 Sistema Categorie Template
+
+#### Categorie Proposte
+- **🎬 Intrattenimento**
+  - Film (🎬) - Filtraggio streaming + IMDb
+  
+- **📱 Social & Comunicazione** 
+  - Telegram (📱) - Sintesi per gruppi
+  - Thread Twitter (🧵) - Thread strutturati
+  
+- **🔍 Analisi & SEO**
+  - SEO Brief (🔍) - Ottimizzazione contenuti
+  - Fact-Check (✓) - Verifiche claim
+  - Dati aperti (📊) - Analisi dataset
+  
+- **🧠 Apprendimento**
+  - Comprendi e Apprendi (🧠) - Studio approfondito
+  
+- **📝 Base (disattivati)**
+  - Semplice (📝)
+  - Formale (🤝) 
+  - Breve (⚡)
+
+#### Schema YAML Proposto
+```yaml
+categories:
+  - id: entertainment
+    name: Intrattenimento
+    emoji: "🎬"
+    active: true
+    order: 1
+    
+  - id: social
+    name: Social & Comunicazione
+    emoji: "📱"
+    active: true
+    order: 2
+    
+  - id: analysis
+    name: Analisi & SEO
+    emoji: "🔍"
+    active: true
+    order: 3
+    
+  - id: learning
+    name: Apprendimento
+    emoji: "🧠"
+    active: true
+    order: 4
+    
+  - id: basic
+    name: Base
+    emoji: "📝"
+    active: false
+    order: 99
+
+templates:
+  - id: movies-filtered
+    name: Film
+    emoji: "🎬"
+    category: entertainment
+    active: true
+    template: |
+      Prendi i titoli di film/serie da questo URL: {url}...
+```
+
+### 🎨 Template da Sviluppare
+
+#### Business Intelligence
+- **Dashboard Analysis**: Estrai KPI da report, analizza trend
+- **Competitor Intelligence**: Analisi competitor, market positioning
+- **Financial Summary**: Sintesi report finanziari, bilanci
+
+#### Academico
+- **Paper Review**: Estrai metodologia, risultati, limitazioni
+- **Citation Extract**: Estrai citazioni in formato standard
+- **Literature Gap**: Identifica gap nella ricerca esistente
+
+#### Legal
+- **Contract Analysis**: Estrai clausole chiave, obblighi, rischi
+- **Compliance Check**: Verifica conformità normative
+- **Risk Assessment**: Analisi rischi legali
+
+#### Marketing
+- **Copy Generator**: Crea testi per social, email, landing
+- **SEO Audit**: Analizza pagina, suggerisce ottimizzazioni
+- **Campaign Brief**: Brief per campagne marketing
+
+### 🔧 Miglioramenti Tecnici
+
+#### Performance
+- **Lazy loading template**: Carica template on-demand
+- **Caching intelligente**: Cache basata su uso frequente
+- **Bundle splitting**: Suddividi JS per caricamento più rapido
+
+#### UX/UI
+- **Dark mode**: Tema scuro per uso notturno
+- **Gesture support**: Swipe per cambiare template
+- **Voice input**: Dettagli vocali per template veloci
+
+#### Analytics
+- **Template usage stats**: Statistiche d'uso template
+- **User behavior tracking**: Tracciamento pattern d'uso
+- **A/B testing framework**: Test varianti template
+
+---
+
+## 📊 Priorità
+
+### Alta Priorità
+1. Sistema categorie template
+2. Template Business Intelligence
+3. Miglioramenti UX base
+
+### Media Priorità
+1. Template Academici
+2. Browser extension
+3. Analytics base
+
+### Bassa Priorità
+1. Desktop app
+2. Marketplace template
+3. Visual template builder
+
+---
+
+## 🔄 Processo di Sviluppo
+
+### Fasi
+1. **Spec**: Definizione requisiti in openspec/
+2. **Dev**: Implementazione feature
+3. **Test**: Verifica funzionalità
+4. **Deploy**: Release su GitHub Pages
+
+### Metriche
+- Tempo da share a prompt < 5 secondi
+- Numero template per utente ≥ 3
+- Aperture via share ≥ 80%
+
+---
+
+*Ultimo aggiornamento: 2025-11-08*
