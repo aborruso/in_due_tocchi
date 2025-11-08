@@ -1,3 +1,13 @@
+## 2025-11-08
+
+**Added mobile landing page + redesigned desktop warning**
+- Creata pagina landing `/mobile` elegante e professionale (design magazine-style)
+- Modale desktop riscritta: tono diretto, emoji 📱, link a landing page
+- Landing page contiene: hero, 4 benefici chiave, demo placeholder, guida PWA con 4 step numerati
+- Guida PWA visibile come sezione principale (non collassata) con design elegante
+- CTA primario "Scopri come usarla 📲" collegato a `/mobile`
+- Build completato, pronto per deployment
+
 ## 2025-11-07
 
 **Added 3 new templates + refactored docs for LLM-focused positioning**
