@@ -35,9 +35,23 @@ const templates = (() => {
 <body class="bg-gray-100 min-h-screen">
   <div class="container mx-auto px-4 py-8 max-w-4xl">
     <!-- Header -->
-    <header class="mb-8 text-center">
-      <h1 class="text-4xl font-bold text-gray-900 mb-2">Riformula</h1>
-      <p class="text-gray-600">Trasforma link in messaggi curati</p>
+    <header class="mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <div class="text-center flex-1">
+          <h1 class="text-4xl font-bold text-gray-900 mb-2">Riformula</h1>
+          <p class="text-gray-600">Trasforma link in messaggi curati</p>
+        </div>
+        <button id="menu-btn" class="text-3xl text-gray-600 hover:text-gray-900 transition-colors p-2" aria-label="Menu">
+          ≡
+        </button>
+      </div>
+
+      <!-- Dropdown Menu -->
+      <div id="menu-dropdown" class="hidden bg-white rounded-lg shadow-md border border-gray-200 p-2 text-right">
+        <a href="/in_due_tocchi/mobile" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded transition-colors font-medium">
+          📖 Guida
+        </a>
+      </div>
     </header>
 
     <!-- Main content -->
@@ -399,6 +413,30 @@ const templates = (() => {
         showFeedback('Errore durante la copia', 'error');
       }
     });
+
+    // Menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const menuDropdown = document.getElementById('menu-dropdown');
+
+    if (menuBtn && menuDropdown) {
+      menuBtn.addEventListener('click', () => {
+        menuDropdown.classList.toggle('hidden');
+      });
+
+      // Close menu when clicking a link
+      menuDropdown.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+          menuDropdown.classList.add('hidden');
+        }
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('header')) {
+          menuDropdown.classList.add('hidden');
+        }
+      });
+    }
 
     // Initialize app
     init();
