@@ -32,22 +32,22 @@ const templates = (() => {
   <link rel="manifest" href="/in_due_tocchi/manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="/in_due_tocchi/favicon.svg" />
 </head>
-<body class="bg-gray-100 min-h-screen">
-  <div class="container mx-auto px-4 py-8 max-w-4xl">
+<body class="bg-gray-100 min-h-screen flex flex-col pb-28">
+  <div class="container mx-auto px-4 py-4 max-w-4xl flex-1">
     <!-- Header -->
-    <header class="mb-8">
-      <div class="flex items-center justify-between mb-4">
+    <header class="mb-6">
+      <div class="flex items-center justify-between">
         <div class="text-center flex-1">
-          <h1 class="text-4xl font-bold text-gray-900 mb-2">Riformula</h1>
-          <p class="text-gray-600">Trasforma link in messaggi curati</p>
+          <h1 class="text-3xl font-bold text-gray-900 mb-1">Riformula</h1>
+          <p class="text-sm text-gray-600">Trasforma link in messaggi curati</p>
         </div>
-        <button id="menu-btn" class="text-3xl text-gray-600 hover:text-gray-900 transition-colors p-2" aria-label="Menu">
+        <button id="menu-btn" class="text-2xl text-gray-600 hover:text-gray-900 transition-colors p-2" aria-label="Menu">
           ≡
         </button>
       </div>
 
       <!-- Dropdown Menu -->
-      <div id="menu-dropdown" class="hidden bg-white rounded-lg shadow-md border border-gray-200 p-2 text-right">
+      <div id="menu-dropdown" class="hidden bg-white rounded-lg shadow-md border border-gray-200 p-2 text-right mt-2">
         <a href="/in_due_tocchi/mobile" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded transition-colors font-medium">
           📖 Guida
         </a>
@@ -57,14 +57,47 @@ const templates = (() => {
     <!-- Main content -->
     <main>
       <TemplateSelect />
-      <ShareButtons />
       <TextPreview />
     </main>
 
     <!-- Footer -->
-    <footer class="mt-12 text-center text-sm text-gray-500">
+    <footer class="mt-8 text-center text-xs text-gray-500">
       <p>Riformula v1.0 - PWA Offline-First</p>
     </footer>
+  </div>
+
+  <!-- Sticky Bottom Bar with Share Buttons -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+    <div class="container mx-auto px-4 py-3 max-w-4xl">
+      <div id="share-buttons-container" class="flex gap-2">
+        <button
+          id="share-btn"
+          class="flex-1 px-4 py-3 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors shadow-sm hover:shadow-md flex items-center justify-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+          </svg>
+          Condividi
+        </button>
+
+        <button
+          id="copy-btn"
+          class="flex-1 px-4 py-3 bg-gray-500 text-white text-sm font-medium rounded-lg hover:bg-gray-600 transition-colors shadow-sm hover:shadow-md flex items-center justify-center gap-2"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+            <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+          </svg>
+          Copia
+        </button>
+      </div>
+
+      <!-- Feedback message -->
+      <div
+        id="feedback-message"
+        class="mt-2 p-2 rounded-lg hidden text-xs text-center"
+      ></div>
+    </div>
   </div>
 
   <!-- Device Warning Modal -->

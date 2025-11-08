@@ -1,5 +1,5 @@
 // Dynamic cache name based on timestamp - changes with each deployment
-const CACHE_VERSION = '20251108-0800';  // Update this with each deployment
+const CACHE_VERSION = '20251108-0931';  // Update this with each deployment
 const CACHE_NAME = `riformula-v${CACHE_VERSION}`;
 const ASSETS_TO_CACHE = [
   '/in_due_tocchi/',
