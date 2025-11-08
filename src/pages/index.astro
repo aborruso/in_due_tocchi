@@ -58,6 +58,7 @@ const templates = (() => {
     <main>
       <TemplateSelect />
       <TextPreview />
+      <ShareButtons />
     </main>
 
     <!-- Footer -->
@@ -193,7 +194,7 @@ const templates = (() => {
 
     // Reload app button handler
     document.addEventListener('click', (e) => {
-      if (e.target.id === 'reload-app') {
+      if (e.target && e.target.id === 'reload-app') {
         window.location.reload();
       }
     });
@@ -231,7 +232,7 @@ const templates = (() => {
 
     // Modal dismissal handler
     document.addEventListener('click', (e) => {
-      if (e.target.id === 'dismiss-modal') {
+      if (e.target && e.target.id === 'dismiss-modal') {
         hideDeviceModal();
       }
     });
@@ -251,10 +252,22 @@ const templates = (() => {
     const inputText = document.getElementById('input-text');
     const inputUrl = document.getElementById('input-url');
 
-
     const shareBtn = document.getElementById('share-btn');
     const copyBtn = document.getElementById('copy-btn');
     const feedbackMessage = document.getElementById('feedback-message');
+
+    console.log('DOM elements:', {
+      templateButtons: !!templateButtons,
+      previewText: !!previewText,
+      charCount: !!charCount,
+      appendUrlCheckbox: !!appendUrlCheckbox,
+      inputTitle: !!inputTitle,
+      inputText: !!inputText,
+      inputUrl: !!inputUrl,
+      shareBtn: !!shareBtn,
+      copyBtn: !!copyBtn,
+      feedbackMessage: !!feedbackMessage
+    });
 
     // Initialize
     function init() {
@@ -272,13 +285,14 @@ const templates = (() => {
       updatePreview();
 
       // Show/hide share button based on API availability
-      if (!canShare()) {
+      if (shareBtn && !canShare()) {
         shareBtn.style.display = 'none';
       }
     }
 
     // Load templates as buttons
     function loadTemplates() {
+      if (!templateButtons) return;
       templateButtons.innerHTML = '';
 
       DEFAULT_TEMPLATES.forEach((template, index) => {
@@ -307,6 +321,7 @@ const templates = (() => {
 
     // Update button styles based on selection
     function updateButtonStyles() {
+      if (!templateButtons) return;
       const buttons = templateButtons.querySelectorAll('.template-btn');
       buttons.forEach(button => {
         const isSelected = button.dataset.templateId === currentTemplateId;
@@ -327,6 +342,7 @@ const templates = (() => {
 
     // Populate input fields with current data
     function populateInputs() {
+      if (!inputTitle || !inputText || !inputUrl) return;
       isPopulating = true;
       inputTitle.value = currentData.title;
       inputText.value = currentData.text;
@@ -336,6 +352,7 @@ const templates = (() => {
 
     // Update current data from inputs
     function updateDataFromInputs() {
+      if (!inputTitle || !inputText || !inputUrl) return;
       currentData = {
         title: inputTitle.value,
         text: inputText.value,
@@ -345,6 +362,7 @@ const templates = (() => {
 
     // Update preview text
     function updatePreview() {
+      if (!previewText || !charCount || !appendUrlCheckbox) return;
       let result = '';
 
       if (currentTemplateId) {
@@ -374,6 +392,7 @@ const templates = (() => {
 
     // Show feedback message
     function showFeedback(message, type = 'success') {
+      if (!feedbackMessage) return;
       feedbackMessage.textContent = message;
       feedbackMessage.className = `mt-4 p-3 rounded-lg ${
         type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
@@ -381,71 +400,85 @@ const templates = (() => {
       feedbackMessage.classList.remove('hidden');
 
       setTimeout(() => {
-        feedbackMessage.classList.add('hidden');
+        if (feedbackMessage) {
+          feedbackMessage.classList.add('hidden');
+        }
       }, 3000);
     }
 
 
     // Event listeners
 
-    inputTitle.addEventListener('input', () => {
-      if (!isPopulating) {
-        updateDataFromInputs();
-        updatePreview();
-      }
-    });
-
-    inputText.addEventListener('input', () => {
-      if (!isPopulating) {
-        updateDataFromInputs();
-        updatePreview();
-      }
-    });
-
-    inputUrl.addEventListener('input', () => {
-      if (!isPopulating) {
-        updateDataFromInputs();
-        updatePreview();
-      }
-    });
-
-    appendUrlCheckbox.addEventListener('change', updatePreview);
-
-    shareBtn.addEventListener('click', async () => {
-      const text = previewText.value;
-      if (!text) {
-        showFeedback('Nessun testo da condividere', 'error');
-        return;
-      }
-
-      const success = await shareText(text, 'Riformula');
-      if (success) {
-        showFeedback('Testo condiviso con successo');
-      } else {
-        // Fallback to copy
-        const copied = await copyToClipboard(text);
-        if (copied) {
-          showFeedback('Condivisione non disponibile. Testo copiato negli appunti');
-        } else {
-          showFeedback('Errore durante la condivisione', 'error');
+    if (inputTitle) {
+      inputTitle.addEventListener('input', () => {
+        if (!isPopulating) {
+          updateDataFromInputs();
+          updatePreview();
         }
-      }
-    });
+      });
+    }
 
-    copyBtn.addEventListener('click', async () => {
-      const text = previewText.value;
-      if (!text) {
-        showFeedback('Nessun testo da copiare', 'error');
-        return;
-      }
+    if (inputText) {
+      inputText.addEventListener('input', () => {
+        if (!isPopulating) {
+          updateDataFromInputs();
+          updatePreview();
+        }
+      });
+    }
 
-      const success = await copyToClipboard(text);
-      if (success) {
-        showFeedback('Testo copiato negli appunti');
-      } else {
-        showFeedback('Errore durante la copia', 'error');
-      }
-    });
+    if (inputUrl) {
+      inputUrl.addEventListener('input', () => {
+        if (!isPopulating) {
+          updateDataFromInputs();
+          updatePreview();
+        }
+      });
+    }
+
+    if (appendUrlCheckbox) {
+      appendUrlCheckbox.addEventListener('change', updatePreview);
+    }
+
+    if (shareBtn) {
+      shareBtn.addEventListener('click', async () => {
+        const text = previewText.value;
+        if (!text) {
+          showFeedback('Nessun testo da condividere', 'error');
+          return;
+        }
+
+        const success = await shareText(text, 'Riformula');
+        if (success) {
+          showFeedback('Testo condiviso con successo');
+        } else {
+          // Fallback to copy
+          const copied = await copyToClipboard(text);
+          if (copied) {
+            showFeedback('Condivisione non disponibile. Testo copiato negli appunti');
+          } else {
+            showFeedback('Errore durante la condivisione', 'error');
+          }
+        }
+      });
+    }
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        const text = previewText.value;
+        if (!text) {
+          showFeedback('Nessun testo da copiare', 'error');
+          return;
+        }
+
+        const success = await copyToClipboard(text);
+        if (success) {
+          showFeedback('Testo copiato negli appunti');
+        } else {
+          showFeedback('Errore durante la copia', 'error');
+        }
+      });
+    }
 
     // Menu toggle
     const menuBtn = document.getElementById('menu-btn');
@@ -458,21 +491,25 @@ const templates = (() => {
 
       // Close menu when clicking a link
       menuDropdown.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') {
+        if (e.target && e.target.tagName === 'A') {
           menuDropdown.classList.add('hidden');
         }
       });
 
       // Close menu when clicking outside
       document.addEventListener('click', (e) => {
-        if (!e.target.closest('header')) {
+        if (e.target && !e.target.closest('header')) {
           menuDropdown.classList.add('hidden');
         }
       });
     }
 
     // Initialize app
-    init();
+    try {
+      init();
+    } catch (error) {
+      console.error('Error during app initialization:', error);
+    }
   </script>
 </body>
 </html>

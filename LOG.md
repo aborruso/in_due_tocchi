@@ -1,5 +1,13 @@
 ## 2025-11-08
 
+**Fixed UI layout: sticky bottom bar for share buttons**
+- Ridotto header: da py-8/text-4xl a py-4/text-3xl
+- Pulsanti Condividi/Copia spostati in barra sticky fixed in basso
+- Body con padding-bottom per evitare overlap con sticky bar
+- Pulsanti sempre visibili durante scroll - nessun scroll necessario per azione principale
+- Risolti bug e-target null checks in event listeners
+- Console clean, nessun errore
+
 **Added "Comprendi e Apprendi" template (🧠)**
 - Nuovo template per analisi approfondita di qualsiasi contenuto web
 - Strutturato in 7 sezioni: sintesi esecutiva, concetti, terminologia, contesto, implicazioni, collegamenti, domande
