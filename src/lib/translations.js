@@ -59,9 +59,13 @@ export const translations = {
 
     // Device modal
     deviceModal: {
-      title: 'Usa da Smartphone',
-      message: 'Questa app funziona <strong>SOLO su smartphone</strong>. Da desktop è completamente inutilizzabile.',
-      learnMore: 'Scopri come usarla 📲',
+      title: 'Questa app funziona SOLO su smartphone Android',
+      instructions: 'Per usarla:',
+      step1: 'Apri questo link da Chrome Android',
+      step2: 'Installa l\'app (Chrome menu → "Installa app")',
+      step3: 'Condividi link da qualsiasi app → seleziona ShareForge',
+      qrTitle: 'Scansiona con Chrome Android',
+      learnMore: 'Guida completa',
     },
 
     // Update banner
@@ -198,9 +202,13 @@ export const translations = {
 
     // Device modal
     deviceModal: {
-      title: 'Use on Smartphone',
-      message: 'This app works <strong>ONLY on smartphones</strong>. It is completely unusable on desktop.',
-      learnMore: 'Learn how to use it 📲',
+      title: 'This app works ONLY on Android smartphones',
+      instructions: 'To use it:',
+      step1: 'Open this link from Chrome Android',
+      step2: 'Install the app (Chrome menu → "Install app")',
+      step3: 'Share link from any app → select ShareForge',
+      qrTitle: 'Scan with Chrome Android',
+      learnMore: 'Complete guide',
     },
 
     // Update banner

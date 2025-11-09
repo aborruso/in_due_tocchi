@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "astro": "^4.0.0",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "qrcode": "^1.5.4"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^5.0.0",
