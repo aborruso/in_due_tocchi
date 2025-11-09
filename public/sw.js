@@ -6,6 +6,14 @@ const ASSETS_TO_CACHE = [
   '/in_due_tocchi/manifest.webmanifest',
 ];
 
+// Listen for SKIP_WAITING message from client
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    console.log('[Service Worker] Received SKIP_WAITING message');
+    self.skipWaiting();
+  }
+});
+
 // Install event - cache assets
 self.addEventListener('install', (event) => {
   console.log('[Service Worker] Installing...', CACHE_NAME);
