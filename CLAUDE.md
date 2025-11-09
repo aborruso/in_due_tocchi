@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Riformula** is a progressive web app (PWA) that transforms shared links into curated text messages formatted according to user-selected templates. Core design principle: zero copy-paste, maximum automation through Android Share Target and Web Share API.
+**ShareForge** is a progressive web app (PWA) that transforms shared links into curated text messages formatted according to user-selected templates. Core design principle: zero copy-paste, maximum automation through Android Share Target and Web Share API.
 
 Key constraints:
 - **Offline-first**: Works completely offline after first load via Service Worker
@@ -96,7 +96,7 @@ All component styles: Tailwind CSS utility classes. No Astro component interacti
 ### Service Worker & Cache Strategy
 
 - **File**: `public/sw.js`
-- **Cache key**: `riformula-v${CACHE_VERSION}` (timestamp-based, e.g., `20251108-0800`)
+- **Cache key**: `shareforge-v${CACHE_VERSION}` (timestamp-based, e.g., `20251108-0800`)
 - **Strategy**: Cache-first (serve from cache, fallback to network)
 - **Update flow**:
   1. On page load, SW registers and checks for updates every 5 minutes
@@ -151,7 +151,7 @@ Users can reorder templates via drag-and-drop in the template grid (index.astro)
 - Button with ↺ symbol, calls `resetTemplateOrder()` + `loadTemplates()`
 - Shows feedback "Ordine template ripristinato"
 
-**localStorage key**: `riformula-template-order` (JSON array of template IDs)
+**localStorage key**: `shareforge-template-order` (JSON array of template IDs)
 
 **Persistence**: Survives reload, PWA deactivation, app updates (PWA cache version doesn't affect localStorage)
 
@@ -166,7 +166,7 @@ npm run preview
 Then on Android Chrome:
 1. Install the app (Chrome menu → "Install app")
 2. Share a link from another app
-3. Select "Riformula" from share target list
+3. Select "ShareForge" from share target list
 4. Verify template applies and output looks correct
 
 **Note**: Service Worker is only active in HTTPS contexts. For local testing, `npm run preview` serves over HTTP. To test PWA/SW locally, consider using `npm run build && serve -l 5000 dist/` with a local HTTPS tunnel, or test directly on Android device against the deployed GitHub Pages URL.
@@ -175,9 +175,9 @@ Then on Android Chrome:
 
 - **PWA config**: Chrome DevTools → Application tab → Manifest
 - **Service Worker**: Application → Service Workers (check cache, controlled clients)
-- **Cache contents**: Application → Cache Storage → `riformula-v*`
+- **Cache contents**: Application → Cache Storage → `shareforge-v*`
 - **Console errors**: Check for JS errors on mobile via USB debugging
-- **Clear SW cache**: Application → Cache Storage → right-click `riformula-v*` → Delete; then refresh
+- **Clear SW cache**: Application → Cache Storage → right-click `shareforge-v*` → Delete; then refresh
 
 **Incognito mode**: Service Workers don't activate in incognito—use normal tab for testing.
 
@@ -190,7 +190,7 @@ Then on Android Chrome:
 | Template placeholders not replaced | Wrong placeholder syntax | Use `{title}`, `{text}`, `{url}` exactly |
 | Share API fails silently | Not on Android or HTTPS required | Share API only works on secure contexts (HTTPS + Android) |
 | URL param detection broken | Android puts URL in `text` field | `parseSharedData()` handles this with regex fallback |
-| App loads old version after deploy | Stale SW cache | Press F12 → DevTools → Application → Cache Storage → delete `riformula-v*`; refresh page |
+| App loads old version after deploy | Stale SW cache | Press F12 → DevTools → Application → Cache Storage → delete `shareforge-v*`; refresh page |
 
 ## File Paths to Know
 

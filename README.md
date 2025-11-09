@@ -1,105 +1,105 @@
-# Riformula
+# ShareForge
 
-**Riformula** è una Progressive Web App (PWA) che trasforma link in testo curato da inviare direttamente a un LLM (ChatGPT, Claude, etc.). Scegli il template, condividi. Due tocchi, zero copia-incolla.
+**ShareForge** is a Progressive Web App (PWA) that transforms shared links into curated prompts for LLMs (ChatGPT, Claude, etc.). Pick a template, share. Two taps, zero copy-paste.
 
-## Caratteristiche
+## Features
 
-- ✅ **Web Share Target**: Riceve contenuti condivisi da altre app Android
-- ✅ **Template personalizzabili**: Crea, modifica ed elimina template con segnaposto `{title}`, `{text}`, `{url}`
-- ✅ **Drag-and-drop**: Riordina i template via trascinamento, ordine salvato in localStorage
-- ✅ **Offline-first**: Funziona completamente offline dopo il primo caricamento
-- ✅ **Condivisione rapida**: Usa Web Share API o copia negli appunti
-- ✅ **Leggera e veloce**: Nessun backend, solo file statici
+- ✅ **Web Share Target**: Receives shared content from other Android apps
+- ✅ **Customizable templates**: Create, edit, and delete templates with `{title}`, `{text}`, `{url}` placeholders
+- ✅ **Drag-and-drop**: Reorder templates via drag-and-drop, order saved in localStorage
+- ✅ **Offline-first**: Works completely offline after first load
+- ✅ **Quick sharing**: Uses Web Share API or clipboard fallback
+- ✅ **Lightweight & fast**: No backend, just static files
 
-## Stack Tecnologico
+## Tech Stack
 
-- **Astro** - Framework per build statico
+- **Astro** - Static site framework
 - **Tailwind CSS** - Styling
-- **js-yaml** - Parser YAML per template di default
-- **Service Worker** - Cache offline
-- **LocalStorage** - Salvataggio template personalizzati
+- **js-yaml** - YAML parser for default templates
+- **Service Worker** - Offline cache
+- **LocalStorage** - Custom template persistence
 
-## Installazione e Sviluppo
+## Installation & Development
 
-### Prerequisiti
+### Prerequisites
 
-- Node.js 18+ e npm
+- Node.js 18+ and npm
 
 ### Setup
 
 ```bash
-# Installa dipendenze
+# Install dependencies
 npm install
 
-# Avvia server di sviluppo
+# Start dev server
 npm run dev
 
-# Build per produzione
+# Build for production
 npm run build
 
 # Preview build
 npm run preview
 ```
 
-## Come Funziona
+## How It Works
 
-Il flusso è in **due share**:
+The flow uses **two shares**:
 
 ```
-[Leggi articolo/post]
+[Read article/post]
     ↓ share (Android)
-[Riformula + scegli template]
+[ShareForge + pick template]
     ↓ share (Android)
 [LLM: ChatGPT, Claude, Ollama, etc]
     ↓
-[Risposta strutturata]
+[Structured response]
 ```
 
-### 1. Condivisione in Ingresso (dal lettore)
+### 1. Inbound Sharing (from reader)
 
-L'app è configurata come **Share Target** nel file `manifest.webmanifest`. Quando condividi un link da un'altra app Android e selezioni "Riformula":
+The app is configured as a **Share Target** in `manifest.webmanifest`. When you share a link from another Android app and select "ShareForge":
 
-1. L'app si apre con i parametri URL: `?title=...&text=...&url=...`
-2. I dati vengono estratti e popolati nei campi
-3. Scegli il template adatto (es: "Analizza film", "Riassumi articolo", "Crea domanda")
+1. App opens with URL params: `?title=...&text=...&url=...`
+2. Data is extracted and populated in fields
+3. Pick the right template (e.g., "Analyze movie", "Summarize article", "Create question")
 
-### 2. Template
+### 2. Templates
 
-I template sono la **chiave del valore**: trasformano il contenuto grezzo in un prompt strutturato per l'LLM.
+Templates are the **key value**: they transform raw content into a structured LLM prompt.
 
-I template supportano tre segnaposto:
-- `{title}` - Titolo del contenuto condiviso
-- `{text}` - Testo o descrizione
-- `{url}` - URL del contenuto
+Templates support three placeholders:
+- `{title}` - Shared content title
+- `{text}` - Text or description
+- `{url}` - Content URL
 
-**Template di default**: Gestiti tramite file YAML (`src/data/templates.yaml`), facili da manutenere e versionare nel codice.
+**Default templates**: Managed via YAML file (`src/data/templates.yaml`), easy to maintain and version in code.
 
-**Template personalizzati**: Creati e modificati via UI, salvati in `localStorage` per persistenza locale.
+**Custom templates**: Created and edited via UI, saved in `localStorage` for local persistence.
 
-Esempio di template per film:
+Example movie template:
 ```
-Analismi questo film:
+Analyze this movie:
 
-Titolo: {title}
+Title: {title}
 
-Trama/Descrizione: {text}
+Plot/Description: {text}
 
-Ulteriori info: {url}
+More info: {url}
 
-Mi piacerebbe sapere:
-- Genere principale e sottogeneri
-- Pubblico consigliato
-- Trama breve
-- Giudizio critico
+I'd like to know:
+- Main genre and subgenres
+- Recommended audience
+- Brief plot
+- Critical review
 ```
 
-#### Gestione Template YAML
+#### Managing YAML Templates
 
-Modifica template di default in `src/data/templates.yaml`:
+Edit default templates in `src/data/templates.yaml`:
 
 ```yaml
-- id: mio-template
-  name: Nome Template
+- id: my-template
+  name: Template Name
   template: |
     {title}
 
@@ -108,46 +108,46 @@ Modifica template di default in `src/data/templates.yaml`:
     {url}
 ```
 
-I template custom creati dall'utente tramite UI rimangono in localStorage e vengono mostrati assieme ai template di default.
+Custom templates created by user via UI remain in localStorage and are shown alongside default templates.
 
-### 3. Condivisione in Uscita (verso LLM)
+### 3. Outbound Sharing (to LLM)
 
-Il testo riformulato viene ricondiviso verso qualsiasi app LLM installata:
+The reformulated text is re-shared to any installed LLM app:
 
-- **Web Share API**: Condividi verso ChatGPT app, Claude app, browser con LLM, Ollama locale, etc.
-- **Clipboard Fallback**: Se Web Share non è disponibile, copia negli appunti per incollare manualmente
+- **Web Share API**: Share to ChatGPT app, Claude app, browser with LLM, local Ollama, etc.
+- **Clipboard Fallback**: If Web Share unavailable, copy to clipboard for manual paste
 
-Zero copia-incolla nel flusso ideale: tutto passa via Android share intent.
+Zero copy-paste in ideal flow: everything passes via Android share intent.
 
-## Struttura Progetto
+## Project Structure
 
 ```
 project/
 ├── src/
 │   ├── data/
-│   │   └── templates.yaml       # Template di default in YAML
+│   │   └── templates.yaml       # Default templates in YAML
 │   ├── pages/
-│   │   └── index.astro          # Pagina principale
+│   │   └── index.astro          # Main page
 │   ├── components/
-│   │   ├── TemplateSelect.astro # Gestione template
-│   │   ├── TextPreview.astro    # Anteprima testo generato
-│   │   └── ShareButtons.astro   # Pulsanti condivisione
+│   │   ├── TemplateSelect.astro # Template management
+│   │   ├── TextPreview.astro    # Generated text preview
+│   │   └── ShareButtons.astro   # Share buttons
 │   └── lib/
-│       ├── templates.js         # Logica template (CRUD)
-│       └── share.js             # Web Share API e clipboard
+│       ├── templates.js         # Template logic (CRUD)
+│       └── share.js             # Web Share API & clipboard
 ├── public/
-│   ├── manifest.webmanifest     # Manifest PWA
+│   ├── manifest.webmanifest     # PWA manifest
 │   ├── sw.js                    # Service Worker
 │   ├── favicon.svg              # Favicon
-│   └── icons/                   # Icone PWA
+│   └── icons/                   # PWA icons
 ├── astro.config.mjs
 ├── tailwind.config.cjs
 └── package.json
 ```
 
-## Deploy
+## Deployment
 
-L'app è statica e può essere deployata su qualsiasi hosting che supporti file statici:
+The app is static and can be deployed to any static file hosting:
 
 - **Netlify**
 - **Vercel**
@@ -160,48 +160,48 @@ L'app è statica e può essere deployata su qualsiasi hosting che supporti file 
 npm run build
 ```
 
-Il contenuto della cartella `dist/` è pronto per il deploy.
+Content of `dist/` folder is ready for deployment.
 
-### Requisiti per PWA e Share Target
+### PWA & Share Target Requirements
 
-Per funzionare come Share Target su Android, l'app deve:
+To work as Share Target on Android, the app must:
 
-1. ✅ Essere servita via HTTPS
-2. ✅ Avere un `manifest.webmanifest` valido con `share_target`
-3. ✅ Avere un Service Worker registrato
-4. ✅ Essere installata dall'utente
+1. ✅ Be served via HTTPS
+2. ✅ Have a valid `manifest.webmanifest` with `share_target`
+3. ✅ Have a Service Worker registered
+4. ✅ Be installed by the user
 
 ## Testing
 
-### Test locale
+### Local testing
 
 ```bash
 npm run build
 npm run preview
 ```
 
-Poi apri l'app su Chrome Android e:
-1. Vai al menu → "Installa app"
-2. Dopo l'installazione, prova a condividere un link da un'altra app
-3. Seleziona "Riformula" dalla lista
+Then open the app on Android Chrome and:
+1. Go to menu → "Install app"
+2. After installation, try sharing a link from another app
+3. Select "ShareForge" from the list
 
-### Debug
+### Debugging
 
-- Console del browser per errori JavaScript
-- Chrome DevTools → Application → Manifest (verifica configurazione PWA)
-- Chrome DevTools → Application → Service Workers (verifica cache)
+- Browser console for JavaScript errors
+- Chrome DevTools → Application → Manifest (verify PWA config)
+- Chrome DevTools → Application → Service Workers (verify cache)
 
-## Licenza
+## License
 
 MIT
 
 ## Roadmap
 
-- [x] MVP: Share Target + Template base + PWA
-- [ ] V1.1: Sincronizzazione template via file export/import
-- [ ] V2: Template "intelligenti" con suggerimenti automatici
-- [ ] V3: Statistiche d'uso
+- [x] MVP: Share Target + Base templates + PWA
+- [ ] V1.1: Template sync via file export/import
+- [ ] V2: "Smart" templates with auto-suggestions
+- [ ] V3: Usage statistics
 
-## Contribuire
+## Contributing
 
-Pull request e issue sono benvenute!
+Pull requests and issues are welcome!

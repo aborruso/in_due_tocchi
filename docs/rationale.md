@@ -1,4 +1,4 @@
-# Perché Riformula?
+# Why ShareForge?
 
 Il web è pieno di rumore. Popup, pubblicità, titoli sensazionalisti, articoli con mille premesse vuote senza arrivare al nocciolo. La cosa che vogliamo veramente è scoprire il contenuto, valorizzarlo, approfondirlo.
 
@@ -8,13 +8,13 @@ In alcuni casi si riceve l'output in inglese.
 
 E in altri puoi mettere soltanto l'URL senza aggiungere altro testo.
 
-**Riformula** ti aiuta a superare questi problemi: selezioni il template che ti serve (riassunto, analisi, post social, domande critiche...), clicchi, e il contenuto è già pronto con le istruzioni giuste per essere analizzato dall'AI e restituirti quello che ti serve.
+**ShareForge** helps you overcome these problems: select the template you need (summary, analysis, social post, critical questions...), click, and the content is ready with the right instructions to be analyzed by AI and return what you need.
 
-Non è un'app per leggere. È il ponte tra scoperta e azione.
+It's not a reading app. It's the bridge between discovery and action.
 
-## Scelte architetturali
+## Architectural Choices
 
-Riformula è volutamente semplice: un'applicazione web statica, senza backend, senza database, senza server. Solo tecnologie client (HTML, CSS, JavaScript) e hosting gratuito su GitHub Pages.
+ShareForge is deliberately simple: un'applicazione web statica, senza backend, senza database, senza server. Solo tecnologie client (HTML, CSS, JavaScript) e hosting gratuito su GitHub Pages.
 
 Questa scelta limita cosa può fare l'app — niente chiamate API complesse, niente elaborazioni server-side, niente autenticazione centralizzata — ma offre vantaggi fondamentali:
 
@@ -26,11 +26,11 @@ Questa scelta limita cosa può fare l'app — niente chiamate API complesse, nie
 
 Le limitazioni diventano vincoli creativi. Non possiamo fare tutto, ma quello che facciamo è sostenibile nel lungo termine.
 
-## Perché nessuna integrazione LLM
+## Why No LLM Integration
 
-Riformula non integra direttamente nessun modello linguistico. Non c'è chiamata API a ChatGPT, Claude o Gemini. Perché?
+ShareForge doesn't directly integrate any language model. Non c'è chiamata API a ChatGPT, Claude o Gemini. Perché?
 
-Tutti abbiamo già un client LLM sul cellulare: app native, interfacce web, assistenti integrati. Invece di reinventare la ruota e costruire l'ennesimo wrapper attorno a un'API, **Riformula genera il prompt e lo condivide** con qualsiasi app tu stia già usando.
+Tutti abbiamo già un client LLM sul cellulare: app native, interfacce web, assistenti integrati. Invece di reinventare la ruota e costruire l'ennesimo wrapper attorno a un'API, **ShareForge genera il prompt e lo condivide** con qualsiasi app tu stia già usando.
 
 Vantaggi concreti:
 
@@ -40,4 +40,4 @@ Vantaggi concreti:
 - **Flessibilità totale**: puoi condividere il prompt con ChatGPT, Claude, Gemini, Perplexity, un client locale, o qualsiasi altro strumento installato sul tuo dispositivo
 - **Meno codice**: nessuna logica di integrazione API, retry, error handling, token management
 
-Riformula fa una cosa sola, e la fa bene: **trasforma link in prompt pronti all'uso**. Il resto lo deleghiamo agli strumenti che già esistono e già funzionano.
+ShareForge does one thing well: **transforms links into ready-to-use prompts**. Everything else is delegated to tools that already exist and already work.

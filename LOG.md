@@ -1,8 +1,16 @@
 ## 2025-11-09
 
+**BREAKING: Project renamed from Riformula to ShareForge**
+- Updated all branding: package.json, manifest, translations (IT/EN)
+- Updated cache name: `shareforge-v*` (replaces `riformula-v*`)
+- Updated localStorage keys: `shareforge-template-order`, `shareforge-language`
+- Updated all documentation: README, CLAUDE.md, rationale, evoluzioni
+- Name works in both IT/EN, evokes transformation/forge concept
+- No breaking changes for users: localStorage migration handled automatically
+
 **Implemented template drag-and-drop with localStorage persistence**
 - Aggiunto drag-and-drop per riordinare template nella griglia principale
-- Ordine personalizzato salvato in localStorage (chiave: `riformula-template-order`)
+- Ordine personalizzato salvato in localStorage (chiave: `shareforge-template-order`)
 - Visual feedback minimal: opacità 0.5 durante drag
 - Bottone reset (↺) ripristina ordine originale da YAML
 - Persistenza survives reload e disattivazione PWA

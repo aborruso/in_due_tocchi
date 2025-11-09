@@ -1,15 +1,15 @@
-# Evoluzioni del Progetto Riformula
+# ShareForge Project Evolution
 
-## 📋 Indice
-- [Implementato](#implementato)
-- [Evoluzioni a breve termine](#evoluzioni-a-breve-termine)
-- [Evoluzioni a medio termine](#evoluzioni-a-medio-termine)
-- [Visione a lungo termine](#visione-a-lungo-termine)
-- [Idee specifiche](#idee-specifiche)
+## 📋 Index
+- [Implemented](#implemented)
+- [Short-term Roadmap](#short-term-roadmap)
+- [Mid-term Roadmap](#mid-term-roadmap)
+- [Long-term Vision](#long-term-vision)
+- [Specific Ideas](#specific-ideas)
 
 ---
 
-## ✅ Implementato
+## ✅ Implemented
 
 ### Supporto bilingue (IT/EN)
 - Rilevamento automatico lingua da browser (`navigator.language`)
@@ -34,7 +34,7 @@
 
 ---
 
-## 🚀 Evoluzioni a breve termine
+## 🚀 Short-term Roadmap
 
 ### Template specializzati
 - **Business Intelligence**: Analisi report aziendali, KPI, dashboard
@@ -49,7 +49,7 @@
 
 ---
 
-## 🎯 Evoluzioni a medio termine
+## 🎯 Mid-term Roadmap
 
 ### Intelligenza artificiale
 - **Suggerimento template**: AI rileva tipo contenuto e propone template ottimale
@@ -63,9 +63,9 @@
 
 ---
 
-## 🌟 Visione a lungo termine
+## 🌟 Long-term Vision
 
-### Ecosistema Riformula
+### ShareForge Ecosystem
 - **Marketplace template**: Community condivide template premium
 - **Team collaboration**: Template condivisi tra team aziendali
 - **Analytics**: Statistiche d'uso, performance template
@@ -77,7 +77,7 @@
 
 ---
 
-## 💡 Idee Specifiche
+## 💡 Specific Ideas
 
 ### 📂 Sistema Categorie Template
 
@@ -186,7 +186,7 @@ templates:
 
 ---
 
-## 📊 Priorità
+## 📊 Priority
 
 ### Alta Priorità
 1. Sistema categorie template
@@ -205,7 +205,7 @@ templates:
 
 ---
 
-## 🔄 Processo di Sviluppo
+## 🔄 Development Process
 
 ### Fasi
 1. **Spec**: Definizione requisiti in openspec/

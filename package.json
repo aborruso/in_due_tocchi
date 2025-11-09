@@ -1,8 +1,8 @@
 {
-  "name": "riformula",
+  "name": "shareforge",
   "type": "module",
   "version": "1.0.0",
-  "description": "PWA per riformulare link condivisi secondo template personalizzabili",
+  "description": "PWA to transform shared links into curated prompts with customizable templates",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-**Riformula** is a Progressive Web App (PWA) that enables rapid transformation of shared links from other apps into curated messages using customizable templates.
+**ShareForge** is a Progressive Web App (PWA) that enables rapid transformation of shared links from other apps into curated messages using customizable templates.
 
 **Core Goals:**
 - Receive shared content from other Android apps via Web Share Target

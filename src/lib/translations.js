@@ -16,7 +16,7 @@ export const translations = {
 
     // Header
     header: {
-      title: 'Riformula',
+      title: 'ShareForge',
       subtitle: 'Trasforma link in messaggi curati',
     },
 
@@ -72,7 +72,7 @@ export const translations = {
 
     // Footer
     footer: {
-      version: 'Riformula v1.0 - PWA Offline-First',
+      version: 'ShareForge v1.0 - PWA Offline-First',
       github: 'Codice su GitHub',
     },
 
@@ -87,11 +87,11 @@ export const translations = {
     // Mobile page
     mobilePage: {
       heroTitle: 'Prepara il Contesto<br />per i tuoi LLM',
-      heroSubtitle: 'Su smartphone non puoi scrivere prompt prima di inviare l\'URL. Con Riformula, crei il contesto attorno al link e lo invii al miglior LLM per il tuo obiettivo.',
-      openApp: 'Apri Riformula',
-      openAppCta: 'Apri Riformula Ora →',
+      heroSubtitle: 'Su smartphone non puoi scrivere prompt prima di inviare l\'URL. Con ShareForge, crei il contesto attorno al link e lo invii al miglior LLM per il tuo obiettivo.',
+      openApp: 'Apri ShareForge',
+      openAppCta: 'Apri ShareForge Ora →',
 
-      benefitsTitle: 'Perché Riformula?',
+      benefitsTitle: 'Perché ShareForge?',
       benefit1Title: 'Crea il Contesto Prima',
       benefit1Text: 'Scegli un template e circonda l\'URL con contesto strutturato. Così l\'LLM capisce cosa vuoi, senza doverlo spiegare dopo.',
       benefit2Title: 'Subito, Offline',
@@ -106,22 +106,22 @@ export const translations = {
       demoDescription: 'Mostra come: condividere URL → scegliere template → inviare a un LLM',
 
       installTitle: 'Installa come App',
-      installSubtitle: 'Aggiungi Riformula alla schermata iniziale in 30 secondi',
+      installSubtitle: 'Aggiungi ShareForge alla schermata iniziale in 30 secondi',
       step1Title: 'Apri Chrome',
-      step1Text: 'Accedi a Riformula tramite il browser Chrome del tuo Android',
+      step1Text: 'Accedi a ShareForge tramite il browser Chrome del tuo Android',
       step2Title: 'Tap Menu (⋮)',
       step2Text: 'Premi i tre puntini in alto a destra del browser',
       step2Note: 'Vedrai il bottone <strong>"Installa app"</strong> o <strong>"Aggiungi a Home"</strong>',
       step3Title: 'Tap "Installa app"',
       step3Text: 'Seleziona l\'opzione per aggiungere l\'app alla schermata iniziale',
-      step3Note: 'Confermando, Riformula apparirà come app nativa sul tuo telefono',
+      step3Note: 'Confermando, ShareForge apparirà come app nativa sul tuo telefono',
       step4Title: 'Goditi l\'app',
       step4Text: 'Ora puoi usarla offline, direttamente dalla tua schermata iniziale. Nessun browser necessario.',
       installTip: 'Consiglio',
-      installTipText: 'Se vedi il messaggio <strong>"Pagina web non disponibile offline"</strong> la prima volta, non ti preoccupare. Riformula caricherà i dati la volta successiva. L\'offline mode migliora nel tempo.',
+      installTipText: 'Se vedi il messaggio <strong>"Pagina web non disponibile offline"</strong> la prima volta, non ti preoccupare. ShareForge caricherà i dati la volta successiva. L\'offline mode migliora nel tempo.',
 
       ctaTitle: 'Pronto a preparare il contesto?',
-      ctaSubtitle: 'Apri Riformula, scegli un template, e invia il contesto strutturato al tuo LLM preferito',
+      ctaSubtitle: 'Apri ShareForge, scegli un template, e invia il contesto strutturato al tuo LLM preferito',
     },
 
     // Language selector
@@ -145,7 +145,7 @@ export const translations = {
 
     // Header
     header: {
-      title: 'Riformula',
+      title: 'ShareForge',
       subtitle: 'Transform links into curated messages',
     },
 
@@ -201,7 +201,7 @@ export const translations = {
 
     // Footer
     footer: {
-      version: 'Riformula v1.0 - Offline-First PWA',
+      version: 'ShareForge v1.0 - Offline-First PWA',
       github: 'Code on GitHub',
     },
 
@@ -216,11 +216,11 @@ export const translations = {
     // Mobile page
     mobilePage: {
       heroTitle: 'Prepare Context<br />for your LLMs',
-      heroSubtitle: 'On smartphones you can\'t write prompts before sending the URL. With Riformula, you create context around the link and send it to the best LLM for your goal.',
-      openApp: 'Open Riformula',
-      openAppCta: 'Open Riformula Now →',
+      heroSubtitle: 'On smartphones you can\'t write prompts before sending the URL. With ShareForge, you create context around the link and send it to the best LLM for your goal.',
+      openApp: 'Open ShareForge',
+      openAppCta: 'Open ShareForge Now →',
 
-      benefitsTitle: 'Why Riformula?',
+      benefitsTitle: 'Why ShareForge?',
       benefit1Title: 'Create Context First',
       benefit1Text: 'Choose a template and surround the URL with structured context. The LLM understands what you want, without having to explain afterwards.',
       benefit2Title: 'Instant, Offline',
@@ -235,22 +235,22 @@ export const translations = {
       demoDescription: 'Shows how to: share URL → choose template → send to an LLM',
 
       installTitle: 'Install as App',
-      installSubtitle: 'Add Riformula to your home screen in 30 seconds',
+      installSubtitle: 'Add ShareForge to your home screen in 30 seconds',
       step1Title: 'Open Chrome',
-      step1Text: 'Access Riformula via Chrome browser on your Android',
+      step1Text: 'Access ShareForge via Chrome browser on your Android',
       step2Title: 'Tap Menu (⋮)',
       step2Text: 'Press the three dots at the top right of the browser',
       step2Note: 'You will see the <strong>"Install app"</strong> or <strong>"Add to Home"</strong> button',
       step3Title: 'Tap "Install app"',
       step3Text: 'Select the option to add the app to your home screen',
-      step3Note: 'By confirming, Riformula will appear as a native app on your phone',
+      step3Note: 'By confirming, ShareForge will appear as a native app on your phone',
       step4Title: 'Enjoy the app',
       step4Text: 'You can now use it offline, directly from your home screen. No browser needed.',
       installTip: 'Tip',
-      installTipText: 'If you see <strong>"Web page not available offline"</strong> the first time, don\'t worry. Riformula will load the data next time. Offline mode improves over time.',
+      installTipText: 'If you see <strong>"Web page not available offline"</strong> the first time, don\'t worry. ShareForge will load the data next time. Offline mode improves over time.',
 
       ctaTitle: 'Ready to prepare context?',
-      ctaSubtitle: 'Open Riformula, choose a template, and send structured context to your favorite LLM',
+      ctaSubtitle: 'Open ShareForge, choose a template, and send structured context to your favorite LLM',
     },
 
     // Language selector

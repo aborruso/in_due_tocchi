@@ -23,7 +23,7 @@ export function applyTemplate(templateText, data, appendUrl = true) {
  */
 export function getTemplateOrder(defaultTemplates) {
   try {
-    const stored = localStorage.getItem('riformula-template-order');
+    const stored = localStorage.getItem('shareforge-template-order');
     if (stored) {
       try {
         const order = JSON.parse(stored);
@@ -52,7 +52,7 @@ export function getTemplateOrder(defaultTemplates) {
  */
 export function saveTemplateOrder(templateIds) {
   try {
-    localStorage.setItem('riformula-template-order', JSON.stringify(templateIds));
+    localStorage.setItem('shareforge-template-order', JSON.stringify(templateIds));
   } catch (e) {
     console.warn('localStorage not available for saving template order:', e);
   }
@@ -63,7 +63,7 @@ export function saveTemplateOrder(templateIds) {
  */
 export function resetTemplateOrder() {
   try {
-    localStorage.removeItem('riformula-template-order');
+    localStorage.removeItem('shareforge-template-order');
   } catch (e) {
     console.warn('localStorage not available for resetting template order:', e);
   }

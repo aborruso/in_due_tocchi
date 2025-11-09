@@ -1,7 +1,7 @@
-# PRD: Riformula
+# PRD: ShareForge
 
 ## Visione
-Riformula è una web app installabile (PWA) che **trasforma contenuti web in prompt strutturati per LLM** con un flusso di due share. L'utente legge un articolo, lo condivide, sceglie il template (che riformula il contenuto in base al contesto), e lo ricondivide direttamente verso ChatGPT/Claude/Ollama/etc per ottenere risposte intelligenti.
+ShareForge è una web app installabile (PWA) che **trasforma contenuti web in prompt strutturati per LLM** con un flusso di due share. L'utente legge un articolo, lo condivide, sceglie il template (che riformula il contenuto in base al contesto), e lo ricondivide direttamente verso ChatGPT/Claude/Ollama/etc per ottenere risposte intelligenti.
 
 L'app
 - riceve automaticamente titolo, testo e URL tramite la funzione di Condivisione di Android,

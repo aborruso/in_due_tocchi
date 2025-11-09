@@ -1,9 +1,9 @@
 /**
- * i18n - Internationalization library for Riformula
+ * i18n - Internationalization library for ShareForge
  * Supports language detection, persistence, and translation
  */
 
-const STORAGE_KEY = 'riformula-language';
+const STORAGE_KEY = 'shareforge-language';
 const DEFAULT_LANGUAGE = 'it';
 const SUPPORTED_LANGUAGES = ['it', 'en'];
 

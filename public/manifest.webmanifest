@@ -1,7 +1,7 @@
 {
-  "name": "Riformula",
-  "short_name": "Riformula",
-  "description": "Trasforma link condivisi in messaggi curati secondo template personalizzabili",
+  "name": "ShareForge",
+  "short_name": "ShareForge",
+  "description": "Transform shared links into curated prompts with customizable templates",
   "start_url": "/in_due_tocchi/",
   "display": "standalone",
   "background_color": "#ffffff",
