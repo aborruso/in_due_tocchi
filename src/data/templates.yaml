@@ -23,7 +23,9 @@
     - Tono conversazionale, no formalismi
 
     Scrivi tutto in UN UNICO BLOCCO, senza numerazioni.
-    Output interamente in italiano.
+    Usa un tono amichevole ma informativo.
+    Dividi l'output in 2 paragrafi separati da una riga vuota.
+    Scrivi tutto in italiano.
 
 - id: generic-summary
   name: Riassunto generico
@@ -107,6 +109,7 @@
     3. **Tweet finale**: call-to-action (leggi l'articolo, condividi, replica)
 
     Numera i tweet nel formato 1/n, 2/n, ecc.
+    Ogni tweet deve rimanere entro 280 caratteri.
     Rendi il thread autonomo (no necessità di leggere articolo per capire).
     Scrivi il thread interamente in italiano.
 
