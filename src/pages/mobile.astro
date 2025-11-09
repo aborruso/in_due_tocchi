@@ -2,6 +2,13 @@
 // Mobile landing page for smartphone users
 import SiteFooter from '../components/SiteFooter.astro';
 import LanguageSelector from '../components/LanguageSelector.astro';
+import { getSeoData, OG_LOCALES, OG_IMAGE_ALT } from '../lib/seo.js';
+
+const { meta: pageSeo, pageUrl, imageUrl } = getSeoData('mobile', Astro);
+const primaryLocale = OG_LOCALES.it;
+const alternateLocales = Object.entries(OG_LOCALES)
+  .filter(([lang]) => lang !== 'it')
+  .map(([, locale]) => locale);
 ---
 
 <!DOCTYPE html>
@@ -9,9 +16,34 @@ import LanguageSelector from '../components/LanguageSelector.astro';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Riformula - Prepara il contesto degli URL per gli LLM. Scegli un template strutturato e condividi il contesto al miglior modello." />
+  <meta name="description" content={pageSeo.translations.it.description} />
   <meta name="theme-color" content="#1e293b" />
-  <title id="page-title">Riformula - Usa su Smartphone</title>
+  <title id="page-title">{pageSeo.translations.it.title}</title>
+  <meta property="og:type" content={pageSeo.type} />
+  <meta property="og:url" content={pageUrl} />
+  <meta property="og:site_name" content="ShareForge" />
+  <meta property="og:image" content={imageUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content={OG_IMAGE_ALT} />
+  {primaryLocale && <meta property="og:locale" content={primaryLocale} />}
+  {alternateLocales.map(locale => (
+    <meta property="og:locale:alternate" content={locale} key={`og-locale-${locale}`} />
+  ))}
+  {Object.entries(pageSeo.translations).flatMap(([lang, data]) => [
+    <meta property="og:title" content={data.title} lang={lang} key={`og-title-${lang}`} />,
+    <meta property="og:description" content={data.description} lang={lang} key={`og-desc-${lang}`} />
+  ])}
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={pageUrl} />
+  <meta name="twitter:image" content={imageUrl} />
+  <meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
+  {Object.entries(pageSeo.translations).flatMap(([lang, data]) => [
+    <meta name="twitter:title" content={data.title} lang={lang} key={`tw-title-${lang}`} />,
+    <meta name="twitter:description" content={data.description} lang={lang} key={`tw-desc-${lang}`} />
+  ])}
   <link rel="manifest" href="/in_due_tocchi/manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="/in_due_tocchi/favicon.svg" />
 </head>
