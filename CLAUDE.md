@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**ShareForge** is a progressive web app (PWA) that transforms shared links into curated text messages formatted according to user-selected templates. Core design principle: zero copy-paste, maximum automation through Android Share Target and Web Share API.
+**ShareForge** is a progressive web app (PWA) that transforms shared links into curated prompts for LLMs. Core design principles: eliminate repetitive prompt writing, work with any LLM client, maintain zero costs through static architecture.
 
 Key constraints:
 - **Offline-first**: Works completely offline after first load via Service Worker

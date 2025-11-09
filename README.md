@@ -1,6 +1,20 @@
 # ShareForge
 
-**ShareForge** is a Progressive Web App (PWA) that transforms shared links into curated prompts for LLMs (ChatGPT, Claude, etc.). Pick a template, share. Two taps, zero copy-paste.
+**ShareForge** is a Progressive Web App (PWA) that transforms shared links into curated prompts for LLMs (ChatGPT, Claude, etc.).
+
+## The Problem
+
+The web is full of noise. Popup, ads, sensational headlines, articles with empty preambles. What we really want is to discover content, enhance it, explore it deeply.
+
+Today you can share URLs directly to LLMs via Android Share. But then what? You have to write the **prompt**, the "instructions". Like: "Summarize this to help me...", "Create a message for chat...", "Analyze critical points...". These are basic, often repetitive tasks.
+
+In some cases you get output in English when you don't want it.
+
+In others you can only put the URL without adding any additional text.
+
+**ShareForge helps you overcome these problems**: select the template you need (summary, analysis, social post, critical questions...), click, and the content is ready with the right instructions to be analyzed by AI and return what you need.
+
+It's not a reading app. It's the bridge between discovery and action.
 
 ## Features
 
@@ -112,12 +126,40 @@ Custom templates created by user via UI remain in localStorage and are shown alo
 
 ### 3. Outbound Sharing (to LLM)
 
-The reformulated text is re-shared to any installed LLM app:
+The reformulated prompt is re-shared to any installed LLM app:
 
 - **Web Share API**: Share to ChatGPT app, Claude app, browser with LLM, local Ollama, etc.
-- **Clipboard Fallback**: If Web Share unavailable, copy to clipboard for manual paste
+- **Clipboard Fallback**: If Web Share unavailable, copy to clipboard
 
-Zero copy-paste in ideal flow: everything passes via Android share intent.
+### Why No LLM Integration?
+
+ShareForge doesn't directly integrate any language model. No API calls to ChatGPT, Claude or Gemini. Why?
+
+You already have an LLM client on your phone: native apps, web interfaces, integrated assistants. Instead of reinventing the wheel and building yet another wrapper around an API, **ShareForge generates the prompt and shares it** with whatever app you're already using.
+
+Concrete benefits:
+
+- **Freedom of choice**: Use the model you prefer, without constraints
+- **Zero costs for users**: No subscription, no tokens to pay through the app
+- **Zero management costs**: No need to cover users' API expenses, nor implement rate limiting, credit management, authentication
+- **Total flexibility**: Share the prompt with ChatGPT, Claude, Gemini, Perplexity, a local client, or any other tool installed on your device
+- **Less code**: No API integration logic, retry, error handling, token management
+
+ShareForge does one thing well: **transforms links into ready-to-use prompts**. Everything else is delegated to tools that already exist and already work.
+
+## Architectural Choices
+
+ShareForge is deliberately simple: a static web application, no backend, no database, no server. Only client-side technologies (HTML, CSS, JavaScript) and free hosting on GitHub Pages.
+
+This choice limits what the app can do — no complex API calls, no server-side processing, no centralized authentication — but offers fundamental advantages:
+
+- **Zero costs**: Hosting, maintenance, infrastructure
+- **Minimal maintenance**: No servers to update, no databases to manage
+- **Speed**: Instant deploy, no backend latency
+- **Privacy**: No data transmitted to third-party servers, everything stays on device
+- **Reliability**: Works offline after first load (PWA)
+
+The limitations become creative constraints. We can't do everything, but what we do is sustainable in the long term.
 
 ## Project Structure
 
