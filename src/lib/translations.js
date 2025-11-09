@@ -101,7 +101,7 @@ export const translations = {
       benefit4Title: 'Invia al Miglior LLM',
       benefit4Text: 'Condividi il contesto a ChatGPT, Claude, Gemini o altri. Scegli il modello migliore per il tuo template/obiettivo.',
 
-      demoTitle: 'Il Flusso: URL → Contesto → LLM',
+      demoTitle: 'Il Flusso: URL → Contesto → LLM → Utente',
       demoPlaceholder: 'Video demo in arrivo',
       demoDescription: 'Mostra come: condividere URL → scegliere template → inviare a un LLM',
 
@@ -230,7 +230,7 @@ export const translations = {
       benefit4Title: 'Send to the Best LLM',
       benefit4Text: 'Share context to ChatGPT, Claude, Gemini or others. Choose the best model for your template/goal.',
 
-      demoTitle: 'The Flow: URL → Context → LLM',
+      demoTitle: 'The Flow: URL → Context → LLM → User',
       demoPlaceholder: 'Video demo coming soon',
       demoDescription: 'Shows how to: share URL → choose template → send to an LLM',
 
