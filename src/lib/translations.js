@@ -144,6 +144,15 @@ export const translations = {
       it: 'Italiano',
       en: 'English',
     },
+
+    // Mobile help banner
+    mobileHelp: {
+      title: 'Come si usa ShareForge?',
+      step1: 'Condividi un link da un\'altra app',
+      step2: 'Scegli un template',
+      step3: 'Invia al tuo LLM preferito',
+      guideLink: 'Vedi guida completa →',
+    },
   },
 
   en: {
@@ -286,6 +295,15 @@ export const translations = {
       label: 'Language',
       it: 'Italiano',
       en: 'English',
+    },
+
+    // Mobile help banner
+    mobileHelp: {
+      title: 'How to use ShareForge?',
+      step1: 'Share a link from another app',
+      step2: 'Choose a template',
+      step3: 'Send to your favorite LLM',
+      guideLink: 'See complete guide →',
     },
   },
 };

@@ -95,6 +95,29 @@ const alternateLocales = Object.entries(OG_LOCALES)
       </div>
     </header>
 
+    <!-- Mobile Help Banner -->
+    <div id="mobile-help-banner" class="hidden bg-blue-50 border-2 border-blue-200 rounded-lg p-4 mb-6 shadow-sm">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-2xl">📲</span>
+            <h3 class="font-bold text-blue-900" data-i18n="mobileHelp.title">Come si usa ShareForge?</h3>
+          </div>
+          <ol class="list-decimal list-inside space-y-1 text-sm text-blue-800 mb-3">
+            <li data-i18n="mobileHelp.step1">Condividi un link da un'altra app</li>
+            <li data-i18n="mobileHelp.step2">Scegli un template</li>
+            <li data-i18n="mobileHelp.step3">Invia al tuo LLM preferito</li>
+          </ol>
+          <a href="/in_due_tocchi/mobile#come-funziona" class="inline-block text-sm font-semibold text-blue-600 hover:text-blue-800 underline" data-i18n="mobileHelp.guideLink">
+            Vedi guida completa →
+          </a>
+        </div>
+        <button id="dismiss-mobile-help" class="text-blue-600 hover:text-blue-800 font-bold text-xl leading-none p-1" aria-label="Chiudi">
+          ×
+        </button>
+      </div>
+    </div>
+
     <!-- Main content -->
     <main>
       <TemplateSelect />
@@ -440,6 +463,42 @@ const alternateLocales = Object.entries(OG_LOCALES)
       }
     });
 
+    // Mobile help banner logic
+    function shouldShowMobileHelp() {
+      try {
+        return isAndroidMobile() && !isSharedContent() && !localStorage.getItem('mobileHelpDismissed');
+      } catch (e) {
+        console.warn('localStorage not available for mobile help check:', e);
+        return isAndroidMobile() && !isSharedContent();
+      }
+    }
+
+    function showMobileHelp() {
+      const banner = document.getElementById('mobile-help-banner');
+      if (banner) {
+        banner.classList.remove('hidden');
+      }
+    }
+
+    function hideMobileHelp() {
+      const banner = document.getElementById('mobile-help-banner');
+      if (banner) {
+        banner.classList.add('hidden');
+        try {
+          localStorage.setItem('mobileHelpDismissed', 'true');
+        } catch (e) {
+          console.warn('localStorage not available for dismissing mobile help:', e);
+        }
+      }
+    }
+
+    // Mobile help dismiss handler
+    document.addEventListener('click', (e) => {
+      if (e.target && e.target.id === 'dismiss-mobile-help') {
+        hideMobileHelp();
+      }
+    });
+
     // App state
     let currentTemplateId = null;
     let currentData = { title: '', text: '', url: '' };
@@ -495,6 +554,11 @@ const alternateLocales = Object.entries(OG_LOCALES)
       // Show/hide share button based on API availability
       if (shareBtn && !canShare()) {
         shareBtn.style.display = 'none';
+      }
+
+      // Show mobile help banner if needed
+      if (shouldShowMobileHelp()) {
+        showMobileHelp();
       }
     }
 
