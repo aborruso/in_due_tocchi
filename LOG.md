@@ -1,3 +1,14 @@
+## 2025-11-09
+
+**Implemented template drag-and-drop with localStorage persistence**
+- Aggiunto drag-and-drop per riordinare template nella griglia principale
+- Ordine personalizzato salvato in localStorage (chiave: `riformula-template-order`)
+- Visual feedback minimal: opacità 0.5 durante drag
+- Bottone reset (↺) ripristina ordine originale da YAML
+- Persistenza survives reload e disattivazione PWA
+- Validazione ordine: fallback automatico se localStorage corrotto
+- Test completato: drag, persistenza, reset funzionano correttamente
+
 ## 2025-11-08
 
 **Fixed UI layout: sticky bottom bar for share buttons**

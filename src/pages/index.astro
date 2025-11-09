@@ -144,7 +144,10 @@ const templates = (() => {
 
   <script>
     import {
-      applyTemplate
+      applyTemplate,
+      getTemplateOrder,
+      saveTemplateOrder,
+      resetTemplateOrder
     } from '../lib/templates.js';
 
     import {
@@ -242,6 +245,8 @@ const templates = (() => {
     let currentTemplateId = null;
     let currentData = { title: '', text: '', url: '' };
     let isPopulating = false; // Flag to prevent event handlers during populate
+    let orderedTemplates = []; // Ordered templates from storage
+    let draggedElement = null;
 
     // DOM elements
     const templateButtons = document.getElementById('template-buttons');
@@ -291,16 +296,21 @@ const templates = (() => {
       }
     }
 
-    // Load templates as buttons
+    // Load templates as buttons with drag-and-drop support
     function loadTemplates() {
       if (!templateButtons) return;
       templateButtons.innerHTML = '';
 
-      DEFAULT_TEMPLATES.forEach((template, index) => {
+      // Get custom order from localStorage
+      const order = getTemplateOrder(DEFAULT_TEMPLATES);
+      orderedTemplates = order.map(id => DEFAULT_TEMPLATES.find(t => t.id === id)).filter(t => t);
+
+      orderedTemplates.forEach((template, index) => {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'template-btn flex flex-col items-center justify-center p-4 rounded-xl bg-gray-50 border-2 border-gray-200 text-gray-800 font-medium shadow-sm hover:bg-gray-100 active:bg-gray-200 transition-colors';
         button.dataset.templateId = template.id;
+        button.draggable = true;
 
         button.innerHTML = `
           <span class="text-3xl mb-2">${template.emoji}</span>
@@ -309,7 +319,48 @@ const templates = (() => {
 
         button.addEventListener('click', () => selectTemplate(template.id));
 
+        // Drag event handlers
+        button.addEventListener('dragstart', (e) => {
+          draggedElement = button;
+          button.style.opacity = '0.5';
+          e.dataTransfer.effectAllowed = 'move';
+        });
+
+        button.addEventListener('dragend', (e) => {
+          draggedElement = null;
+          button.style.opacity = '1';
+        });
+
+        button.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+
+          if (draggedElement && draggedElement !== button) {
+            // Swap elements in DOM
+            const allButtons = Array.from(templateButtons.querySelectorAll('.template-btn'));
+            const draggedIndex = allButtons.indexOf(draggedElement);
+            const targetIndex = allButtons.indexOf(button);
+
+            if (draggedIndex < targetIndex) {
+              button.parentNode.insertBefore(draggedElement, button.nextSibling);
+            } else {
+              button.parentNode.insertBefore(draggedElement, button);
+            }
+          }
+        });
+
+        button.addEventListener('drop', (e) => {
+          e.preventDefault();
+        });
+
         templateButtons.appendChild(button);
+      });
+
+      // Save reordered templates on any change
+      templateButtons.addEventListener('dragend', () => {
+        const newOrder = Array.from(templateButtons.querySelectorAll('.template-btn'))
+          .map(btn => btn.dataset.templateId);
+        saveTemplateOrder(newOrder);
       });
     }
 
@@ -502,6 +553,16 @@ const templates = (() => {
         if (e.target && !e.target.closest('header')) {
           menuDropdown.classList.add('hidden');
         }
+      });
+    }
+
+    // Reset templates order button
+    const resetTemplatesBtn = document.getElementById('reset-templates-btn');
+    if (resetTemplatesBtn) {
+      resetTemplatesBtn.addEventListener('click', () => {
+        resetTemplateOrder();
+        loadTemplates();
+        showFeedback('Ordine template ripristinato');
       });
     }
 

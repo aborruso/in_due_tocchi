@@ -6,6 +6,7 @@
 
 - ✅ **Web Share Target**: Riceve contenuti condivisi da altre app Android
 - ✅ **Template personalizzabili**: Crea, modifica ed elimina template con segnaposto `{title}`, `{text}`, `{url}`
+- ✅ **Drag-and-drop**: Riordina i template via trascinamento, ordine salvato in localStorage
 - ✅ **Offline-first**: Funziona completamente offline dopo il primo caricamento
 - ✅ **Condivisione rapida**: Usa Web Share API o copia negli appunti
 - ✅ **Leggera e veloce**: Nessun backend, solo file statici
