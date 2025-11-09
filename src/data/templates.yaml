@@ -264,3 +264,87 @@
     Per ciascuno: trova il voto IMDb e restituisci un elenco puntato in questa forma:
     • Piattaforma – Voto – Titolo
     Ordina la lista in ordine decrescente di voto IMDb.
+
+- id: comprehensive-review
+  name: Valutazione Complessiva
+  emoji: "⭐"
+  lang: it
+  active: true
+  description: |
+    **Valutazione Complessiva** identifica automaticamente il tipo di prodotto/contenuto (libro, film, gadget, software, ecc.) e cerca recensioni aggregate dai siti più autorevoli del settore. Restituisce una valutazione sintetica con punteggio medio, range di voti e criterio di aggregazione usato.
+  template: |
+    Sono interessato a quanto descritto in questo URL: {url}
+
+    Analizza il contenuto e:
+
+    1. **Identifica tipo di prodotto/contenuto**: determina se si tratta di libro, film, serie TV, album musicale, videogioco, dispositivo elettronico, software, app, ristorante, hotel, corso online, o altro
+
+    2. **Cerca recensioni aggregate**: consulta i siti di recensioni più autorevoli per quella categoria:
+       - Libri: Goodreads, Amazon, Anobii
+       - Film/Serie: IMDb, Rotten Tomatoes, Metacritic, FilmTV
+       - Musica: AllMusic, Pitchfork, Metacritic
+       - Videogiochi: Metacritic, IGN, GameSpot
+       - Elettronica/Tech: TechRadar, CNET, Tom's Hardware, DXOMark (foto)
+       - Software/App: G2, Capterra, App Store/Play Store rating
+       - Ristoranti: TripAdvisor, Google Maps, Michelin
+       - Hotel: Booking.com, TripAdvisor, Google Maps
+
+    3. **Valutazione complessiva**:
+       - **Punteggio medio aggregato**: [X/10 o X/5 o % secondo scala prevalente]
+       - **Range di voti raccolti**: [min - max]
+       - **Numero di recensioni totali**: [somma tra tutte le fonti]
+       - **Distribuzione**: [es. "80% positive, 15% miste, 5% negative"]
+
+    4. **Criterio di aggregazione**:
+       - Spiega come hai calcolato la valutazione finale (media ponderata? mediana? consensus critica vs pubblico?)
+       - Indica eventuali discrepanze significative tra fonti (es. critica alta ma pubblico basso)
+       - Segnala bias evidenti (es. poche recensioni, campione geografico limitato)
+
+    5. **Sintesi qualitativa** (3-5 righe):
+       - Punti di forza ricorrenti nelle recensioni
+       - Criticità comuni segnalate
+       - A chi è particolarmente consigliato/sconsigliato
+
+    Fonte originale: {url}
+
+- id: comprehensive-review-en
+  name: Comprehensive Review
+  emoji: "⭐"
+  lang: en
+  active: true
+  description: |
+    **Comprehensive Review** automatically identifies the type of product/content (book, movie, gadget, software, etc.) and searches for aggregated reviews from the most authoritative sites in the sector. Returns a synthetic evaluation with average score, vote range, and aggregation criterion used.
+  template: |
+    I'm interested in what is described in this URL: {url}
+
+    Analyze the content and:
+
+    1. **Identify product/content type**: determine if it's a book, movie, TV series, music album, video game, electronic device, software, app, restaurant, hotel, online course, or other
+
+    2. **Search for aggregated reviews**: consult the most authoritative review sites for that category:
+       - Books: Goodreads, Amazon, LibraryThing
+       - Movies/Series: IMDb, Rotten Tomatoes, Metacritic
+       - Music: AllMusic, Pitchfork, Metacritic
+       - Video Games: Metacritic, IGN, GameSpot
+       - Electronics/Tech: TechRadar, CNET, Tom's Hardware, DXOMark (cameras)
+       - Software/Apps: G2, Capterra, App Store/Play Store ratings
+       - Restaurants: TripAdvisor, Google Maps, Michelin
+       - Hotels: Booking.com, TripAdvisor, Google Maps
+
+    3. **Overall rating**:
+       - **Aggregated average score**: [X/10 or X/5 or % according to prevalent scale]
+       - **Vote range collected**: [min - max]
+       - **Total number of reviews**: [sum across all sources]
+       - **Distribution**: [e.g., "80% positive, 15% mixed, 5% negative"]
+
+    4. **Aggregation criterion**:
+       - Explain how you calculated the final rating (weighted average? median? critics vs. public consensus?)
+       - Indicate any significant discrepancies between sources (e.g., high critics but low public)
+       - Flag evident biases (e.g., few reviews, limited geographic sample)
+
+    5. **Qualitative summary** (3-5 lines):
+       - Recurring strengths in reviews
+       - Common criticisms reported
+       - Who is it particularly recommended/not recommended for
+
+    Original source: {url}
