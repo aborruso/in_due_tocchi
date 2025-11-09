@@ -10,6 +10,16 @@ export default defineConfig({
   vite: {
     build: {
       assetsInlineLimit: 0
+    },
+    server: {
+      watch: {
+        ignored: [
+          '**/public/video/**',
+          '**/video/**',
+          '**/*.mp4',
+          '**/*.webm'
+        ]
+      }
     }
   }
 });
