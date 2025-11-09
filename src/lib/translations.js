@@ -80,7 +80,7 @@ export const translations = {
     templatesPage: {
       title: 'Template disponibili',
       subtitle: 'Scegli in base allo scopo',
-      backToApp: '← Torna all\'app',
+      backToApp: 'Torna all\'app',
       noTemplates: 'Nessun template disponibile.',
     },
 
@@ -209,7 +209,7 @@ export const translations = {
     templatesPage: {
       title: 'Available Templates',
       subtitle: 'Choose based on your goal',
-      backToApp: '← Back to app',
+      backToApp: 'Back to app',
       noTemplates: 'No templates available.',
     },
 
