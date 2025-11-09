@@ -105,6 +105,14 @@ export const translations = {
       demoPlaceholder: 'Video demo in arrivo',
       demoDescription: 'Mostra come: condividere URL → scegliere template → inviare a un LLM',
 
+      flowTitle: 'Come funziona (6 passi)',
+      flow1: 'Apri un contenuto (articolo, video, post...)',
+      flow2: 'Fai click su Share',
+      flow3: 'Condividilo con ShareForge',
+      flow4: 'Sull\'app, scegli cosa vuoi fare con quella sorgente (template)',
+      flow5: 'Fai click su Condividi',
+      flow6: 'Invialo al tuo sistema LLM preferito',
+
       installTitle: 'Installa come App',
       installSubtitle: 'Testata solo su Chrome per Android. Parti da <a href="https://aborruso.github.io/in_due_tocchi/" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">https://aborruso.github.io/in_due_tocchi/</a> e aggiungi ShareForge alla schermata iniziale in 30 secondi',
       step1Title: 'Apri Chrome',
@@ -235,6 +243,14 @@ export const translations = {
       demoTitle: 'The Flow: URL → Context → LLM → User',
       demoPlaceholder: 'Video demo coming soon',
       demoDescription: 'Shows how to: share URL → choose template → send to an LLM',
+
+      flowTitle: 'How it works (6 steps)',
+      flow1: 'Open content (article, video, post...)',
+      flow2: 'Click Share',
+      flow3: 'Share it with ShareForge',
+      flow4: 'In the app, choose what you want to do with that source (template)',
+      flow5: 'Click Share',
+      flow6: 'Send it to your preferred LLM system',
 
       installTitle: 'Install as App',
       installSubtitle: 'Tested only on Chrome for Android. Start from <a href="https://aborruso.github.io/in_due_tocchi/" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">https://aborruso.github.io/in_due_tocchi/</a> and add ShareForge to your home screen in 30 seconds',
