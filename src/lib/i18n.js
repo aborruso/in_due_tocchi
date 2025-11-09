@@ -13,9 +13,13 @@ const SUPPORTED_LANGUAGES = ['it', 'en'];
  */
 export function detectLanguage() {
   // Check localStorage first
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored && SUPPORTED_LANGUAGES.includes(stored)) {
-    return stored;
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored && SUPPORTED_LANGUAGES.includes(stored)) {
+      return stored;
+    }
+  } catch (e) {
+    console.warn('localStorage not available for language detection:', e);
   }
 
   // Detect from browser
@@ -31,7 +35,12 @@ export function detectLanguage() {
  * @returns {string} Current language code
  */
 export function getCurrentLanguage() {
-  return localStorage.getItem(STORAGE_KEY) || detectLanguage();
+  try {
+    return localStorage.getItem(STORAGE_KEY) || detectLanguage();
+  } catch (e) {
+    console.warn('localStorage not available for getting language:', e);
+    return detectLanguage();
+  }
 }
 
 /**
@@ -43,7 +52,11 @@ export function setLanguage(lang) {
     console.warn(`Language ${lang} not supported. Using default: ${DEFAULT_LANGUAGE}`);
     lang = DEFAULT_LANGUAGE;
   }
-  localStorage.setItem(STORAGE_KEY, lang);
+  try {
+    localStorage.setItem(STORAGE_KEY, lang);
+  } catch (e) {
+    console.warn('localStorage not available for setting language:', e);
+  }
 }
 
 /**

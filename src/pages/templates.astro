@@ -97,10 +97,16 @@ const formatDescription = (text) => {
       if (!container) return;
 
       if (templates.length === 0) {
+        // SECURITY NOTE: innerHTML is used here with translation strings.
+        // This is safe because translations are bundled at build time from trusted sources.
         container.innerHTML = '<p class="text-gray-600 text-center">' + t('templatesPage.noTemplates') + '</p>';
         return;
       }
 
+      // SECURITY NOTE: innerHTML is used here to render template data.
+      // Template data comes from templates.yaml (build time) - a trusted source.
+      // The emoji and name fields are hardcoded in YAML and validated at build.
+      // NEVER use this pattern with user-generated or runtime-loaded content.
       container.innerHTML = templates.map(template => `
         <article class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4" aria-label="Template ${template.name}">
           <div class="flex items-start gap-3">

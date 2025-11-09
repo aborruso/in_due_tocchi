@@ -247,6 +247,9 @@ import LanguageSelector from '../components/LanguageSelector.astro';
       });
 
       // Update all elements with data-i18n-html attribute (for HTML content)
+      // SECURITY NOTE: innerHTML is used here with translation strings.
+      // This is safe because translations are bundled at build time from trusted sources (translations.js).
+      // NEVER use this pattern with user-generated content or runtime-loaded strings.
       document.querySelectorAll('[data-i18n-html]').forEach(el => {
         const key = el.getAttribute('data-i18n-html');
         el.innerHTML = t(key);

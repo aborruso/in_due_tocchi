@@ -203,6 +203,9 @@ const templates = (() => {
       });
 
       // Update all elements with data-i18n-html attribute (for HTML content)
+      // SECURITY NOTE: innerHTML is used here with translation strings.
+      // This is safe because translations are bundled at build time from trusted sources (translations.js).
+      // NEVER use this pattern with user-generated content or runtime-loaded strings.
       document.querySelectorAll('[data-i18n-html]').forEach(el => {
         const key = el.getAttribute('data-i18n-html');
         el.innerHTML = t(key);
@@ -299,7 +302,12 @@ const templates = (() => {
     }
 
     function shouldShowDeviceModal() {
-      return !isAndroidMobile() && !localStorage.getItem('deviceModalDismissed');
+      try {
+        return !isAndroidMobile() && !localStorage.getItem('deviceModalDismissed');
+      } catch (e) {
+        console.warn('localStorage not available for device modal check:', e);
+        return !isAndroidMobile();
+      }
     }
 
     function showDeviceModal() {
@@ -313,7 +321,11 @@ const templates = (() => {
       const modal = document.getElementById('device-modal');
       if (modal) {
         modal.classList.add('hidden');
-        localStorage.setItem('deviceModalDismissed', 'true');
+        try {
+          localStorage.setItem('deviceModalDismissed', 'true');
+        } catch (e) {
+          console.warn('localStorage not available for dismissing device modal:', e);
+        }
       }
     }
 
@@ -404,6 +416,9 @@ const templates = (() => {
         button.dataset.templateId = template.id;
         button.draggable = true;
 
+        // SECURITY NOTE: innerHTML is used here to render template data.
+        // Template data comes from templates.yaml (build time) - a trusted source.
+        // The emoji and name fields are hardcoded in YAML and validated at build.
         button.innerHTML = `
           <span class="text-3xl mb-2">${template.emoji}</span>
           <span class="text-sm text-center">${template.name}</span>
