@@ -106,7 +106,7 @@ export const translations = {
       demoDescription: 'Mostra come: condividere URL → scegliere template → inviare a un LLM',
 
       installTitle: 'Installa come App',
-      installSubtitle: 'Aggiungi ShareForge alla schermata iniziale in 30 secondi',
+      installSubtitle: 'Testata solo su Chrome per Android. Parti da <a href="https://aborruso.github.io/in_due_tocchi/" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">https://aborruso.github.io/in_due_tocchi/</a> e aggiungi ShareForge alla schermata iniziale in 30 secondi',
       step1Title: 'Apri Chrome',
       step1Text: 'Accedi a ShareForge tramite il browser Chrome del tuo Android',
       step2Title: 'Tap Menu (⋮)',
@@ -117,6 +117,8 @@ export const translations = {
       step3Note: 'Confermando, ShareForge apparirà come app nativa sul tuo telefono',
       step4Title: 'Goditi l\'app',
       step4Text: 'Ora puoi usarla offline, direttamente dalla tua schermata iniziale. Nessun browser necessario.',
+      installVideoTitle: 'Video guida all\'installazione',
+      installVideoDescription: 'Il video mostra i passaggi per installare ShareForge su Android Chrome.',
       installTip: 'Consiglio',
       installTipText: 'Se vedi il messaggio <strong>"Pagina web non disponibile offline"</strong> la prima volta, non ti preoccupare. ShareForge caricherà i dati la volta successiva. L\'offline mode migliora nel tempo.',
 
@@ -235,7 +237,7 @@ export const translations = {
       demoDescription: 'Shows how to: share URL → choose template → send to an LLM',
 
       installTitle: 'Install as App',
-      installSubtitle: 'Add ShareForge to your home screen in 30 seconds',
+      installSubtitle: 'Tested only on Chrome for Android. Start from <a href="https://aborruso.github.io/in_due_tocchi/" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">https://aborruso.github.io/in_due_tocchi/</a> and add ShareForge to your home screen in 30 seconds',
       step1Title: 'Open Chrome',
       step1Text: 'Access ShareForge via Chrome browser on your Android',
       step2Title: 'Tap Menu (⋮)',
@@ -246,6 +248,8 @@ export const translations = {
       step3Note: 'By confirming, ShareForge will appear as a native app on your phone',
       step4Title: 'Enjoy the app',
       step4Text: 'You can now use it offline, directly from your home screen. No browser needed.',
+      installVideoTitle: 'Installation video guide',
+      installVideoDescription: 'The video shows the steps to install ShareForge on Android Chrome.',
       installTip: 'Tip',
       installTipText: 'If you see <strong>"Web page not available offline"</strong> the first time, don\'t worry. ShareForge will load the data next time. Offline mode improves over time.',
 

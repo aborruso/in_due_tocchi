@@ -121,14 +121,37 @@ const alternateLocales = Object.entries(OG_LOCALES)
         Il Flusso: URL → Contesto → LLM → Utente
       </h2>
 
-      <!-- Demo Placeholder -->
-      <div class="bg-white rounded-xl border-2 border-slate-300 aspect-video flex items-center justify-center">
-        <div class="text-center">
-          <div class="text-5xl mb-4">🎬</div>
-          <p class="text-slate-600 font-medium mb-2" data-i18n="mobilePage.demoPlaceholder">Video demo in arrivo</p>
-          <p class="text-slate-500 text-sm" data-i18n="mobilePage.demoDescription">Mostra come: condividere URL → scegliere template → inviare a un LLM</p>
+      <!-- Demo Video -->
+      <div class="mx-auto max-w-sm">
+        <div class="bg-white rounded-xl border-2 border-slate-300 overflow-hidden max-h-[500px]">
+          <video
+            id="demo-video"
+            poster="/in_due_tocchi/video/uso-poster.jpg"
+            controls
+            preload="metadata"
+            loading="lazy"
+            class="w-full h-full object-contain"
+            aria-label="Video dimostrativo: come usare ShareForge per condividere URL con template"
+          >
+            <source src="/in_due_tocchi/video/uso.webm" type="video/webm">
+            <source src="/in_due_tocchi/video/uso.mp4" type="video/mp4">
+            <p class="p-8 text-center text-slate-600">
+              Il tuo browser non supporta la riproduzione video.
+              <a href="/in_due_tocchi" class="text-blue-600 underline">Apri ShareForge</a> per iniziare.
+            </p>
+          </video>
         </div>
+        <button
+          id="demo-fullscreen-btn"
+          class="mt-3 w-full bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          aria-label="Visualizza a schermo intero"
+        >
+          ⛶ Fullscreen
+        </button>
       </div>
+      <p class="text-center text-slate-600 mt-4 text-sm" data-i18n="mobilePage.demoDescription">
+        Mostra come: condividere URL → scegliere template → inviare a un LLM
+      </p>
     </div>
   </section>
 
@@ -137,7 +160,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
     <h2 class="text-3xl font-bold text-center mb-4 text-slate-900" data-i18n="mobilePage.installTitle">
       Installa come App
     </h2>
-    <p class="text-center text-slate-600 mb-12" data-i18n="mobilePage.installSubtitle">
+    <p class="text-center text-slate-600 mb-12" data-i18n-html="mobilePage.installSubtitle">
       Aggiungi ShareForge alla schermata iniziale in 30 secondi
     </p>
 
@@ -215,6 +238,42 @@ const alternateLocales = Object.entries(OG_LOCALES)
             </p>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Installation Video -->
+    <div class="mt-12">
+      <div class="border-l-4 border-blue-600 pl-6">
+        <h3 class="text-xl font-bold text-slate-900 mb-4" data-i18n="mobilePage.installVideoTitle">Video guida all'installazione</h3>
+        <div class="mx-auto max-w-sm">
+          <div class="bg-white rounded-xl border-2 border-blue-200 overflow-hidden max-h-[500px]">
+            <video
+              id="install-video"
+              poster="/in_due_tocchi/video/install-poster.jpg"
+              controls
+              preload="metadata"
+              loading="lazy"
+              class="w-full h-full object-contain"
+              aria-label="Video guida: come installare ShareForge come PWA su Android"
+            >
+              <source src="/in_due_tocchi/video/install.webm" type="video/webm">
+              <source src="/in_due_tocchi/video/install.mp4" type="video/mp4">
+              <p class="p-8 text-center text-slate-600">
+                Il tuo browser non supporta la riproduzione video. Segui i passaggi sopra per installare l'app.
+              </p>
+            </video>
+          </div>
+          <button
+            id="install-fullscreen-btn"
+            class="mt-3 w-full bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+            aria-label="Visualizza a schermo intero"
+          >
+            ⛶ Fullscreen
+          </button>
+        </div>
+        <p class="text-slate-600 mt-3 text-sm" data-i18n="mobilePage.installVideoDescription">
+          Il video mostra i passaggi per installare ShareForge su Android Chrome.
+        </p>
       </div>
     </div>
 
@@ -315,6 +374,30 @@ const alternateLocales = Object.entries(OG_LOCALES)
 
     // Initialize on load
     updateI18n();
+
+    // Fullscreen functionality for videos
+    function setupFullscreen(videoId, btnId) {
+      const video = document.getElementById(videoId);
+      const btn = document.getElementById(btnId);
+
+      if (!video || !btn) return;
+
+      btn.addEventListener('click', () => {
+        if (video.requestFullscreen) {
+          video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+          video.webkitRequestFullscreen();
+        } else if (video.mozRequestFullScreen) {
+          video.mozRequestFullScreen();
+        } else if (video.msRequestFullscreen) {
+          video.msRequestFullscreen();
+        }
+      });
+    }
+
+    // Setup fullscreen for both videos
+    setupFullscreen('demo-video', 'demo-fullscreen-btn');
+    setupFullscreen('install-video', 'install-fullscreen-btn');
   </script>
 
   <style is:global>
