@@ -13,6 +13,14 @@ const templates = (() => {
     return [];
   }
 })();
+
+const formatDescription = (text) => {
+  if (!text) return '';
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n\n/g, '<br /><br />')
+    .replace(/\n/g, ' ');
+};
 ---
 
 <!DOCTYPE html>
@@ -51,12 +59,8 @@ const templates = (() => {
                   <span class="text-xs uppercase tracking-wide text-gray-500 bg-gray-100 rounded-full px-2 py-1">Default</span>
                 </div>
                 {template.description && (
-                  <p class="text-sm text-gray-700 mt-2 leading-relaxed whitespace-pre-line">{template.description}</p>
+                  <p class="text-sm text-gray-700 mt-2 leading-relaxed" set:html={formatDescription(template.description)}></p>
                 )}
-                <div class="mt-4 text-xs uppercase tracking-wide text-gray-500">Prompt completo</div>
-                <pre class="mt-1 text-sm text-gray-600 whitespace-pre-wrap bg-gray-50 border border-dashed border-gray-200 rounded-xl p-3 overflow-x-auto">
-                  {template.template.trim()}
-                </pre>
               </div>
             </div>
           </article>

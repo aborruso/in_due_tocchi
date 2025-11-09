@@ -1,5 +1,8 @@
 ---
-const { variant = 'default' } = Astro.props;
+const {
+  variant = 'default',
+  class: className = ''
+} = Astro.props;
 const baseClasses = "text-center text-sm";
 const variants = {
   default: "text-gray-500",
@@ -11,7 +14,7 @@ const linkClasses = {
 };
 ---
 
-<footer class={`space-y-2 ${baseClasses} ${variants[variant] ?? variants.default}`}>
+<footer class={`space-y-2 ${baseClasses} ${variants[variant] ?? variants.default} ${className}`}>
   <p>Riformula v1.0 - PWA Offline-First</p>
   <a
     href="https://github.com/aborruso/in_due_tocchi"
