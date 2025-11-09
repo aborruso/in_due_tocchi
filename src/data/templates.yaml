@@ -2,6 +2,7 @@
   name: Film
   emoji: "🎬"
   active: true
+  description: "Seleziona film disponibili su Prime/Netflix e ordina per voto IMDb."
   template: |
     Prendi i titoli di film/serie da questo URL: {url}.
     Filtra solo quelli presenti su Amazon Prime Video o Netflix (non altre piattaforme).
@@ -13,6 +14,7 @@
   name: Telegram
   emoji: "📱"
   active: true
+  description: "Mini post per canali Telegram: hook rapido, tono colloquiale e link finale."
   template: |
     Leggi questo URL: {url}
 
@@ -31,6 +33,7 @@
   name: Riassunto generico
   emoji: "🧾"
   active: true
+  description: "Riassunto universale con takeaway e nota su chi ne beneficia."
   template: |
     Leggi il contenuto da questo URL: {url}
 
@@ -46,6 +49,7 @@
   name: Dati aperti
   emoji: "📊"
   active: true
+  description: "Checklist completa per valutare e rilasciare dataset open data."
   template: |
     Analizza questo URL: {url}
 
@@ -74,6 +78,7 @@
   name: SEO Brief
   emoji: "🔍"
   active: true
+  description: "Analisi on-page: topic, keyword, struttura e suggerimenti SEO."
   template: |
     Analizza questo URL: {url}
 
@@ -96,6 +101,7 @@
   name: Thread Twitter
   emoji: "🧵"
   active: true
+  description: "Thread pronto alla pubblicazione con hook, punti chiave e CTA."
   template: |
     Leggi il contenuto da questo URL: {url}
 
@@ -117,6 +123,7 @@
   name: Fact-Check
   emoji: "✓"
   active: true
+  description: "Verifica affermazioni chiave con evidenze, red flag e giudizio finale."
   template: |
     Analizza il contenuto da: {url}
 
@@ -145,6 +152,7 @@
   name: Comprendi e Apprendi
   emoji: "🧠"
   active: true
+  description: "Analisi approfondita per studio: concetti, contesto, applicazioni e riflessioni."
   template: |
     Leggi e analizza approfonditamente il contenuto da: {url}
 

@@ -1,0 +1,66 @@
+---
+import yaml from 'js-yaml';
+import templatesYamlRaw from '../data/templates.yaml?raw';
+
+const templates = (() => {
+  try {
+    const data = yaml.load(templatesYamlRaw);
+    const allTemplates = Array.isArray(data) ? data : [];
+    return allTemplates.filter(template => template.active !== false);
+  } catch (error) {
+    console.error('Error parsing templates.yaml:', error);
+    return [];
+  }
+})();
+---
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Panoramica template Riformula" />
+  <title>Template · Riformula</title>
+  <link rel="manifest" href="/in_due_tocchi/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/in_due_tocchi/favicon.svg" />
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <div class="container mx-auto px-4 py-5 max-w-4xl flex-1">
+    <header class="mb-6">
+      <div class="flex items-center justify-between gap-3">
+        <a href="/in_due_tocchi/" class="text-lg text-blue-600 font-medium">← Torna all'app</a>
+        <div class="text-center flex-1">
+          <h1 class="text-2xl font-bold text-gray-900">Template disponibili</h1>
+          <p class="text-sm text-gray-600">Scegli in base allo scopo</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="space-y-4">
+      {templates.length === 0 ? (
+        <p class="text-gray-600 text-center">Nessun template disponibile.</p>
+      ) : (
+        templates.map(template => (
+          <article class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4" aria-label={`Template ${template.name}`}>
+            <div class="flex items-start gap-3">
+              <div class="text-3xl" aria-hidden="true">{template.emoji}</div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                  <h2 class="text-lg font-semibold text-gray-900">{template.name}</h2>
+                  <span class="text-xs uppercase tracking-wide text-gray-500 bg-gray-100 rounded-full px-2 py-1">Default</span>
+                </div>
+                {template.description && (
+                  <p class="text-sm text-gray-600 mt-1">{template.description}</p>
+                )}
+                <div class="mt-3 text-sm text-gray-500 whitespace-pre-wrap border-t border-dashed border-gray-200 pt-3">
+                  {template.template.trim().split('\n').slice(0, 6).join('\n')}{template.template.trim().split('\n').length > 6 ? '…' : ''}
+                </div>
+              </div>
+            </div>
+          </article>
+        ))
+      )}
+    </main>
+  </div>
+</body>
+</html>
