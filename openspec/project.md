@@ -11,26 +11,31 @@
 - Enable quick sharing via Web Share API or clipboard fallback
 - Provide static, reliable template system with no sync issues
 
-**Recent Changes (2025-11-07):**
+**Recent Changes (2025-11-08):**
 - Migrated to completely static template system (no localStorage for templates)
-- Templates loaded from YAML at build-time and embedded in HTML
+- Templates loaded from YAML at build-time and embedded in HTML as `window.DEFAULT_TEMPLATES`
 - Removed custom template management features (create/edit/delete/import/export)
 - Added "Film" template for filtering movies/series by streaming platform + IMDb rating
 - Added "Telegram" template for creating Italian summaries optimized for Telegram group sharing with markdown formatting and emojis
 - Added `active` boolean field to template schema for enabling/disabling templates
 - Added device warning modal for non-Android/non-mobile users
+- Implemented drag-and-drop template reordering with localStorage persistence
+- Added reset button to restore YAML-defined template order
+- Auto-incrementing Service Worker cache version via prebuild hook
 
 ## Tech Stack
 
 - **Framework**: Astro 4.x - Static site generation
-- **Styling**: Tailwind CSS 3.x
+- **Styling**: Tailwind CSS 3.x (via @astrojs/tailwind integration)
 - **Runtime**: Vanilla JavaScript (ES6 modules)
-- **PWA**: Service Worker for offline caching
-- **Storage**: localStorage (client-side only for user data), YAML for static templates
-- **YAML Parser**: js-yaml for parsing templates at build-time and embedding in HTML
-- **Hosting**: GitHub Pages
+- **PWA**: Service Worker for offline caching with timestamp-based cache versioning
+- **Storage**: localStorage (template order only), YAML for static templates
+- **YAML Parser**: js-yaml 4.1.0 for parsing templates at build-time and embedding in HTML
+- **Image Processing**: Sharp 0.34.5 (Astro dependency for image optimization)
+- **Hosting**: GitHub Pages at `/in_due_tocchi/` base path
 - **Build Tool**: npm with Astro CLI
 - **Node Version**: 18+ (20 in CI/CD)
+- **Cache Version Management**: Automated via `update-cache-version.js` prebuild hook
 
 ## Project Conventions
 
@@ -95,30 +100,34 @@ export function functionName(param1, param2) {
 - **Web Share API**: Native sharing to system share sheet (WhatsApp, Telegram, Email, etc.)
 - **Template Placeholders**: `{title}`, `{text}`, `{url}` replaced with shared data
 - **Offline-First**: App works completely offline after service worker caches assets
-- **AndroidFirst**: Primary target is Android devices, secondary support for web browsers
-- **localStorage Strategy**: All templates stored in browser localStorage, no sync backend
+- **Android-First**: Primary target is Android devices with Share Target, desktop shows warning modal
+- **localStorage Strategy**: Only template order stored in localStorage (`shareforge-template-order`), templates are static and embedded in HTML
 
 **User Flows:**
-1. User shares link from another app → Riformula receives via Share Target → fills input fields → applies template → shares/copies result
+1. User shares link from another app → ShareForge receives via Share Target → fills input fields → applies template → shares/copies result
 2. User taps template button (with emoji + name) → applies to shared content → shares/copies formatted result
+3. User drags template buttons to reorder → new order saved to localStorage → persists across sessions
+4. User clicks reset button (↺) → template order reverts to YAML-defined default
 
 ## Important Constraints
 
 - **HTTPS Only**: PWA requires HTTPS for production (GitHub Pages provides this)
 - **Android Requirements**: Must be installed as PWA on Android to function as Share Target
-- **Storage Limits**: localStorage has ~5-10MB limit per origin (used only for user data, not templates)
+- **Storage Limits**: localStorage has ~5-10MB limit per origin (only used for template order)
 - **No Backend**: Static-only deployment, no server-side processing
 - **Browser Support**: Requires modern browser with Service Worker support (Chrome 40+, Firefox 44+)
 - **Offline Limitation**: Cannot fetch fresh content offline, only cached assets available
-- **Base Path**: Deployed to `/in_due_tocchi/` subpath on GitHub Pages (affects manifest and SW paths)
+- **Base Path**: Deployed to `/in_due_tocchi/` subpath on GitHub Pages (affects manifest and SW paths, set in `astro.config.mjs`)
 - **Static Templates**: All templates are read-only and embedded in HTML at build-time, no runtime modifications
 - **Build-Time Parsing**: Template YAML must be valid during build, errors will fail the build process
-- **Android PWA Fix**: Page reload ensures templates are always up-to-date (no sync issues)
+- **Vite Asset Inlining**: Disabled (`assetsInlineLimit: 0`) to prevent base64 encoding of assets
+- **Video Files**: Ignored by Vite watch to prevent dev server performance issues
 
 ## External Dependencies
 
-- **GitHub Pages**: Hosting platform, requires HTTPS
-- **GitHub Actions**: CI/CD pipeline for automated build and deploy
-- **npm/Node.js**: Build tooling (Astro, Tailwind, Sharp)
-- **Tailwind CSS CDN**: Not used (built-in with @astrojs/tailwind)
-- **Web APIs**: Service Worker, localStorage, Web Share API, Clipboard API (all native browser APIs)
+- **GitHub Pages**: Hosting platform, requires HTTPS, serves from `gh-pages` branch
+- **GitHub Actions**: CI/CD pipeline for automated build and deploy (`.github/workflows/deploy.yml`)
+- **npm/Node.js**: Build tooling (Astro, Tailwind, Sharp, js-yaml)
+- **Tailwind CSS**: Integrated via @astrojs/tailwind, no CDN required
+- **Web APIs**: Service Worker, localStorage, Web Share API, Clipboard API, Drag and Drop API (all native browser APIs)
+- **js-yaml**: NPM package for YAML parsing, required during build process
