@@ -19,6 +19,7 @@ export function applyTemplate(templateText, data, appendUrl = true) {
 
 /**
  * Get template order from localStorage, fallback to default order (template IDs array)
+ * Automatically adds new templates that aren't in the saved order
  */
 export function getTemplateOrder(defaultTemplates) {
   try {
@@ -26,11 +27,15 @@ export function getTemplateOrder(defaultTemplates) {
     if (stored) {
       try {
         const order = JSON.parse(stored);
-        // Validate stored order contains valid IDs
         const validIds = defaultTemplates.map(t => t.id);
-        if (order.every(id => validIds.includes(id))) {
-          return order;
-        }
+
+        // Filter out invalid IDs from saved order
+        const validOrder = order.filter(id => validIds.includes(id));
+
+        // Add new templates that aren't in the saved order (append at end)
+        const missingIds = validIds.filter(id => !validOrder.includes(id));
+
+        return [...validOrder, ...missingIds];
       } catch (e) {
         console.warn('Invalid template order in localStorage:', e);
       }
