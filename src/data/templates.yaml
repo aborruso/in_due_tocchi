@@ -2,7 +2,8 @@
   name: Riassunto generico
   emoji: "🧾"
   active: true
-  description: "Riassunto universale con takeaway e nota su chi ne beneficia."
+  description: |
+    **Riassunto generico** condensa qualsiasi contenuto in poche righe ordinate, mettendo in evidenza il contesto iniziale, i tre takeaway più utili e chi può trarne vantaggio. È il template ideale quando ti serve una panoramica fedele e veloce prima di decidere se approfondire.
   template: |
     Leggi il contenuto da questo URL: {url}
 
@@ -18,7 +19,8 @@
   name: Telegram
   emoji: "📱"
   active: true
-  description: "Mini post per canali Telegram: hook rapido, tono colloquiale e link finale."
+  description: |
+    **Telegram** trasforma l'articolo in un mini post in due paragrafi, con un gancio iniziale brillante e un invito alla conversazione. Mantiene tono amichevole, inserisce emoji dove servono e chiude con il link originale per favorire la condivisione immediata nel canale.
   template: |
     Leggi questo URL: {url}
 
@@ -37,7 +39,8 @@
   name: Thread Twitter
   emoji: "🧵"
   active: true
-  description: "Thread pronto alla pubblicazione con hook, punti chiave e CTA."
+  description: |
+    Il template **Thread Twitter** costruisce un intero filo narrativo: parte con un hook curioso, dedica un tweet a ciascuna idea portante e conclude con una call-to-action. Tutto resta entro i 280 caratteri per tweet, già pronto da incollare su X senza altri ritocchi.
   template: |
     Leggi il contenuto da questo URL: {url}
 
@@ -59,7 +62,8 @@
   name: Fact-Check
   emoji: "✓"
   active: true
-  description: "Verifica affermazioni chiave con evidenze, red flag e giudizio finale."
+  description: |
+    **Fact-Check** aiuta a smontare il testo in claim verificabili, indicando fonti, possibili red flag e un giudizio finale sull'affidabilità. È perfetto quando devi capire se un articolo regge ai dati o se sta esagerando con opinioni spacciate per fatti.
   template: |
     Analizza il contenuto da: {url}
 
@@ -88,7 +92,8 @@
   name: Comprendi e Apprendi
   emoji: "🧠"
   active: true
-  description: "Analisi approfondita per studio: concetti, contesto, applicazioni e riflessioni."
+  description: |
+    Con **Comprendi e Apprendi** ottieni un dossier completo: sintesi esecutiva, concetti organizzati, glossario, contesto storico e applicazioni pratiche. Chiude con domande di riflessione per interiorizzare meglio e collegare il tema ad altre discipline.
   template: |
     Leggi e analizza approfonditamente il contenuto da: {url}
 
@@ -128,7 +133,8 @@
   name: SEO Brief
   emoji: "🔍"
   active: true
-  description: "Analisi on-page: topic, keyword, struttura e suggerimenti SEO."
+  description: |
+    **SEO Brief** analizza la pagina lato on-page: individua topic e keyword, valuta titoli, headings, leggibilità e meta tag, poi suggerisce migliorie concrete. È pensato per marketer che vogliono un piano d'azione chiaro senza aprire mille tool.
   template: |
     Analizza questo URL: {url}
 
@@ -151,7 +157,8 @@
   name: Dati aperti
   emoji: "📊"
   active: true
-  description: "Checklist completa per valutare e rilasciare dataset open data."
+  description: |
+    **Dati aperti** guida un'analisi strutturata: elenca i dati presenti, valuta livello di strutturazione, licenze e rischi, e propone strumenti per l'estrazione. È utile quando devi capire se e come pubblicare un dataset in modo responsabile.
   template: |
     Analizza questo URL: {url}
 
@@ -180,7 +187,8 @@
   name: Film
   emoji: "🎬"
   active: true
-  description: "Seleziona film disponibili su Prime/Netflix e ordina per voto IMDb."
+  description: |
+    **Film** filtra automaticamente i titoli trovati online, lasciando solo quelli su Prime Video o Netflix e ordinandoli per voto IMDb. In pochi secondi ottieni una watchlist commentata, utile per newsletter o consigli rapidi.
   template: |
     Prendi i titoli di film/serie da questo URL: {url}.
     Filtra solo quelli presenti su Amazon Prime Video o Netflix (non altre piattaforme).
