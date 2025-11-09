@@ -2,6 +2,7 @@
 import TemplateSelect from '../components/TemplateSelect.astro';
 import TextPreview from '../components/TextPreview.astro';
 import ShareButtons from '../components/ShareButtons.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import yaml from 'js-yaml';
 import templatesYamlRaw from '../data/templates.yaml?raw';
 
@@ -64,10 +65,7 @@ const templates = (() => {
       <ShareButtons />
     </main>
 
-    <!-- Footer -->
-    <footer class="mt-8 text-center text-xs text-gray-500">
-      <p>Riformula v1.0 - PWA Offline-First</p>
-    </footer>
+    <SiteFooter class="mt-8" />
   </div>
 
   <!-- Sticky Bottom Bar with Share Buttons -->

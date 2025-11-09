@@ -1,6 +1,7 @@
 ---
 import yaml from 'js-yaml';
 import templatesYamlRaw from '../data/templates.yaml?raw';
+import SiteFooter from '../components/SiteFooter.astro';
 
 const templates = (() => {
   try {
@@ -62,6 +63,7 @@ const templates = (() => {
         ))
       )}
     </main>
+    <SiteFooter class="mt-8" />
   </div>
 </body>
 </html>

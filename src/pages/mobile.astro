@@ -1,5 +1,6 @@
 ---
 // Mobile landing page for smartphone users
+import SiteFooter from '../components/SiteFooter.astro';
 ---
 
 <!DOCTYPE html>
@@ -203,10 +204,11 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="max-w-2xl mx-auto py-8 px-4 text-center text-slate-600 text-sm">
-    <p>Riformula v1.0 - PWA Offline-First | Made with 🔧</p>
-  </footer>
+  <div class="bg-slate-900">
+    <div class="max-w-2xl mx-auto py-8 px-4">
+      <SiteFooter variant="solid" />
+    </div>
+  </div>
 
   <style is:global>
     * {
