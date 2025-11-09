@@ -1,5 +1,21 @@
 ## 2025-11-09
 
+**Updated PWA icon: link emoji with gradient background**
+- Replaced "R" placeholder with 🔗 emoji (clearer brand identity)
+- Gradient background: blue→purple (tech/AI aesthetic)
+- Generated 8 PNG sizes (72-512px) + favicon.svg
+- Flat/Material style for optimal readability at all sizes
+
+**Added video guides to mobile landing page**
+- Integrated installation video (installa.mp4/webm, 107s) in PWA Installation Guide section
+- Integrated usage demo video (uso.mp4/webm, 93s) in Demo Section
+- Optimized videos: WebM VP9 (primary) + H.264 MP4 fallback for Safari/iOS
+- Target bitrate 450 kbps for mobile, file sizes <10MB each (WebM)
+- Generated poster images (<62KB JPG) for instant preview
+- No autoplay, user-initiated playback only, lazy loading
+- Total dist size: 31MB (videos not cached by SW, loaded on demand)
+- OpenSpec proposal: `add-video-guides` (validated, completed)
+
 **BREAKING: Project renamed from Riformula to ShareForge**
 - Updated all branding: package.json, manifest, translations (IT/EN)
 - Updated cache name: `shareforge-v*` (replaces `riformula-v*`)
