@@ -1,14 +1,18 @@
-- id: movies-filtered
-  name: Film
-  emoji: "🎬"
+- id: generic-summary
+  name: Riassunto generico
+  emoji: "🧾"
   active: true
-  description: "Seleziona film disponibili su Prime/Netflix e ordina per voto IMDb."
+  description: "Riassunto universale con takeaway e nota su chi ne beneficia."
   template: |
-    Prendi i titoli di film/serie da questo URL: {url}.
-    Filtra solo quelli presenti su Amazon Prime Video o Netflix (non altre piattaforme).
-    Per ciascuno: trova il voto IMDb e restituisci un elenco puntato in questa forma:
-    • Piattaforma – Voto – Titolo
-    Ordina la lista in ordine decrescente di voto IMDb.
+    Leggi il contenuto da questo URL: {url}
+
+    Scrivi un riassunto strutturato in italiano che includa:
+    1. 3-5 frasi con l'idea principale e il contesto
+    2. Un elenco puntato con i 3 takeaway essenziali
+    3. Una frase finale che spiega a chi è utile il contenuto
+
+    Usa un tono chiaro e sintetico, senza copiare parti testuali pari pari.
+    Cita il link originale nell'ultima riga come "Fonte: {url}".
 
 - id: telegram
   name: Telegram
@@ -28,74 +32,6 @@
     Usa un tono amichevole ma informativo.
     Dividi l'output in 2 paragrafi separati da una riga vuota.
     Scrivi tutto in italiano.
-
-- id: generic-summary
-  name: Riassunto generico
-  emoji: "🧾"
-  active: true
-  description: "Riassunto universale con takeaway e nota su chi ne beneficia."
-  template: |
-    Leggi il contenuto da questo URL: {url}
-
-    Scrivi un riassunto strutturato in italiano che includa:
-    1. 3-5 frasi con l'idea principale e il contesto
-    2. Un elenco puntato con i 3 takeaway essenziali
-    3. Una frase finale che spiega a chi è utile il contenuto
-
-    Usa un tono chiaro e sintetico, senza copiare parti testuali pari pari.
-    Cita il link originale nell'ultima riga come "Fonte: {url}".
-
-- id: open-data-analysis
-  name: Dati aperti
-  emoji: "📊"
-  active: true
-  description: "Checklist completa per valutare e rilasciare dataset open data."
-  template: |
-    Analizza questo URL: {url}
-
-    1. **Estrai dati presenti**:
-       - Tabelle, grafici, numeri, elenchi
-       - Riferimenti normativi, dataset citati
-       - Formati visibili (PDF, HTML, Excel, immagini)
-
-    2. **Strutturazione e rilascio**:
-       - Livello di strutturazione (1=testo grezzo, 5=database strutturato)
-       - Formato ideale per open data (CSV, JSON, RDF, API)
-       - Licenza implicita e ostacoli legali (copyright, privacy)
-       - Rischi specifici (PII, segreti commerciali, dati sensibili)
-
-    3. **Estrazione pratica**:
-       - Strumenti per estrarre (web scraping, OCR, API)
-       - Normalizzazione richiesta (encoding, pulizia, validazione)
-       - Effort stimato (basso/medio/alto)
-
-    4. **Fonti correlate affidabili**:
-       - ISTAT, ANAC, ARERA, OpenStreetMap, Geoportali, ISPRA
-       - Dati EU (data.europa.eu, Eurostat)
-       - Alternative pubbliche già disponibili
-
-- id: seo-brief
-  name: SEO Brief
-  emoji: "🔍"
-  active: true
-  description: "Analisi on-page: topic, keyword, struttura e suggerimenti SEO."
-  template: |
-    Analizza questo URL: {url}
-
-    Crea un SEO brief strutturato:
-
-    1. **Topic principale**: identifica l'argomento primario della pagina
-    2. **Keywords primarie e secondarie**: estrai le keyword più rilevanti (presenti nel titolo, headings, prime righe)
-    3. **Struttura contenuto**: analizza titoli, sottotitoli, lunghezza, presenza di liste/tabelle
-    4. **Valutazione on-page**:
-       - Qualità del titolo meta (lunghezza, keyword, appeal)
-       - Meta description presente e ottimizzata?
-       - Headings logici (H1, H2)?
-       - Readability (lunghezza paragrafi, uso di formatting)
-    5. **Suggerimenti di ottimizzazione**:
-       - 3 keyword da aggiungere/enfatizzare
-       - Miglioramenti strutturali (headings mancanti, sezioni da aggiungere)
-       - Elementi mancanti (schema markup, immagini, internal links)
 
 - id: twitter-thread
   name: Thread Twitter
@@ -187,3 +123,67 @@
     7. **Domande di riflessione**: 3-5 domande che stimolano pensiero critico e approfondimento successivo
 
     Sii esaustivo ma organizzato. Output in italiano.
+
+- id: seo-brief
+  name: SEO Brief
+  emoji: "🔍"
+  active: true
+  description: "Analisi on-page: topic, keyword, struttura e suggerimenti SEO."
+  template: |
+    Analizza questo URL: {url}
+
+    Crea un SEO brief strutturato:
+
+    1. **Topic principale**: identifica l'argomento primario della pagina
+    2. **Keywords primarie e secondarie**: estrai le keyword più rilevanti (presenti nel titolo, headings, prime righe)
+    3. **Struttura contenuto**: analizza titoli, sottotitoli, lunghezza, presenza di liste/tabelle
+    4. **Valutazione on-page**:
+       - Qualità del titolo meta (lunghezza, keyword, appeal)
+       - Meta description presente e ottimizzata?
+       - Headings logici (H1, H2)?
+       - Readability (lunghezza paragrafi, uso di formatting)
+    5. **Suggerimenti di ottimizzazione**:
+       - 3 keyword da aggiungere/enfatizzare
+       - Miglioramenti strutturali (headings mancanti, sezioni da aggiungere)
+       - Elementi mancanti (schema markup, immagini, internal links)
+
+- id: open-data-analysis
+  name: Dati aperti
+  emoji: "📊"
+  active: true
+  description: "Checklist completa per valutare e rilasciare dataset open data."
+  template: |
+    Analizza questo URL: {url}
+
+    1. **Estrai dati presenti**:
+       - Tabelle, grafici, numeri, elenchi
+       - Riferimenti normativi, dataset citati
+       - Formati visibili (PDF, HTML, Excel, immagini)
+
+    2. **Strutturazione e rilascio**:
+       - Livello di strutturazione (1=testo grezzo, 5=database strutturato)
+       - Formato ideale per open data (CSV, JSON, RDF, API)
+       - Licenza implicita e ostacoli legali (copyright, privacy)
+       - Rischi specifici (PII, segreti commerciali, dati sensibili)
+
+    3. **Estrazione pratica**:
+       - Strumenti per estrarre (web scraping, OCR, API)
+       - Normalizzazione richiesta (encoding, pulizia, validazione)
+       - Effort stimato (basso/medio/alto)
+
+    4. **Fonti correlate affidabili**:
+       - ISTAT, ANAC, ARERA, OpenStreetMap, Geoportali, ISPRA
+       - Dati EU (data.europa.eu, Eurostat)
+       - Alternative pubbliche già disponibili
+
+- id: movies-filtered
+  name: Film
+  emoji: "🎬"
+  active: true
+  description: "Seleziona film disponibili su Prime/Netflix e ordina per voto IMDb."
+  template: |
+    Prendi i titoli di film/serie da questo URL: {url}.
+    Filtra solo quelli presenti su Amazon Prime Video o Netflix (non altre piattaforme).
+    Per ciascuno: trova il voto IMDb e restituisci un elenco puntato in questa forma:
+    • Piattaforma – Voto – Titolo
+    Ordina la lista in ordine decrescente di voto IMDb.

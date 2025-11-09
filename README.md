@@ -8,7 +8,6 @@
 - ✅ **Template personalizzabili**: Crea, modifica ed elimina template con segnaposto `{title}`, `{text}`, `{url}`
 - ✅ **Offline-first**: Funziona completamente offline dopo il primo caricamento
 - ✅ **Condivisione rapida**: Usa Web Share API o copia negli appunti
-- ✅ **Import/Export**: Backup e sincronizzazione dei template
 - ✅ **Leggera e veloce**: Nessun backend, solo file statici
 
 ## Stack Tecnologico
