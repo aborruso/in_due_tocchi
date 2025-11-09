@@ -40,18 +40,6 @@ npm run build
 npm run preview
 ```
 
-### Genera Icone PWA
-
-Prima di fare il deploy in produzione, genera le icone PWA:
-
-1. Apri `generate-icons.html` in un browser
-2. Clicca "Generate Icons"
-3. Salva ogni icona nella cartella `public/icons/` con il nome corretto (es: `icon-192x192.png`)
-
-Oppure usa uno strumento online come:
-- [realfavicongenerator.net](https://realfavicongenerator.net/)
-- [PWA Asset Generator](https://github.com/onderceylan/pwa-asset-generator)
-
 ## Come Funziona
 
 Il flusso è in **due share**:
