@@ -54,10 +54,7 @@ const formatDescription = (text) => {
             <div class="flex items-start gap-3">
               <div class="text-3xl" aria-hidden="true">{template.emoji}</div>
               <div class="flex-1">
-                <div class="flex items-center justify-between flex-wrap gap-2">
-                  <h2 class="text-lg font-semibold text-gray-900">{template.name}</h2>
-                  <span class="text-xs uppercase tracking-wide text-gray-500 bg-gray-100 rounded-full px-2 py-1">Default</span>
-                </div>
+                <h2 class="text-lg font-semibold text-gray-900">{template.name}</h2>
                 {template.description && (
                   <p class="text-sm text-gray-700 mt-2 leading-relaxed" set:html={formatDescription(template.description)}></p>
                 )}
