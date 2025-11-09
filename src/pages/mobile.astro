@@ -1,39 +1,45 @@
 ---
 // Mobile landing page for smartphone users
 import SiteFooter from '../components/SiteFooter.astro';
+import LanguageSelector from '../components/LanguageSelector.astro';
 ---
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" id="html-root">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Riformula - Prepara il contesto degli URL per gli LLM. Scegli un template strutturato e condividi il contesto al miglior modello." />
   <meta name="theme-color" content="#1e293b" />
-  <title>Riformula - Usa su Smartphone</title>
+  <title id="page-title">Riformula - Usa su Smartphone</title>
   <link rel="manifest" href="/in_due_tocchi/manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="/in_due_tocchi/favicon.svg" />
 </head>
 <body class="bg-slate-50 text-slate-900">
+  <!-- Language Selector (fixed top-right) -->
+  <div class="fixed top-4 right-4 z-50">
+    <LanguageSelector />
+  </div>
+
   <!-- Hero Section -->
   <section class="bg-gradient-to-b from-slate-900 to-slate-800 text-white py-16 px-4">
     <div class="max-w-2xl mx-auto text-center">
       <div class="text-6xl mb-6">🤖</div>
-      <h1 class="text-5xl font-bold leading-tight mb-4">
+      <h1 class="text-5xl font-bold leading-tight mb-4" data-i18n-html="mobilePage.heroTitle">
         Prepara il Contesto<br />per i tuoi LLM
       </h1>
-      <p class="text-xl text-slate-200 mb-8 leading-relaxed">
+      <p class="text-xl text-slate-200 mb-8 leading-relaxed" data-i18n="mobilePage.heroSubtitle">
         Su smartphone non puoi scrivere prompt prima di inviare l'URL. Con Riformula, crei il contesto attorno al link e lo invii al miglior LLM per il tuo obiettivo.
       </p>
-      <a href="/in_due_tocchi" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors">
-        Apri Riformula →
+      <a href="/in_due_tocchi" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors" data-i18n="mobilePage.openAppCta">
+        Apri Riformula Ora →
       </a>
     </div>
   </section>
 
   <!-- Benefits Section -->
   <section class="max-w-2xl mx-auto py-16 px-4">
-    <h2 class="text-3xl font-bold text-center mb-12 text-slate-900">
+    <h2 class="text-3xl font-bold text-center mb-12 text-slate-900" data-i18n="mobilePage.benefitsTitle">
       Perché Riformula?
     </h2>
 
@@ -42,8 +48,8 @@ import SiteFooter from '../components/SiteFooter.astro';
       <div class="flex gap-4">
         <div class="text-4xl flex-shrink-0">💭</div>
         <div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Crea il Contesto Prima</h3>
-          <p class="text-slate-700">Scegli un template e circonda l'URL con contesto strutturato. Così l'LLM capisce cosa vuoi, senza doverlo spiegare dopo.</p>
+          <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit1Title">Crea il Contesto Prima</h3>
+          <p class="text-slate-700" data-i18n="mobilePage.benefit1Text">Scegli un template e circonda l'URL con contesto strutturato. Così l'LLM capisce cosa vuoi, senza doverlo spiegare dopo.</p>
         </div>
       </div>
 
@@ -51,8 +57,8 @@ import SiteFooter from '../components/SiteFooter.astro';
       <div class="flex gap-4">
         <div class="text-4xl flex-shrink-0">⚡</div>
         <div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Subito, Offline</h3>
-          <p class="text-slate-700">Zero server, zero connessione. Genera il contesto istantaneamente nel tuo smartphone, ovunque tu sia.</p>
+          <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit2Title">Subito, Offline</h3>
+          <p class="text-slate-700" data-i18n="mobilePage.benefit2Text">Zero server, zero connessione. Genera il contesto istantaneamente nel tuo smartphone, ovunque tu sia.</p>
         </div>
       </div>
 
@@ -60,8 +66,8 @@ import SiteFooter from '../components/SiteFooter.astro';
       <div class="flex gap-4">
         <div class="text-4xl flex-shrink-0">📋</div>
         <div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Template = Prompt Strutturati</h3>
-          <p class="text-slate-700">11 template per diversi LLM use case: SEO analysis, fact-check, sintesi, thread social. Ognuno è un prompt ottimizzato.</p>
+          <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit3Title">Template = Prompt Strutturati</h3>
+          <p class="text-slate-700" data-i18n="mobilePage.benefit3Text">11 template per diversi LLM use case: SEO analysis, fact-check, sintesi, thread social. Ognuno è un prompt ottimizzato.</p>
         </div>
       </div>
 
@@ -69,8 +75,8 @@ import SiteFooter from '../components/SiteFooter.astro';
       <div class="flex gap-4">
         <div class="text-4xl flex-shrink-0">🎯</div>
         <div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2">Invia al Miglior LLM</h3>
-          <p class="text-slate-700">Condividi il contesto a ChatGPT, Claude, Gemini o altri. Scegli il modello migliore per il tuo template/obiettivo.</p>
+          <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit4Title">Invia al Miglior LLM</h3>
+          <p class="text-slate-700" data-i18n="mobilePage.benefit4Text">Condividi il contesto a ChatGPT, Claude, Gemini o altri. Scegli il modello migliore per il tuo template/obiettivo.</p>
         </div>
       </div>
     </div>
@@ -79,7 +85,7 @@ import SiteFooter from '../components/SiteFooter.astro';
   <!-- Demo Section -->
   <section class="bg-slate-100 py-16 px-4">
     <div class="max-w-2xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-12 text-slate-900">
+      <h2 class="text-3xl font-bold text-center mb-12 text-slate-900" data-i18n="mobilePage.demoTitle">
         Il Flusso: URL → Contesto → LLM
       </h2>
 
@@ -87,8 +93,8 @@ import SiteFooter from '../components/SiteFooter.astro';
       <div class="bg-white rounded-xl border-2 border-slate-300 aspect-video flex items-center justify-center">
         <div class="text-center">
           <div class="text-5xl mb-4">🎬</div>
-          <p class="text-slate-600 font-medium mb-2">Video demo in arrivo</p>
-          <p class="text-slate-500 text-sm">Mostra come: condividere URL → scegliere template → inviare a un LLM</p>
+          <p class="text-slate-600 font-medium mb-2" data-i18n="mobilePage.demoPlaceholder">Video demo in arrivo</p>
+          <p class="text-slate-500 text-sm" data-i18n="mobilePage.demoDescription">Mostra come: condividere URL → scegliere template → inviare a un LLM</p>
         </div>
       </div>
     </div>
@@ -96,10 +102,10 @@ import SiteFooter from '../components/SiteFooter.astro';
 
   <!-- PWA Installation Guide -->
   <section class="max-w-2xl mx-auto py-16 px-4">
-    <h2 class="text-3xl font-bold text-center mb-4 text-slate-900">
+    <h2 class="text-3xl font-bold text-center mb-4 text-slate-900" data-i18n="mobilePage.installTitle">
       Installa come App
     </h2>
-    <p class="text-center text-slate-600 mb-12">
+    <p class="text-center text-slate-600 mb-12" data-i18n="mobilePage.installSubtitle">
       Aggiungi Riformula alla schermata iniziale in 30 secondi
     </p>
 
@@ -111,8 +117,8 @@ import SiteFooter from '../components/SiteFooter.astro';
             1
           </div>
           <div>
-            <h3 class="text-xl font-bold text-slate-900 mb-2">Apri Chrome</h3>
-            <p class="text-slate-700 mb-3">
+            <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.step1Title">Apri Chrome</h3>
+            <p class="text-slate-700 mb-3" data-i18n="mobilePage.step1Text">
               Accedi a Riformula tramite il browser Chrome del tuo Android
             </p>
             <div class="bg-slate-100 rounded-lg p-4 border border-slate-300">
@@ -131,12 +137,12 @@ import SiteFooter from '../components/SiteFooter.astro';
             2
           </div>
           <div>
-            <h3 class="text-xl font-bold text-slate-900 mb-2">Tap Menu (⋮)</h3>
-            <p class="text-slate-700 mb-3">
+            <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.step2Title">Tap Menu (⋮)</h3>
+            <p class="text-slate-700 mb-3" data-i18n="mobilePage.step2Text">
               Premi i tre puntini in alto a destra del browser
             </p>
             <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
-              <p class="text-sm text-slate-700">
+              <p class="text-sm text-slate-700" data-i18n-html="mobilePage.step2Note">
                 Vedrai il bottone <strong>"Installa app"</strong> o <strong>"Aggiungi a Home"</strong>
               </p>
             </div>
@@ -151,12 +157,12 @@ import SiteFooter from '../components/SiteFooter.astro';
             3
           </div>
           <div>
-            <h3 class="text-xl font-bold text-slate-900 mb-2">Tap "Installa app"</h3>
-            <p class="text-slate-700 mb-3">
+            <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.step3Title">Tap "Installa app"</h3>
+            <p class="text-slate-700 mb-3" data-i18n="mobilePage.step3Text">
               Seleziona l'opzione per aggiungere l'app alla schermata iniziale
             </p>
             <div class="bg-slate-100 rounded-lg p-4 border border-slate-300">
-              <p class="text-sm text-slate-600">
+              <p class="text-sm text-slate-600" data-i18n="mobilePage.step3Note">
                 Confermando, Riformula apparirà come app nativa sul tuo telefono
               </p>
             </div>
@@ -171,8 +177,8 @@ import SiteFooter from '../components/SiteFooter.astro';
             4
           </div>
           <div>
-            <h3 class="text-xl font-bold text-slate-900 mb-2">Goditi l'app</h3>
-            <p class="text-slate-700">
+            <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.step4Title">Goditi l'app</h3>
+            <p class="text-slate-700" data-i18n="mobilePage.step4Text">
               Ora puoi usarla offline, direttamente dalla tua schermata iniziale. Nessun browser necessario.
             </p>
           </div>
@@ -183,9 +189,9 @@ import SiteFooter from '../components/SiteFooter.astro';
     <!-- Info Box -->
     <div class="mt-12 bg-blue-50 border border-blue-300 rounded-lg p-6">
       <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
-        <span>💡</span> Consiglio
+        <span>💡</span> <span data-i18n="mobilePage.installTip">Consiglio</span>
       </h3>
-      <p class="text-slate-700">
+      <p class="text-slate-700" data-i18n-html="mobilePage.installTipText">
         Se vedi il messaggio <strong>"Pagina web non disponibile offline"</strong> la prima volta, non ti preoccupare. Riformula caricherà i dati la volta successiva. L'offline mode migliora nel tempo.
       </p>
     </div>
@@ -194,11 +200,11 @@ import SiteFooter from '../components/SiteFooter.astro';
   <!-- CTA Section -->
   <section class="bg-slate-900 text-white py-16 px-4">
     <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-4">Pronto a preparare il contesto?</h2>
-      <p class="text-slate-300 mb-8 text-lg">
+      <h2 class="text-3xl font-bold mb-4" data-i18n="mobilePage.ctaTitle">Pronto a preparare il contesto?</h2>
+      <p class="text-slate-300 mb-8 text-lg" data-i18n="mobilePage.ctaSubtitle">
         Apri Riformula, scegli un template, e invia il contesto strutturato al tuo LLM preferito
       </p>
-      <a href="/in_due_tocchi" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors">
+      <a href="/in_due_tocchi" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors" data-i18n="mobilePage.openAppCta">
         Apri Riformula Ora →
       </a>
     </div>
@@ -209,6 +215,75 @@ import SiteFooter from '../components/SiteFooter.astro';
       <SiteFooter variant="solid" />
     </div>
   </div>
+
+  <script>
+    import {
+      detectLanguage,
+      getCurrentLanguage,
+      setLanguage,
+      setTranslations,
+      t
+    } from '../lib/i18n.js';
+
+    import { translations } from '../lib/translations.js';
+
+    // Initialize i18n
+    setTranslations(translations);
+
+    // Function to update all i18n elements
+    function updateI18n() {
+      const lang = getCurrentLanguage();
+
+      // Update html lang attribute
+      const htmlRoot = document.getElementById('html-root');
+      if (htmlRoot) {
+        htmlRoot.setAttribute('lang', lang);
+      }
+
+      // Update all elements with data-i18n attribute
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = t(key);
+      });
+
+      // Update all elements with data-i18n-html attribute (for HTML content)
+      // SECURITY NOTE: innerHTML is used here with translation strings.
+      // This is safe because translations are bundled at build time from trusted sources (translations.js).
+      // NEVER use this pattern with user-generated content or runtime-loaded strings.
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        el.innerHTML = t(key);
+      });
+
+      // Update language selector active state
+      updateLanguageSelectorState();
+    }
+
+    // Function to update language selector button states
+    function updateLanguageSelectorState() {
+      const lang = getCurrentLanguage();
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    // Language selector event listener
+    document.addEventListener('click', (e) => {
+      const langBtn = e.target.closest('.lang-btn');
+      if (langBtn) {
+        const newLang = langBtn.getAttribute('data-lang');
+        setLanguage(newLang);
+        updateI18n();
+      }
+    });
+
+    // Initialize on load
+    updateI18n();
+  </script>
 
   <style is:global>
     * {
