@@ -1,0 +1,31 @@
+---
+// Language selector component
+// Shows available languages and allows switching
+---
+
+<div id="language-selector" class="flex items-center gap-2">
+  <button
+    data-lang="it"
+    class="lang-btn px-3 py-1.5 rounded-md text-sm font-medium transition-colors"
+    aria-label="Italiano"
+  >
+    🇮🇹 IT
+  </button>
+  <button
+    data-lang="en"
+    class="lang-btn px-3 py-1.5 rounded-md text-sm font-medium transition-colors"
+    aria-label="English"
+  >
+    🇬🇧 EN
+  </button>
+</div>
+
+<style>
+  .lang-btn {
+    @apply bg-gray-100 text-gray-700 hover:bg-gray-200;
+  }
+
+  .lang-btn.active {
+    @apply bg-blue-500 text-white hover:bg-blue-600;
+  }
+</style>

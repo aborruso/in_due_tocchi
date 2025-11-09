@@ -3,6 +3,7 @@ import TemplateSelect from '../components/TemplateSelect.astro';
 import TextPreview from '../components/TextPreview.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import LanguageSelector from '../components/LanguageSelector.astro';
 import yaml from 'js-yaml';
 import templatesYamlRaw from '../data/templates.yaml?raw';
 
@@ -21,14 +22,14 @@ const templates = (() => {
 ---
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" id="html-root">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Trasforma link condivisi in messaggi curati secondo template personalizzabili" />
   <meta name="theme-color" content="#3b82f6" />
 
-  <title>Riformula</title>
+  <title id="page-title">Riformula</title>
 
   <link rel="manifest" href="/in_due_tocchi/manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="/in_due_tocchi/favicon.svg" />
@@ -37,11 +38,12 @@ const templates = (() => {
   <div class="container mx-auto px-4 py-4 max-w-4xl flex-1">
     <!-- Header -->
     <header class="mb-6">
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between gap-3">
         <div class="text-center flex-1">
-          <h1 class="text-3xl font-bold text-gray-900 mb-1">Riformula</h1>
-          <p class="text-sm text-gray-600">Trasforma link in messaggi curati</p>
+          <h1 class="text-3xl font-bold text-gray-900 mb-1" data-i18n="header.title">Riformula</h1>
+          <p class="text-sm text-gray-600" data-i18n="header.subtitle">Trasforma link in messaggi curati</p>
         </div>
+        <LanguageSelector />
         <button id="menu-btn" class="text-2xl text-gray-600 hover:text-gray-900 transition-colors p-2" aria-label="Menu">
           ≡
         </button>
@@ -50,10 +52,10 @@ const templates = (() => {
       <!-- Dropdown Menu -->
       <div id="menu-dropdown" class="hidden bg-white rounded-lg shadow-md border border-gray-200 p-2 text-right mt-2">
         <a href="/in_due_tocchi/templates" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded transition-colors font-medium">
-          📋 Template
+          <span>📋</span> <span data-i18n="common.templates">Template</span>
         </a>
         <a href="/in_due_tocchi/mobile" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded transition-colors font-medium">
-          📖 Guida
+          <span>📖</span> <span data-i18n="common.guide">Guida</span>
         </a>
       </div>
     </header>
@@ -79,7 +81,7 @@ const templates = (() => {
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
             <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
           </svg>
-          Condividi
+          <span data-i18n="common.share">Condividi</span>
         </button>
 
         <button
@@ -90,7 +92,7 @@ const templates = (() => {
             <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
             <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
           </svg>
-          Copia
+          <span data-i18n="common.copy">Copia</span>
         </button>
       </div>
 
@@ -107,15 +109,15 @@ const templates = (() => {
     <div class="bg-white rounded-lg p-8 max-w-md mx-4 shadow-xl">
       <div class="text-center">
         <div class="text-5xl mb-4">📱</div>
-        <h3 class="text-xl font-bold text-gray-900 mb-3">Usa da Smartphone</h3>
-        <p class="text-gray-700 mb-6 leading-relaxed">
+        <h3 class="text-xl font-bold text-gray-900 mb-3" data-i18n="deviceModal.title">Usa da Smartphone</h3>
+        <p class="text-gray-700 mb-6 leading-relaxed" data-i18n-html="deviceModal.message">
           Questa app funziona <strong>SOLO su smartphone</strong>. Da desktop è completamente inutilizzabile.
         </p>
         <div class="flex flex-col gap-3">
-          <a href="/in_due_tocchi/mobile" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold text-center transition-colors">
+          <a href="/in_due_tocchi/mobile" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold text-center transition-colors" data-i18n="deviceModal.learnMore">
             Scopri come usarla 📲
           </a>
-          <button id="dismiss-modal" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition-colors">
+          <button id="dismiss-modal" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition-colors" data-i18n="common.close">
             Chiudi
           </button>
         </div>
@@ -128,9 +130,9 @@ const templates = (() => {
     <div class="container mx-auto flex items-center justify-between max-w-4xl">
       <div class="flex items-center gap-3">
         <span class="text-2xl">🔄</span>
-        <span class="font-medium">Nuova versione disponibile!</span>
+        <span class="font-medium" data-i18n="updateBanner.message">Nuova versione disponibile!</span>
       </div>
-      <button id="reload-app" class="bg-white text-blue-500 px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors">
+      <button id="reload-app" class="bg-white text-blue-500 px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors" data-i18n="updateBanner.update">
         Aggiorna ora
       </button>
     </div>
@@ -159,8 +161,95 @@ const templates = (() => {
       canShare
     } from '../lib/share.js';
 
+    import {
+      detectLanguage,
+      getCurrentLanguage,
+      setLanguage,
+      setTranslations,
+      t
+    } from '../lib/i18n.js';
+
+    import { translations } from '../lib/translations.js';
+
     // Get templates from inline script
-    const DEFAULT_TEMPLATES = window.DEFAULT_TEMPLATES || [];
+    const ALL_TEMPLATES = window.DEFAULT_TEMPLATES || [];
+    let DEFAULT_TEMPLATES = []; // Will be filtered by language
+
+    // Initialize i18n
+    setTranslations(translations);
+
+    // Function to filter templates by current language
+    function getTemplatesForLanguage(lang) {
+      return ALL_TEMPLATES.filter(t => t.lang === lang || !t.lang); // Include templates without lang field for backward compatibility
+    }
+
+    // Function to update all i18n elements
+    function updateI18n() {
+      const lang = getCurrentLanguage();
+
+      // Update templates for current language
+      DEFAULT_TEMPLATES = getTemplatesForLanguage(lang);
+
+      // Update html lang attribute
+      const htmlRoot = document.getElementById('html-root');
+      if (htmlRoot) {
+        htmlRoot.setAttribute('lang', lang);
+      }
+
+      // Update all elements with data-i18n attribute
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = t(key);
+      });
+
+      // Update all elements with data-i18n-html attribute (for HTML content)
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        el.innerHTML = t(key);
+      });
+
+      // Update placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        el.placeholder = t(key);
+      });
+
+      // Update language selector active state
+      updateLanguageSelectorState();
+
+      // Reload templates with current language
+      loadTemplates();
+
+      // Update dynamic content
+      updatePreview();
+    }
+
+    // Function to update language selector button states
+    function updateLanguageSelectorState() {
+      const lang = getCurrentLanguage();
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    // Language selector event listener
+    document.addEventListener('click', (e) => {
+      const langBtn = e.target.closest('.lang-btn');
+      if (langBtn) {
+        const newLang = langBtn.getAttribute('data-lang');
+        setLanguage(newLang);
+
+        // Clear current selection when changing language
+        currentTemplateId = null;
+
+        updateI18n();
+        showFeedback(t('languageSelector.label') + ': ' + t(`languageSelector.${newLang}`));
+      }
+    });
 
     // Register service worker
     if ('serviceWorker' in navigator) {
@@ -277,6 +366,9 @@ const templates = (() => {
 
     // Initialize
     function init() {
+      // Initialize i18n first
+      updateI18n();
+
       // Check if content was shared
       if (isSharedContent()) {
         currentData = parseSharedData();
@@ -439,7 +531,7 @@ const templates = (() => {
       }
 
       previewText.value = result;
-      charCount.textContent = `${result.length} caratteri`;
+      charCount.textContent = t('preview.charCount', { count: result.length });
     }
 
     // Show feedback message
@@ -496,20 +588,20 @@ const templates = (() => {
       shareBtn.addEventListener('click', async () => {
         const text = previewText.value;
         if (!text) {
-          showFeedback('Nessun testo da condividere', 'error');
+          showFeedback(t('feedback.noTextToShare'), 'error');
           return;
         }
 
         const success = await shareText(text, 'Riformula');
         if (success) {
-          showFeedback('Testo condiviso con successo');
+          showFeedback(t('feedback.shareSuccess'));
         } else {
           // Fallback to copy
           const copied = await copyToClipboard(text);
           if (copied) {
-            showFeedback('Condivisione non disponibile. Testo copiato negli appunti');
+            showFeedback(t('feedback.shareUnavailable'));
           } else {
-            showFeedback('Errore durante la condivisione', 'error');
+            showFeedback(t('feedback.shareError'), 'error');
           }
         }
       });
@@ -519,15 +611,15 @@ const templates = (() => {
       copyBtn.addEventListener('click', async () => {
         const text = previewText.value;
         if (!text) {
-          showFeedback('Nessun testo da copiare', 'error');
+          showFeedback(t('feedback.noTextToCopy'), 'error');
           return;
         }
 
         const success = await copyToClipboard(text);
         if (success) {
-          showFeedback('Testo copiato negli appunti');
+          showFeedback(t('feedback.copySuccess'));
         } else {
-          showFeedback('Errore durante la copia', 'error');
+          showFeedback(t('feedback.copyError'), 'error');
         }
       });
     }
@@ -562,7 +654,7 @@ const templates = (() => {
       resetTemplatesBtn.addEventListener('click', () => {
         resetTemplateOrder();
         loadTemplates();
-        showFeedback('Ordine template ripristinato');
+        showFeedback(t('templateSection.resetFeedback'));
       });
     }
 

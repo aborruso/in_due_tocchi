@@ -2,17 +2,21 @@
 import yaml from 'js-yaml';
 import templatesYamlRaw from '../data/templates.yaml?raw';
 import SiteFooter from '../components/SiteFooter.astro';
+import LanguageSelector from '../components/LanguageSelector.astro';
 
-const templates = (() => {
+const allTemplates = (() => {
   try {
     const data = yaml.load(templatesYamlRaw);
-    const allTemplates = Array.isArray(data) ? data : [];
-    return allTemplates.filter(template => template.active !== false);
+    const templates = Array.isArray(data) ? data : [];
+    return templates.filter(template => template.active !== false);
   } catch (error) {
     console.error('Error parsing templates.yaml:', error);
     return [];
   }
 })();
+
+// Default to Italian templates for SSR
+const templates = allTemplates.filter(t => t.lang === 'it' || !t.lang);
 
 const formatDescription = (text) => {
   if (!text) return '';
@@ -24,12 +28,12 @@ const formatDescription = (text) => {
 ---
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" id="html-root">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Panoramica template Riformula" />
-  <title>Template · Riformula</title>
+  <title id="page-title">Template · Riformula</title>
   <link rel="manifest" href="/in_due_tocchi/manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="/in_due_tocchi/favicon.svg" />
 </head>
@@ -37,34 +41,127 @@ const formatDescription = (text) => {
   <div class="container mx-auto px-4 py-5 max-w-4xl flex-1">
     <header class="mb-6">
       <div class="flex items-center justify-between gap-3">
-        <a href="/in_due_tocchi/" class="text-lg text-blue-600 font-medium">← Torna all'app</a>
+        <a href="/in_due_tocchi/" class="text-lg text-blue-600 font-medium">
+          <span>←</span> <span data-i18n="templatesPage.backToApp">Torna all'app</span>
+        </a>
         <div class="text-center flex-1">
-          <h1 class="text-2xl font-bold text-gray-900">Template disponibili</h1>
-          <p class="text-sm text-gray-600">Scegli in base allo scopo</p>
+          <h1 class="text-2xl font-bold text-gray-900" data-i18n="templatesPage.title">Template disponibili</h1>
+          <p class="text-sm text-gray-600" data-i18n="templatesPage.subtitle">Scegli in base allo scopo</p>
         </div>
+        <LanguageSelector />
       </div>
     </header>
 
-    <main class="space-y-4">
-      {templates.length === 0 ? (
-        <p class="text-gray-600 text-center">Nessun template disponibile.</p>
-      ) : (
-        templates.map(template => (
-          <article class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4" aria-label={`Template ${template.name}`}>
-            <div class="flex items-start gap-3">
-              <div class="text-3xl" aria-hidden="true">{template.emoji}</div>
-              <div class="flex-1">
-                <h2 class="text-lg font-semibold text-gray-900">{template.name}</h2>
-                {template.description && (
-                  <p class="text-sm text-gray-700 mt-2 leading-relaxed" set:html={formatDescription(template.description)}></p>
-                )}
-              </div>
-            </div>
-          </article>
-        ))
-      )}
+    <main id="templates-container" class="space-y-4">
+      <!-- Templates will be rendered here by JavaScript -->
     </main>
     <SiteFooter class="mt-8" />
   </div>
+
+  <script is:inline set:html={`
+    window.ALL_TEMPLATES = ${JSON.stringify(allTemplates)};
+  `}></script>
+
+  <script>
+    import {
+      detectLanguage,
+      getCurrentLanguage,
+      setLanguage,
+      setTranslations,
+      t
+    } from '../lib/i18n.js';
+
+    import { translations } from '../lib/translations.js';
+
+    // Get all templates
+    const ALL_TEMPLATES = window.ALL_TEMPLATES || [];
+
+    // Initialize i18n
+    setTranslations(translations);
+
+    // Function to format description (same as Astro)
+    function formatDescription(text) {
+      if (!text) return '';
+      return text
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n\n/g, '<br /><br />')
+        .replace(/\n/g, ' ');
+    }
+
+    // Function to render templates for current language
+    function renderTemplates() {
+      const lang = getCurrentLanguage();
+      const templates = ALL_TEMPLATES.filter(t => t.lang === lang || !t.lang);
+      const container = document.getElementById('templates-container');
+
+      if (!container) return;
+
+      if (templates.length === 0) {
+        container.innerHTML = '<p class="text-gray-600 text-center">' + t('templatesPage.noTemplates') + '</p>';
+        return;
+      }
+
+      container.innerHTML = templates.map(template => `
+        <article class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4" aria-label="Template ${template.name}">
+          <div class="flex items-start gap-3">
+            <div class="text-3xl" aria-hidden="true">${template.emoji}</div>
+            <div class="flex-1">
+              <h2 class="text-lg font-semibold text-gray-900">${template.name}</h2>
+              ${template.description ? `<p class="text-sm text-gray-700 mt-2 leading-relaxed">${formatDescription(template.description)}</p>` : ''}
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // Function to update all i18n elements
+    function updateI18n() {
+      const lang = getCurrentLanguage();
+
+      // Update html lang attribute
+      const htmlRoot = document.getElementById('html-root');
+      if (htmlRoot) {
+        htmlRoot.setAttribute('lang', lang);
+      }
+
+      // Update all elements with data-i18n attribute
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = t(key);
+      });
+
+      // Update language selector active state
+      updateLanguageSelectorState();
+
+      // Re-render templates with current language
+      renderTemplates();
+    }
+
+    // Function to update language selector button states
+    function updateLanguageSelectorState() {
+      const lang = getCurrentLanguage();
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    // Language selector event listener
+    document.addEventListener('click', (e) => {
+      const langBtn = e.target.closest('.lang-btn');
+      if (langBtn) {
+        const newLang = langBtn.getAttribute('data-lang');
+        setLanguage(newLang);
+        updateI18n();
+      }
+    });
+
+    // Initialize on load
+    renderTemplates();
+    updateI18n();
+  </script>
 </body>
 </html>

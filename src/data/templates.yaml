@@ -1,6 +1,7 @@
 - id: generic-summary
   name: Riassunto generico
   emoji: "🧾"
+  lang: it
   active: true
   description: |
     **Riassunto generico** condensa qualsiasi contenuto in poche righe ordinate, mettendo in evidenza il contesto iniziale, i tre takeaway più utili e chi può trarne vantaggio. È il template ideale quando ti serve una panoramica fedele e veloce prima di decidere se approfondire.
@@ -15,9 +16,28 @@
     Usa un tono chiaro e sintetico, senza copiare parti testuali pari pari.
     Cita il link originale nell'ultima riga come "Fonte: {url}".
 
+- id: generic-summary-en
+  name: Generic Summary
+  emoji: "🧾"
+  lang: en
+  active: true
+  description: |
+    **Generic Summary** condenses any content into a few organized lines, highlighting the initial context, the three most useful takeaways, and who can benefit from it. It's the ideal template when you need a faithful and quick overview before deciding whether to dive deeper.
+  template: |
+    Read the content from this URL: {url}
+
+    Write a structured summary that includes:
+    1. 3-5 sentences with the main idea and context
+    2. A bulleted list with the 3 essential takeaways
+    3. A final sentence explaining who this content is useful for
+
+    Use a clear and concise tone, without copying text verbatim.
+    Cite the original link in the last line as "Source: {url}".
+
 - id: telegram
   name: Telegram
   emoji: "📱"
+  lang: it
   active: true
   description: |
     **Telegram** trasforma l'articolo in un mini post in due paragrafi, con un gancio iniziale brillante e un invito alla conversazione. Mantiene tono amichevole, inserisce emoji dove servono e chiude con il link originale per favorire la condivisione immediata nel canale.
@@ -35,9 +55,30 @@
     Dividi l'output in 2 paragrafi separati da una riga vuota.
     Scrivi tutto in italiano.
 
+- id: telegram-en
+  name: Telegram
+  emoji: "📱"
+  lang: en
+  active: true
+  description: |
+    **Telegram** transforms the article into a mini post in two paragraphs, with a brilliant opening hook and a conversation starter. It maintains a friendly tone, inserts emojis where needed, and closes with the original link to encourage immediate sharing in the channel.
+  template: |
+    Read this URL: {url}
+
+    Summarize in max 560 characters (2 tweets length):
+    - Catchy title + main idea
+    - Emoji and **bold** for emphasis
+    - URL as last line
+    - Conversational tone, no formalities
+
+    Write everything in ONE BLOCK, without numbering.
+    Use a friendly but informative tone.
+    Divide the output into 2 paragraphs separated by a blank line.
+
 - id: twitter-thread
   name: Thread Twitter
   emoji: "🧵"
+  lang: it
   active: true
   description: |
     Il template **Thread Twitter** costruisce un intero filo narrativo: parte con un hook curioso, dedica un tweet a ciascuna idea portante e conclude con una call-to-action. Tutto resta entro i 280 caratteri per tweet, già pronto da incollare su X senza altri ritocchi.
@@ -58,9 +99,33 @@
     Rendi il thread autonomo (no necessità di leggere articolo per capire).
     Scrivi il thread interamente in italiano.
 
+- id: twitter-thread-en
+  name: Twitter Thread
+  emoji: "🧵"
+  lang: en
+  active: true
+  description: |
+    The **Twitter Thread** template builds an entire narrative thread: it starts with a curious hook, dedicates one tweet to each main idea, and concludes with a call-to-action. Everything stays within 280 characters per tweet, ready to paste on X without further edits.
+  template: |
+    Read the content from this URL: {url}
+
+    Create a Twitter thread to describe the main points:
+
+    1. **Initial tweet (Hook)**: catchy title + question that captures attention
+    2. **Following tweets**: develop main ideas (one per tweet)
+       - Use **bold** for key concepts
+       - Add relevant emojis
+       - Maintain conversational tone
+    3. **Final tweet**: call-to-action (read the article, share, reply)
+
+    Number tweets in format 1/n, 2/n, etc.
+    Each tweet must stay within 280 characters.
+    Make the thread self-contained (no need to read article to understand).
+
 - id: fact-check
   name: Fact-Check
   emoji: "✓"
+  lang: it
   active: true
   description: |
     **Fact-Check** aiuta a smontare il testo in claim verificabili, indicando fonti, possibili red flag e un giudizio finale sull'affidabilità. È perfetto quando devi capire se un articolo regge ai dati o se sta esagerando con opinioni spacciate per fatti.
@@ -91,6 +156,7 @@
 - id: comprendi-apprendi
   name: Comprendi e Apprendi
   emoji: "🧠"
+  lang: it
   active: true
   description: |
     Con **Comprendi e Apprendi** ottieni un dossier completo: sintesi esecutiva, concetti organizzati, glossario, contesto storico e applicazioni pratiche. Chiude con domande di riflessione per interiorizzare meglio e collegare il tema ad altre discipline.
@@ -132,6 +198,7 @@
 - id: seo-brief
   name: SEO Brief
   emoji: "🔍"
+  lang: it
   active: true
   description: |
     **SEO Brief** analizza la pagina lato on-page: individua topic e keyword, valuta titoli, headings, leggibilità e meta tag, poi suggerisce migliorie concrete. È pensato per marketer che vogliono un piano d'azione chiaro senza aprire mille tool.
@@ -156,6 +223,7 @@
 - id: open-data-analysis
   name: Dati aperti
   emoji: "📊"
+  lang: it
   active: true
   description: |
     **Dati aperti** guida un'analisi strutturata: elenca i dati presenti, valuta livello di strutturazione, licenze e rischi, e propone strumenti per l'estrazione. È utile quando devi capire se e come pubblicare un dataset in modo responsabile.
@@ -186,6 +254,7 @@
 - id: movies-filtered
   name: Film
   emoji: "🎬"
+  lang: it
   active: true
   description: |
     **Film** filtra automaticamente i titoli trovati online, lasciando solo quelli su Prime Video o Netflix e ordinandoli per voto IMDb. In pochi secondi ottieni una watchlist commentata, utile per newsletter o consigli rapidi.
