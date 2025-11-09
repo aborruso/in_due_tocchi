@@ -1,10 +1,36 @@
 # Evoluzioni del Progetto Riformula
 
 ## 📋 Indice
+- [Implementato](#implementato)
 - [Evoluzioni a breve termine](#evoluzioni-a-breve-termine)
 - [Evoluzioni a medio termine](#evoluzioni-a-medio-termine)
 - [Visione a lungo termine](#visione-a-lungo-termine)
 - [Idee specifiche](#idee-specifiche)
+
+---
+
+## ✅ Implementato
+
+### Supporto bilingue (IT/EN)
+- Rilevamento automatico lingua da browser (`navigator.language`)
+- Persistenza preferenza in localStorage
+- UI completamente tradotta (pulsanti, label, placeholder, messaggi feedback)
+- Template filtrati per lingua (campo `lang` in YAML)
+- Toggle lingua con bandiere 🇮🇹 / 🇬🇧
+- Cambio lingua senza reload pagina
+- Implementazione custom i18n (zero dipendenze)
+
+### Drag-and-drop template con persistenza
+- Riordinamento template via trascinamento
+- Salvataggio ordine custom in localStorage
+- Pulsante reset per ripristinare ordine YAML
+- Feedback visivo durante trascinamento
+
+### Service Worker e PWA
+- Cache-first strategy
+- Auto-versioning cache (prebuild hook)
+- Notifica aggiornamenti e banner reload
+- Offline-first architecture
 
 ---
 
@@ -47,7 +73,7 @@
 ### Piattaforma low-code
 - **Visual template builder**: Drag-and-drop per creare template
 - **Conditional logic**: Template che si adattano a condizioni
-- **Multi-language**: Supporto internazionale
+- **Template builder API**: API programmatica per generare template
 
 ---
 
@@ -194,4 +220,4 @@ templates:
 
 ---
 
-*Ultimo aggiornamento: 2025-11-08*
+*Ultimo aggiornamento: 2025-11-09*
