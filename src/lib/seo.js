@@ -61,10 +61,16 @@ export function getSeoData(pageKey, AstroContext) {
   }
 
   const siteAddress = (AstroContext?.site ?? new URL(DEFAULT_SITE)).toString();
-  const baseUrl = new URL(import.meta.env.BASE_URL ?? '/', siteAddress);
+  const rawBasePath = import.meta.env.BASE_URL ?? '/';
+  const normalizedBasePath = (() => {
+    if (!rawBasePath || rawBasePath === '/') return '/';
+    const trimmed = rawBasePath.replace(/\/+$/g, '');
+    return `${trimmed.startsWith('/') ? '' : '/'}${trimmed}/`;
+  })();
+  const baseUrl = new URL(normalizedBasePath, siteAddress);
   const relativePath = meta.path ? meta.path.replace(/^\//, '') : '';
-  const pageUrl = new URL(relativePath || '.', baseUrl).toString();
-  const imageUrl = new URL(OG_IMAGE, baseUrl).toString();
+  const pageUrl = new URL(relativePath ? `./${relativePath}` : './', baseUrl).toString();
+  const imageUrl = new URL(`./${OG_IMAGE}`, baseUrl).toString();
 
   return {
     meta,
