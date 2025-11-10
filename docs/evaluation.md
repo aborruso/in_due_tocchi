@@ -127,9 +127,9 @@ Valutazione complessiva del progetto ShareForge - 2025-11-09
 
 **Limitazioni device:**
 
-- App inutilizzabile su desktop (warning modal, ma esperienza UX frustrante)
-- Nessun fallback desktop (es. URL input manuale, bookmarklet)
-- Solo Android supportato (iOS non ha Share Target API standard)
+- ~~App inutilizzabile su desktop~~ → **Risolto**: bookmarklet implementato per cattura URL desktop
+- **Desktop UX**: Esperienza limitata rispetto ad Android, ma funzionale (bookmarklet + copy-paste)
+- Solo Android supportato per Share Target nativo (iOS non ha Share Target API standard)
 
 **Template discovery:**
 
@@ -258,11 +258,11 @@ Valutazione complessiva del progetto ShareForge - 2025-11-09
     - Aggiungere conditionals, loops, filters
     - Backward compatible con template esistenti
 
-11. **Desktop fallback UX**
+11. **Desktop fallback UX** ✅ **Parzialmente completato**
 
-    - URL input manuale
-    - Bookmarklet per desktop browser
-    - Browser extension (Chrome/Firefox)
+    - ~~URL input manuale~~ (non necessario con bookmarklet)
+    - ✅ **Bookmarklet per desktop browser** (implementato 2025-11-10)
+    - Browser extension (Chrome/Firefox) - non prioritario ora che esiste bookmarklet
 
 12. **Monitoring e error tracking**
     - Sentry integration
@@ -330,5 +330,5 @@ ShareForge è un **progetto ben eseguito** per lo scope attuale (MVP funzionante
 
 - No testing (risk alto per refactor)
 - Inline script maintenance nightmare
-- Desktop UX non indirizzata
+- ~~Desktop UX non indirizzata~~ → **Mitigato**: bookmarklet fornisce workaround funzionale
 - I18n fragile per scaling oltre 2 lingue

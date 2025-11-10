@@ -32,6 +32,14 @@
 - Notifica aggiornamenti e banner reload
 - Offline-first architecture
 
+### Desktop bookmarklet (2025-11-10)
+- Bookmarklet JavaScript per cattura URL da desktop
+- Pagina `/desktop` con istruzioni drag-and-drop e manuale
+- Pre-compila campi title e URL da qualsiasi sito web
+- Fallback popup blocker (apre in tab corrente se bloccato)
+- Link da modal desktop e sezione dedicata in `/mobile#desktop`
+- Supporto cross-browser (Chrome, Firefox, Safari, Edge)
+
 ---
 
 ## 🚀 Short-term Roadmap
@@ -57,8 +65,9 @@
 - **Validazione prompt**: AI verifica qualità del prompt generato
 
 ### Estensioni piattaforma
-- **Desktop app**: Electron per Windows/macOS/Linux
-- **Browser extension**: Integrato direttamente in Chrome/Firefox
+- ~~**Bookmarklet desktop**~~: ✅ Implementato (2025-11-10)
+- **Desktop app**: Electron per Windows/macOS/Linux (bassa priorità ora che esiste bookmarklet)
+- **Browser extension**: Integrato direttamente in Chrome/Firefox (opzionale, bookmarklet copre use case base)
 - **API pubblica**: Per integrazioni terze
 
 ---
@@ -195,13 +204,14 @@ templates:
 
 ### Media Priorità
 1. Template Academici
-2. Browser extension
+2. ~~Browser extension~~ (bookmarklet sufficiente per ora)
 3. Analytics base
 
 ### Bassa Priorità
-1. Desktop app
-2. Marketplace template
-3. Visual template builder
+1. ~~Desktop app~~ (bookmarklet risolve use case base)
+2. Browser extension (solo se serve integrazione nativa browser)
+3. Marketplace template
+4. Visual template builder
 
 ---
 
