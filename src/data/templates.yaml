@@ -348,3 +348,119 @@
        - Who is it particularly recommended/not recommended for
 
     Original source: {url}
+
+- id: academic-paper
+  name: Paper Scientifico
+  emoji: "🔬"
+  lang: it
+  active: true
+  description: |
+    **Paper Scientifico** analizza articoli di ricerca accademica con focus su metodologia, risultati, validità e rilevanza. Estrae abstract, domanda di ricerca, metodologia, risultati chiave, limiti dello studio e implicazioni pratiche. Ideale per ricercatori, studenti e reviewer che devono valutare rapidamente la solidità e l'utilità di un paper.
+  template: |
+    Analizza questo paper scientifico: {url}
+
+    Produci un'analisi strutturata in italiano seguendo questo schema:
+
+    1. **Metadati essenziali**:
+       - Autori e affiliazioni principali
+       - Anno di pubblicazione
+       - Journal/Conferenza (con impact factor se disponibile)
+       - Tipo di studio (sperimentale, review, meta-analisi, case study, survey)
+
+    2. **Abstract e domanda di ricerca**:
+       - Riassunto dell'abstract in 2-3 frasi
+       - Domanda di ricerca principale (research question)
+       - Ipotesi testate (se presenti)
+
+    3. **Metodologia**:
+       - Disegno dello studio (quantitativo/qualitativo/misto)
+       - Campione: dimensione, criteri di selezione, rappresentatività
+       - Strumenti di raccolta dati (questionari, interviste, esperimenti, dataset)
+       - Metodi di analisi (statistici, qualitativi)
+
+    4. **Risultati principali**:
+       - Findings chiave (max 5 punti)
+       - Dati quantitativi salienti (p-value, effect size, confidence interval se rilevanti)
+       - Supportano o confutano l'ipotesi?
+
+    5. **Validità e limiti**:
+       - Punti di forza metodologici
+       - Limiti dichiarati dagli autori
+       - Bias potenziali (selection bias, publication bias, conflitti di interesse)
+       - Generalizzabilità dei risultati
+
+    6. **Contributo e rilevanza**:
+       - Novità rispetto alla letteratura esistente
+       - Implicazioni teoriche
+       - Applicazioni pratiche immediate
+       - Gap di ricerca aperti per studi futuri
+
+    7. **Citazioni chiave**:
+       - 3-5 riferimenti bibliografici più rilevanti citati nel paper
+       - Correnti di ricerca/scuole di pensiero a cui si collega
+
+    8. **Valutazione sintetica**:
+       - Rigore metodologico: [Alto/Medio/Basso]
+       - Rilevanza pratica: [Alta/Media/Bassa]
+       - Originalità: [Alta/Media/Bassa]
+       - Raccomandazione: chi dovrebbe leggere questo paper e perché
+
+    Fonte: {url}
+
+- id: academic-paper-en
+  name: Academic Paper
+  emoji: "🔬"
+  lang: en
+  active: true
+  description: |
+    **Academic Paper** analyzes research articles with a focus on methodology, results, validity, and relevance. Extracts abstract, research question, methodology, key findings, study limitations, and practical implications. Ideal for researchers, students, and reviewers who need to quickly assess the rigor and utility of a paper.
+  template: |
+    Analyze this academic paper: {url}
+
+    Produce a structured analysis following this schema:
+
+    1. **Essential metadata**:
+       - Main authors and affiliations
+       - Year of publication
+       - Journal/Conference (with impact factor if available)
+       - Study type (experimental, review, meta-analysis, case study, survey)
+
+    2. **Abstract and research question**:
+       - Summary of abstract in 2-3 sentences
+       - Main research question
+       - Tested hypotheses (if present)
+
+    3. **Methodology**:
+       - Study design (quantitative/qualitative/mixed)
+       - Sample: size, selection criteria, representativeness
+       - Data collection tools (questionnaires, interviews, experiments, datasets)
+       - Analysis methods (statistical, qualitative)
+
+    4. **Main results**:
+       - Key findings (max 5 points)
+       - Salient quantitative data (p-value, effect size, confidence interval if relevant)
+       - Do they support or refute the hypothesis?
+
+    5. **Validity and limitations**:
+       - Methodological strengths
+       - Limitations declared by authors
+       - Potential biases (selection bias, publication bias, conflicts of interest)
+       - Generalizability of results
+
+    6. **Contribution and relevance**:
+       - Novelty compared to existing literature
+       - Theoretical implications
+       - Immediate practical applications
+       - Open research gaps for future studies
+
+    7. **Key citations**:
+       - 3-5 most relevant bibliographic references cited in the paper
+       - Research streams/schools of thought it connects to
+
+    8. **Synthetic evaluation**:
+       - Methodological rigor: [High/Medium/Low]
+       - Practical relevance: [High/Medium/Low]
+       - Originality: [High/Medium/Low]
+       - Recommendation: who should read this paper and why
+
+    Source: {url}
