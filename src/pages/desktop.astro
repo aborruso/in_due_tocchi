@@ -179,25 +179,12 @@ const { meta: pageSeo } = getSeoData('home', Astro);
     const bookmarkletName = 'ShareForge';
     const bookmarkletCode = `javascript:(function(){var t=encodeURIComponent(document.title||""),u=encodeURIComponent(window.location.href||""),s="https://aborruso.github.io/in_due_tocchi/?title="+t+"&url="+u;var w=window.open(s,"_blank");if(!w)window.location.href=s})();`;
 
-    // Handle drag event to ensure correct bookmarklet URL and name are transferred
+    // Simplified drag handling - let browser handle it naturally
     const link = document.getElementById('bookmarklet-link');
     if (link) {
       link.addEventListener('dragstart', (e) => {
-        // Set the bookmark URL and name for different browsers
-        // URL target for browsers that expect it
-        e.dataTransfer.setData('text/uri-list', bookmarkletCode);
-        // Bookmark title (Chrome/Safari use this for the saved name)
-        e.dataTransfer.setData('text/plain', bookmarkletName);
-        // Provide HTML payload so Chromium keeps both name + href
-        e.dataTransfer.setData('text/html', `<a href="${bookmarkletCode}">${bookmarkletName}</a>`);
-        // Firefox format: URL + newline + title
-        e.dataTransfer.setData('text/x-moz-url', `${bookmarkletCode}\n${bookmarkletName}`);
-        // Chrome format: protocol:name:url
-        e.dataTransfer.setData('DownloadURL', `application/javascript:${bookmarkletName}:${bookmarkletCode}`);
-        // Chrome bookmark format: URL + newline + title
-        e.dataTransfer.setData('text/x-moz-text-internal', `${bookmarkletCode}\n${bookmarkletName}`);
-        // Force Chrome to use the link text as bookmark name
-        e.dataTransfer.setData('text/x-bookmark', `${bookmarkletName}\n${bookmarkletCode}`);
+        // Just ensure the link text is used as bookmark name
+        e.dataTransfer.setData('text/plain', 'ShareForge');
         e.dataTransfer.effectAllowed = 'link';
       });
     }
