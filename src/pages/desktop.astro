@@ -199,6 +199,8 @@ const { meta: pageSeo } = getSeoData('home', Astro);
         e.dataTransfer.setData('DownloadURL', `application/javascript:${bookmarkletName}:${bookmarkletCode}`);
         // Chrome bookmark format: URL + newline + title
         e.dataTransfer.setData('text/x-moz-text-internal', `${bookmarkletCode}\n${bookmarkletName}`);
+        // Force Chrome to use the link text as bookmark name
+        e.dataTransfer.setData('text/x-bookmark', `${bookmarkletName}\n${bookmarkletCode}`);
         e.dataTransfer.effectAllowed = 'link';
       });
     }
