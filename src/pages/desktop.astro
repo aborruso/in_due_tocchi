@@ -66,9 +66,10 @@ const { meta: pageSeo } = getSeoData('home', Astro);
             <div class="flex justify-center py-4">
               <a
                 id="bookmarklet-link"
-                href="#"
+                href="javascript:void(0)"
                 class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors cursor-move border-2 border-blue-700"
                 draggable="true"
+                title="Trascina nella barra dei segnalibri"
               >
                 <span class="text-2xl">📌</span>
                 <span>ShareForge</span>
@@ -81,11 +82,17 @@ const { meta: pageSeo } = getSeoData('home', Astro);
 
           <!-- Method 2: Manual -->
           <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-3">
-            <h3 class="font-semibold text-lg text-gray-800">Metodo 2: Manuale</h3>
+            <h3 class="font-semibold text-lg text-gray-800">Metodo 2: Manuale (più affidabile)</h3>
             <ol class="list-decimal list-inside space-y-2 text-gray-700">
-              <li>Crea un nuovo segnalibro nel browser (Ctrl+D o Cmd+D)</li>
-              <li>Come <strong>Nome</strong> scrivi: <code class="bg-white px-2 py-1 rounded">ShareForge</code></li>
-              <li>Come <strong>URL</strong> copia e incolla questo codice:</li>
+              <li>Clicca su "Copia" qui sotto per copiare il codice del bookmarklet</li>
+              <li>Apri il gestore segnalibri del browser (Ctrl+Shift+O o Cmd+Shift+O)</li>
+              <li>Crea un nuovo segnalibro:
+                <ul class="list-disc list-inside ml-6 mt-1">
+                  <li><strong>Nome</strong>: <code class="bg-white px-2 py-1 rounded">ShareForge</code></li>
+                  <li><strong>URL</strong>: Incolla il codice copiato</li>
+                </ul>
+              </li>
+              <li>Salva il segnalibro nella barra dei segnalibri</li>
             </ol>
             <div class="relative">
               <pre class="bg-white border border-gray-300 rounded p-3 text-xs overflow-x-auto"><code id="bookmarklet-code"></code></pre>
@@ -96,6 +103,9 @@ const { meta: pageSeo } = getSeoData('home', Astro);
                 Copia
               </button>
             </div>
+            <p class="text-xs text-gray-600 italic mt-2">
+              💡 <strong>Nota</strong>: Se il drag & drop non funziona, usa questo metodo manuale che è più affidabile.
+            </p>
           </div>
         </div>
       </section>
@@ -171,6 +181,13 @@ const { meta: pageSeo } = getSeoData('home', Astro);
     const link = document.getElementById('bookmarklet-link');
     if (link) {
       link.href = bookmarkletCode;
+
+      // Handle drag event to ensure correct bookmarklet URL is transferred
+      link.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/uri-list', bookmarkletCode);
+        e.dataTransfer.setData('text/plain', bookmarkletCode);
+        e.dataTransfer.effectAllowed = 'link';
+      });
     }
 
     // Display bookmarklet code in <code> element
