@@ -28,8 +28,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Key constraints:
 - **Offline-first**: Works completely offline after first load via Service Worker
 - **Static deployment**: Hosted on GitHub Pages (`/in_due_tocchi/` path)
-- **Android-first**: Share Target integration on Android; explicit warnings on desktop
+- **Android-first**: Share Target integration on Android; bookmarklet for desktop
 - **YAML-driven templates**: Default templates in `src/data/templates.yaml` loaded at build time; custom templates stored in localStorage
+- **Desktop fallback**: Bookmarklet at `/desktop` captures URL+title for manual template application
 
 ## Build & Development Commands
 
@@ -215,6 +216,7 @@ Then on Android Chrome:
 
 - **Templates (YAML)**: `src/data/templates.yaml`
 - **Main entry**: `src/pages/index.astro` (all app logic here)
+- **Desktop guide**: `src/pages/desktop.astro` (bookmarklet installation page)
 - **Utility libs**: `src/lib/templates.js`, `src/lib/share.js`
 - **Service Worker**: `public/sw.js` (cache version **here**)
 - **PWA manifest**: `public/manifest.webmanifest` (share_target config)

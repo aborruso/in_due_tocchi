@@ -1,3 +1,16 @@
+## 2025-11-10
+
+**Added desktop bookmarklet for one-click URL capture**
+- Created `/desktop` page with drag-and-drop bookmarklet installation guide
+- Bookmarklet captures `document.title` and `window.location.href` from any webpage
+- Opens ShareForge in new tab with pre-filled title and URL parameters
+- Two installation methods: drag & drop to bookmark bar, or manual copy-paste
+- Updated desktop device modal with link to `/desktop` guide page
+- Documented desktop workaround in README.md and docs/rationale.md
+- Bookmarklet code syntax validated and tested with Node.js
+- Fallback to manual method emphasized as more reliable cross-browser
+- OpenSpec proposal: `add-bookmarklet-desktop-share` (validated, completed)
+
 ## 2025-11-09
 
 **Updated PWA icon: link emoji with gradient background**
