@@ -179,13 +179,13 @@ const { meta: pageSeo } = getSeoData('home', Astro);
     const bookmarkletName = 'ShareForge';
     const bookmarkletCode = `javascript:(function(){var t=encodeURIComponent(document.title||""),u=encodeURIComponent(window.location.href||""),s="https://aborruso.github.io/in_due_tocchi/?title="+t+"&url="+u;var w=window.open(s,"_blank");if(!w)window.location.href=s})();`;
 
-    // Simplified drag handling - let browser handle it naturally
+    // Handle drag to ensure bookmarklet name is preserved
     const link = document.getElementById('bookmarklet-link');
     if (link) {
       link.addEventListener('dragstart', (e) => {
-        // Just ensure the link text is used as bookmark name
+        // Set bookmark name for Chrome Windows
         e.dataTransfer.setData('text/plain', 'ShareForge');
-        e.dataTransfer.effectAllowed = 'link';
+        // Don't prevent default - let browser handle the drag naturally
       });
     }
 
