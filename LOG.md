@@ -1,5 +1,15 @@
 ## 2025-11-10
 
+**Added heading anchor links with copy, scroll, and URL update**
+- Anchor link icons (🔗) appear on hover for h2/h3 headings with IDs
+- Click behavior: copies URL with fragment to clipboard + updates browser URL + scrolls to heading
+- Visual feedback: icon changes to checkmark (✓) for 1.5s after successful copy
+- Implemented in desktop.astro and mobile.astro guide pages
+- Uses history.replaceState() to update URL without page reload
+- Smooth scroll animation with scrollIntoView({ behavior: 'smooth', block: 'start' })
+- Accessibility: aria-label "Copia link a questa sezione" for screen readers
+- OpenSpec proposal: `add-heading-anchor-links` (validated, completed)
+
 **Added desktop bookmarklet for one-click URL capture**
 - Created `/desktop` page with drag-and-drop bookmarklet installation guide
 - Bookmarklet captures `document.title` and `window.location.href` from any webpage
