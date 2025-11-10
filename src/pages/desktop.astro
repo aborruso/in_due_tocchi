@@ -176,6 +176,7 @@ const { meta: pageSeo } = getSeoData('home', Astro);
 
   <script>
     // Bookmarklet code - set href dynamically to avoid HTML escaping
+    const bookmarkletName = 'ShareForge';
     const bookmarkletCode = `javascript:(function(){var t=encodeURIComponent(document.title||""),u=encodeURIComponent(window.location.href||""),s="https://aborruso.github.io/in_due_tocchi/?title="+t+"&url="+u;var w=window.open(s,"_blank");if(!w)window.location.href=s})();`;
 
     // Set bookmarklet link href
@@ -186,12 +187,16 @@ const { meta: pageSeo } = getSeoData('home', Astro);
       // Handle drag event to ensure correct bookmarklet URL and name are transferred
       link.addEventListener('dragstart', (e) => {
         // Set the bookmark URL and name for different browsers
+        // URL target for browsers that expect it
         e.dataTransfer.setData('text/uri-list', bookmarkletCode);
-        e.dataTransfer.setData('text/plain', bookmarkletCode);
+        // Bookmark title (Chrome/Safari use this for the saved name)
+        e.dataTransfer.setData('text/plain', bookmarkletName);
+        // Provide HTML payload so Chromium keeps both name + href
+        e.dataTransfer.setData('text/html', `<a href="${bookmarkletCode}">${bookmarkletName}</a>`);
         // Firefox format: URL + newline + title
-        e.dataTransfer.setData('text/x-moz-url', bookmarkletCode + '\nShareForge');
+        e.dataTransfer.setData('text/x-moz-url', `${bookmarkletCode}\n${bookmarkletName}`);
         // Chrome format: protocol:name:url
-        e.dataTransfer.setData('DownloadURL', 'application/javascript:ShareForge:' + bookmarkletCode);
+        e.dataTransfer.setData('DownloadURL', `application/javascript:${bookmarkletName}:${bookmarkletCode}`);
         e.dataTransfer.effectAllowed = 'link';
       });
     }
