@@ -66,7 +66,7 @@ const { meta: pageSeo } = getSeoData('home', Astro);
              <div class="flex justify-center py-4">
                <a
                  id="bookmarklet-link"
-                 href="javascript:(function(){var t=encodeURIComponent(document.title||""),u=encodeURIComponent(window.location.href||""),s="https://aborruso.github.io/in_due_tocchi/?title="+t+"&url="+u;var w=window.open(s,"_blank");if(!w)window.location.href=s})();"
+                 href="javascript:(function() {    var currentURL = encodeURIComponent(window.location.href);    var title = encodeURIComponent(document.title);    var precompiledURL = 'https://aborruso.github.io/in_due_tocchi/?title=' + title + '&url=' + currentURL;    window.open(precompiledURL);})();"
                  class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors cursor-move border-2 border-blue-700"
                  draggable="true"
                  title="ShareForge"
