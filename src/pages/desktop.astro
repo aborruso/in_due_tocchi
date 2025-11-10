@@ -3,9 +3,6 @@ import SiteFooter from '../components/SiteFooter.astro';
 import { getSeoData } from '../lib/seo.js';
 
 const { meta: pageSeo } = getSeoData('home', Astro);
-
-// Bookmarklet code (minified)
-const bookmarkletCode = `javascript:(function(){const t=encodeURIComponent(document.title||''),u=encodeURIComponent(window.location.href||''),s='https://aborruso.github.io/in_due_tocchi/?title='+t+'&url='+u,w=window.open(s,'_blank');w||location.href=s})();`;
 ---
 
 <!DOCTYPE html>
@@ -68,7 +65,8 @@ const bookmarkletCode = `javascript:(function(){const t=encodeURIComponent(docum
             </ol>
             <div class="flex justify-center py-4">
               <a
-                href={bookmarkletCode}
+                id="bookmarklet-link"
+                href="#"
                 class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors cursor-move border-2 border-blue-700"
                 draggable="true"
               >
@@ -90,7 +88,7 @@ const bookmarkletCode = `javascript:(function(){const t=encodeURIComponent(docum
               <li>Come <strong>URL</strong> copia e incolla questo codice:</li>
             </ol>
             <div class="relative">
-              <pre class="bg-white border border-gray-300 rounded p-3 text-xs overflow-x-auto"><code id="bookmarklet-code">{bookmarkletCode}</code></pre>
+              <pre class="bg-white border border-gray-300 rounded p-3 text-xs overflow-x-auto"><code id="bookmarklet-code"></code></pre>
               <button
                 id="copy-btn"
                 class="absolute top-2 right-2 px-3 py-1 bg-gray-700 text-white text-xs rounded hover:bg-gray-800 transition-colors"
@@ -166,15 +164,29 @@ const bookmarkletCode = `javascript:(function(){const t=encodeURIComponent(docum
   <SiteFooter class="py-6" />
 
   <script>
+    // Bookmarklet code - set href dynamically to avoid HTML escaping
+    const bookmarkletCode = `javascript:(function(){const t=encodeURIComponent(document.title||''),u=encodeURIComponent(window.location.href||''),s='https://aborruso.github.io/in_due_tocchi/?title='+t+'&url='+u,w=window.open(s,'_blank');w||location.href=s})();`;
+
+    // Set bookmarklet link href
+    const link = document.getElementById('bookmarklet-link');
+    if (link) {
+      link.href = bookmarkletCode;
+    }
+
+    // Display bookmarklet code in <code> element
+    const codeElement = document.getElementById('bookmarklet-code');
+    if (codeElement) {
+      codeElement.textContent = bookmarkletCode;
+    }
+
     // Copy bookmarklet code to clipboard
     document.getElementById('copy-btn')?.addEventListener('click', async () => {
-      const code = document.getElementById('bookmarklet-code')?.textContent;
       const btn = document.getElementById('copy-btn');
 
-      if (!code || !btn) return;
+      if (!btn) return;
 
       try {
-        await navigator.clipboard.writeText(code);
+        await navigator.clipboard.writeText(bookmarkletCode);
         btn.textContent = '✓ Copiato!';
         btn.classList.add('bg-green-600');
         btn.classList.remove('bg-gray-700', 'hover:bg-gray-800');
