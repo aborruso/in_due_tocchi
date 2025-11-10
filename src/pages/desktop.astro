@@ -175,7 +175,7 @@ const { meta: pageSeo } = getSeoData('home', Astro);
 
   <script>
     // Bookmarklet code - set href dynamically to avoid HTML escaping
-    const bookmarkletCode = `javascript:(function(){const t=encodeURIComponent(document.title||''),u=encodeURIComponent(window.location.href||''),s='https://aborruso.github.io/in_due_tocchi/?title='+t+'&url='+u,w=window.open(s,'_blank');w||location.href=s})();`;
+    const bookmarkletCode = `javascript:(function(){var t=encodeURIComponent(document.title||""),u=encodeURIComponent(window.location.href||""),s="https://aborruso.github.io/in_due_tocchi/?title="+t+"&url="+u,w=window.open(s,"_blank");w||window.location.href=s})();`;
 
     // Set bookmarklet link href
     const link = document.getElementById('bookmarklet-link');
