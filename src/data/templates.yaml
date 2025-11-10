@@ -266,12 +266,12 @@
     Ordina la lista in ordine decrescente di voto IMDb.
 
 - id: comprehensive-review
-  name: Valutazione Complessiva
+  name: Valutazione
   emoji: "⭐"
   lang: it
   active: true
   description: |
-    **Valutazione Complessiva** identifica automaticamente il tipo di prodotto/contenuto (libro, film, gadget, software, ecc.) e cerca recensioni aggregate dai siti più autorevoli del settore. Restituisce una valutazione sintetica con punteggio medio, range di voti e criterio di aggregazione usato.
+    **Valutazione** identifica automaticamente il tipo di prodotto/contenuto (libro, film, gadget, software, ecc.) e cerca recensioni aggregate dai siti più autorevoli del settore. Restituisce una valutazione sintetica con punteggio medio, range di voti e criterio di aggregazione usato.
   template: |
     Sono interessato a quanto descritto in questo URL: {url}
 
@@ -289,7 +289,7 @@
        - Ristoranti: TripAdvisor, Google Maps, Michelin
        - Hotel: Booking.com, TripAdvisor, Google Maps
 
-    3. **Valutazione complessiva**:
+    3. **Valutazione**:
        - **Punteggio medio aggregato**: [X/10 o X/5 o % secondo scala prevalente]
        - **Range di voti raccolti**: [min - max]
        - **Numero di recensioni totali**: [somma tra tutte le fonti]
