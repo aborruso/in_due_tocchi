@@ -41,3 +41,38 @@ Vantaggi concreti:
 - **Meno codice**: nessuna logica di integrazione API, retry, error handling, token management
 
 ShareForge does one thing well: **transforms links into ready-to-use prompts**. Everything else is delegated to tools that already exist and already work.
+
+## Why Android-First (Desktop Limitations)
+
+ShareForge is designed **primarily for Android**. The seamless "share to ShareForge from any app" experience that makes the app valuable is technically impossible to replicate on desktop platforms.
+
+**Why it works on Android:**
+
+- Android has a universal Share system built into the OS
+- PWAs can register as Share Targets via Web Share Target API
+- Any app can share content to ShareForge with a single tap
+
+**Why it doesn't work on desktop:**
+
+- Windows, macOS, and Linux lack a universal sharing system
+- Desktop browsers support Web Share API only "outbound" (sharing FROM a web app), not "inbound" (receiving shared content)
+- Desktop PWAs cannot register as share targets
+- Each desktop app handles sharing in proprietary ways
+
+**Current approach:**
+
+- **Mobile users**: Native share integration via Share Target API (the core experience)
+- **Desktop users**: Bookmarklet for one-click URL capture + manual template selection and copy-paste
+- **Fallback**: Manual copy-paste workflow with clear instructions via modal and QR code for mobile installation
+
+**Desktop bookmarklet solution:**
+
+While native share integration is impossible on desktop, the **bookmarklet** provides a pragmatic workaround:
+
+- **What it is**: A JavaScript snippet saved as a browser bookmark
+- **How it works**: Clicking the bookmarklet captures the current page's `document.title` and `window.location.href` and opens ShareForge in a new tab with pre-filled fields
+- **Installation**: Drag-and-drop a link to the bookmark bar (see [/desktop](https://aborruso.github.io/in_due_tocchi/desktop) guide)
+- **Limitations**: No persistent storage, no background tasks, no native UI integration—but sufficient for the use case (capture URL + title, apply template, copy prompt)
+- **Why not a browser extension?**: Bookmarklets require zero installation, zero maintenance, no per-browser packaging, and align with the project's static/zero-cost philosophy
+
+This isn't a limitation of ShareForge—it's a fundamental platform constraint. The value proposition (eliminate repetitive prompt writing via native OS integration) only exists where native OS integration is possible. The bookmarklet bridges the gap for desktop users while maintaining the zero-cost, zero-dependency architecture.

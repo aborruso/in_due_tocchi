@@ -19,11 +19,14 @@ It's not a reading app. It's the bridge between discovery and action.
 ## Features
 
 - ✅ **Web Share Target**: Receives shared content from other Android apps
+- ✅ **Desktop bookmarklet**: One-click URL capture for desktop browsers (Chrome, Firefox, Safari, Edge)
 - ✅ **Customizable templates**: Create, edit, and delete templates with `{title}`, `{text}`, `{url}` placeholders
 - ✅ **Drag-and-drop**: Reorder templates via drag-and-drop, order saved in localStorage
 - ✅ **Offline-first**: Works completely offline after first load
 - ✅ **Quick sharing**: Uses Web Share API or clipboard fallback
 - ✅ **Lightweight & fast**: No backend, just static files
+
+> **Note**: ShareForge is designed for **Android mobile devices** with native Share Target integration. Desktop users can use the **bookmarklet** for one-click URL capture—see [Desktop Guide](/desktop) for installation instructions.
 
 ## Tech Stack
 
@@ -57,6 +60,8 @@ npm run preview
 
 ## How It Works
 
+### Android: Native Share Target
+
 The flow uses **two shares**:
 
 ```
@@ -68,6 +73,22 @@ The flow uses **two shares**:
     ↓
 [Structured response]
 ```
+
+### Desktop: Bookmarklet
+
+Desktop users can use a **bookmarklet** to capture URLs with one click:
+
+```
+[Browse webpage]
+    ↓ click bookmarklet (in bookmark bar)
+[ShareForge opens with URL + title pre-filled]
+    ↓ pick template → copy
+[Paste in LLM: ChatGPT, Claude, etc]
+```
+
+**Installation**: Visit [/desktop](https://aborruso.github.io/in_due_tocchi/desktop) for drag-and-drop bookmarklet setup.
+
+**How it works**: The bookmarklet is a JavaScript snippet saved as a browser bookmark. Clicking it captures `document.title` and `window.location.href` from the current page and opens ShareForge in a new tab with pre-filled fields.
 
 ### 1. Inbound Sharing (from reader)
 
