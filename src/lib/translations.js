@@ -59,7 +59,7 @@ export const translations = {
 
     // Device modal
     deviceModal: {
-      title: 'Questa app funziona SOLO su smartphone Android',
+      title: 'Quest\'app funziona meglio su smartphone Android',
       instructions: 'Per usarla:',
       step1: 'Apri questo link da Chrome Android',
       step2: 'Installa l\'app (Chrome menu → "Installa app")',
@@ -211,7 +211,7 @@ export const translations = {
 
     // Device modal
     deviceModal: {
-      title: 'This app works ONLY on Android smartphones',
+      title: 'This app works best on Android smartphones',
       instructions: 'To use it:',
       step1: 'Open this link from Chrome Android',
       step2: 'Install the app (Chrome menu → "Install app")',
