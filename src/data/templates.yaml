@@ -257,13 +257,37 @@
   lang: it
   active: true
   description: |
-    **Film** filtra automaticamente i titoli trovati online, lasciando solo quelli su Prime Video o Netflix e ordinandoli per voto IMDb. In pochi secondi ottieni una watchlist commentata, utile per newsletter o consigli rapidi.
+    **Film** cerca automaticamente i titoli trovati online su IMDb, recupera la piattaforma di streaming disponibile e il voto, ordinandoli per voto IMDb decrescente. In pochi secondi ottieni una watchlist commentata con piattaforma, titolo e voto.
   template: |
     Prendi i titoli di film/serie da questo URL: {url}.
-    Filtra solo quelli presenti su Amazon Prime Video o Netflix (non altre piattaforme).
-    Per ciascuno: trova il voto IMDb e restituisci un elenco puntato in questa forma:
-    • Piattaforma – Voto – Titolo
+    Per ciascun titolo:
+    1. Cerca su IMDb
+    2. Recupera il voto IMDb
+    3. Identifica la piattaforma di streaming disponibile (Netflix, Prime Video, Disney+, ecc.)
+
+    Restituisci un elenco puntato in questa forma:
+    - Piattaforma, Titolo, Voto
+
     Ordina la lista in ordine decrescente di voto IMDb.
+
+- id: movies-filtered-en
+  name: Movies
+  emoji: "🎬"
+  lang: en
+  active: true
+  description: |
+    **Movies** automatically searches for titles found online on IMDb, retrieves the available streaming platform and rating, sorting them by IMDb rating in descending order. In seconds you get a commented watchlist with platform, title, and rating.
+  template: |
+    Take the movie/series titles from this URL: {url}.
+    For each title:
+    1. Search on IMDb
+    2. Get the IMDb rating
+    3. Identify the available streaming platform (Netflix, Prime Video, Disney+, etc.)
+
+    Return a bulleted list in this format:
+    - Platform, Title, Rating
+
+    Sort the list in descending order by IMDb rating.
 
 - id: comprehensive-review
   name: Valutazione
