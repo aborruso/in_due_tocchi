@@ -34,13 +34,13 @@
     Use a clear and concise tone, without copying text verbatim.
     Cite the original link in the last line as "Source: {url}".
 
-- id: telegram
-  name: Telegram
-  emoji: "📱"
+- id: chat
+  name: Chat
+  emoji: "💬"
   lang: it
   active: true
   description: |
-    **Telegram** trasforma l'articolo in un mini post in due paragrafi, con un gancio iniziale brillante e un invito alla conversazione. Mantiene tono amichevole, inserisce emoji dove servono e chiude con il link originale per favorire la condivisione immediata nel canale.
+    **Chat** trasforma l'articolo in un mini messaggio in due paragrafi, con un gancio iniziale brillante e un invito alla conversazione. Mantiene tono amichevole, inserisce emoji dove servono e chiude con il link originale per favorire la condivisione immediata in chat, gruppi o canali di messaggistica.
   template: |
     Leggi questo URL: {url}
 
@@ -55,13 +55,13 @@
     Dividi l'output in 2 paragrafi separati da una riga vuota.
     Scrivi tutto in italiano.
 
-- id: telegram-en
-  name: Telegram
-  emoji: "📱"
+- id: chat-en
+  name: Chat
+  emoji: "💬"
   lang: en
   active: true
   description: |
-    **Telegram** transforms the article into a mini post in two paragraphs, with a brilliant opening hook and a conversation starter. It maintains a friendly tone, inserts emojis where needed, and closes with the original link to encourage immediate sharing in the channel.
+    **Chat** transforms the article into a mini message in two paragraphs, with a brilliant opening hook and a conversation starter. It maintains a friendly tone, inserts emojis where needed, and closes with the original link to encourage immediate sharing in chats, groups, or messaging channels.
   template: |
     Read this URL: {url}
 
