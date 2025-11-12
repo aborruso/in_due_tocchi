@@ -540,8 +540,30 @@ const alternateLocales = Object.entries(OG_LOCALES)
       feedbackMessage: !!feedbackMessage
     });
 
+    // Migrate old template IDs in localStorage
+    function migrateTemplateIds() {
+      try {
+        const stored = localStorage.getItem('shareforge-template-order');
+        if (stored) {
+          const order = JSON.parse(stored);
+          const migrated = order.map(id => {
+            if (id === 'telegram') return 'chat';
+            if (id === 'telegram-en') return 'chat-en';
+            return id;
+          });
+          localStorage.setItem('shareforge-template-order', JSON.stringify(migrated));
+          console.log('Migrated template IDs:', order, '->', migrated);
+        }
+      } catch (e) {
+        console.warn('Error migrating template IDs:', e);
+      }
+    }
+
     // Initialize
     function init() {
+      // Migrate old template IDs if needed
+      migrateTemplateIds();
+
       // Initialize i18n first
       updateI18n();
 
