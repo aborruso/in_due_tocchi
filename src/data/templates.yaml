@@ -488,3 +488,93 @@
        - Recommendation: who should read this paper and why
 
     Source: {url}
+
+- id: approfondisci-pratica
+  name: Approfondisci e metti in pratica
+  emoji: "🧩"
+  lang: it
+  active: true
+  description: |
+    **Approfondisci e metti in pratica** accompagna nella comprensione piena di un'idea e nella sua sperimentazione concreta. Aiuta a chiarire origine, funzionamento, applicabilità e collegamenti con altre teorie, chiudendo con una riflessione personale per interiorizzarne l'impatto.
+  template: |
+    🧩 Prompt "Approfondisci e metti in pratica"
+
+    Leggi il contenuto da questo URL: {url}
+
+    Scrivi un testo in italiano che aiuti a entrare a fondo nell’idea e a metterla in pratica.
+    Segui questa struttura:
+
+    1. Comprendere l’idea
+    Spiega in modo completo qual è il concetto o la tesi centrale, da dove nasce e che tipo di cambiamento propone.
+    Usa esempi per mostrare perché è rilevante o interessante.
+
+    2. Analizzare come funziona
+    Descrivi il meccanismo o il metodo suggerito: i passaggi, gli strumenti, le condizioni che lo rendono efficace.
+    Indica anche eventuali limiti o rischi se applicato male.
+
+    3. Mettere in pratica
+    Proponi come sperimentare concretamente l’idea nel mondo reale.
+
+    Dove o in quale progetto si può testare.
+
+    È già deployato da qualche parte? Se sì, descrivi come.
+
+    Che tipo di azione o osservazione serve per verificarla.
+
+    Cosa si può imparare dal tentativo, anche se non riesce subito.
+
+    4. Collegamenti e prospettive
+    Mostra come il testo si collega ad altre teorie, pratiche o esperienze note.
+    Evidenzia cosa aggiunge di nuovo o come ribalta idee precedenti.
+
+    5. Riflessione personale
+    Chiudi con uno sguardo soggettivo: che effetto fa questa lettura?
+    Come potrebbe cambiare il tuo modo di lavorare, organizzarti o pensare?
+
+    Cita la fonte originale nell’ultima riga come:
+    Fonte: {url}
+
+- id: approfondisci-pratica-en
+  name: Deepen and Apply
+  emoji: "🧩"
+  lang: en
+  active: true
+  description: |
+    **Deepen and Apply** guides readers to fully grasp an idea and experiment with it in the real world. It clarifies origins, mechanics, applications, and connections with other theories, concluding with a personal reflection to internalize the impact.
+  template: |
+    🧩 Prompt "Deepen and Put into Practice"
+
+    Read the content from this URL: {url}
+
+    Write an English text that helps dive deep into the idea and put it into practice.
+    Follow this structure:
+
+    1. Understand the idea
+    Explain in detail the core concept or thesis, where it comes from, and the type of change it proposes.
+    Use examples to show why it is relevant or interesting.
+
+    2. Analyze how it works
+    Describe the suggested mechanism or method: steps, tools, and conditions that make it effective.
+    Also point out any limits or risks if applied poorly.
+
+    3. Put it into practice
+    Suggest how to experiment with the idea concretely in the real world.
+
+    Where or in which project it can be tested.
+
+    Is it already deployed anywhere? If so, describe how.
+
+    What actions or observations are needed to validate it.
+
+    What can be learned from the attempt, even if it doesn’t succeed immediately.
+
+    4. Connections and perspectives
+    Show how the text connects to other known theories, practices, or experiences.
+    Highlight what it adds that is new or how it overturns previous ideas.
+
+    5. Personal reflection
+    Close with a subjective view: what effect does this reading have?
+    How could it change your way of working, organizing yourself, or thinking?
+
+    Cite the original source in the last line as:
+    Source: {url}
