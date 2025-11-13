@@ -48,7 +48,7 @@
     - Paragrafo 1: titolo accattivante + idea principale
     - Paragrafo 2: invito alla conversazione + URL finale
 
-    Inserisci emoji e **grassetto** dove servono, mantieni un tono conversazionale e privo di formalismi.
+    Inserisci emoji e grassetto dove servono, mantieni un tono conversazionale e privo di formalismi.
     Scrivi esattamente questi due paragrafi consecutivi, separati da una riga vuota, senza elenchi né numerazioni.
     Usa un tono amichevole ma informativo.
     Scrivi tutto in italiano.
@@ -67,7 +67,7 @@
     - Paragraph 1: catchy title + main idea
     - Paragraph 2: conversation starter + final URL
 
-    Add emoji and **bold** where useful, keep the tone conversational and informal.
+    Add emoji and bold where useful, keep the tone conversational and informal.
     Write exactly these two consecutive paragraphs, separated by a blank line, with no lists or numbering.
     Use a friendly but informative tone.
 
@@ -83,12 +83,12 @@
 
     Crea un thread Twitter adeguato a descrivere i punti più importanti:
 
-    1. **Tweet iniziale (Hook)**: titolo accattivante + domanda che cattura attenzione
-    2. **Tweet successivi**: sviluppa idee principali (uno per tweet)
-       - Usa **grassetto** per concetti chiave
+    1. Tweet iniziale (Hook): titolo accattivante + domanda che cattura attenzione
+    2. Tweet successivi: sviluppa idee principali (uno per tweet)
+       - Usa grassetto per concetti chiave
        - Aggiungi emoji rilevanti
        - Mantieni tono conversazionale
-    3. **Tweet finale**: call-to-action (leggi l'articolo, condividi, replica)
+    3. Tweet finale: call-to-action (leggi l'articolo, condividi, replica)
 
     Numera i tweet nel formato 1/n, 2/n, ecc.
     Ogni tweet deve rimanere entro 280 caratteri.
@@ -107,12 +107,12 @@
 
     Create a Twitter thread to describe the main points:
 
-    1. **Initial tweet (Hook)**: catchy title + question that captures attention
-    2. **Following tweets**: develop main ideas (one per tweet)
-       - Use **bold** for key concepts
+    1. Initial tweet (Hook): catchy title + question that captures attention
+    2. Following tweets: develop main ideas (one per tweet)
+       - Use bold for key concepts
        - Add relevant emojis
        - Maintain conversational tone
-    3. **Final tweet**: call-to-action (read the article, share, reply)
+    3. Final tweet: call-to-action (read the article, share, reply)
 
     Number tweets in format 1/n, 2/n, etc.
     Each tweet must stay within 280 characters.
@@ -203,7 +203,7 @@
   template: |
     Analizza questo URL: {url}
 
-    Crea un SEO brief strutturato e presenta l'output in 5 sezioni numerate (1-5) con intestazioni in **grassetto**:
+    Crea un SEO brief strutturato e presenta l'output in 5 sezioni numerate (1-5) con intestazioni in grassetto:
 
     1. Topic principale: identifica l'argomento primario della pagina
     2. Keywords primarie e secondarie: estrai le keyword più rilevanti (presenti nel titolo, headings, prime righe)
