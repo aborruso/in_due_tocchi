@@ -66,6 +66,11 @@ const alternateLocales = Object.entries(OG_LOCALES)
     <meta name="twitter:title" content={data.title} lang={lang} key={`tw-title-${lang}`} />,
     <meta name="twitter:description" content={data.description} lang={lang} key={`tw-desc-${lang}`} />
   ])}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
   <link rel="manifest" href="/in_due_tocchi/manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="/in_due_tocchi/favicon.svg" />
 </head>
@@ -73,12 +78,12 @@ const alternateLocales = Object.entries(OG_LOCALES)
   <div class="container mx-auto px-4 py-5 max-w-4xl flex-1">
     <header class="mb-6">
       <div class="flex items-center justify-between gap-3">
-        <a href="/in_due_tocchi/" class="text-lg text-blue-600 font-medium">
+        <a href="/in_due_tocchi/" class="text-lg text-blue-600 font-semibold">
           <span>←</span> <span data-i18n="templatesPage.backToApp">Torna all'app</span>
         </a>
         <div class="text-center flex-1">
-          <h1 class="text-2xl font-bold text-gray-900" data-i18n="templatesPage.title">Template disponibili</h1>
-          <p class="text-sm text-gray-600" data-i18n="templatesPage.subtitle">Scegli in base allo scopo</p>
+          <h1 class="text-2xl font-display font-extrabold text-gray-900" data-i18n="templatesPage.title">Template disponibili</h1>
+          <p class="text-sm font-medium text-gray-600" data-i18n="templatesPage.subtitle">Scegli in base allo scopo</p>
         </div>
         <LanguageSelector />
       </div>
@@ -144,7 +149,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
           <div class="flex items-start gap-3">
             <div class="text-3xl" aria-hidden="true">${template.emoji}</div>
             <div class="flex-1">
-              <h2 class="text-lg font-semibold text-gray-900">${template.name}</h2>
+              <h2 class="text-lg font-display font-bold text-gray-900">${template.name}</h2>
               ${template.description ? `<p class="text-sm text-gray-700 mt-2 leading-relaxed">${formatDescription(template.description)}</p>` : ''}
             </div>
           </div>
