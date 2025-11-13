@@ -1,334 +1,58 @@
 # Valutazione ShareForge
 
-Valutazione complessiva del progetto ShareForge - 2025-11-09
-
-## Metriche Progetto
-
-**Dimensioni codebase:**
-
-- **Linee di codice totali**: ~2.362
-- **File principali**: 8 componenti Astro, 5 moduli JavaScript, 1 Service Worker
-- **Template YAML**: 12 template attivi (6 italiano + 6 inglese)
-- **Dipendenze production**: 2 (Astro, js-yaml)
-- **Dipendenze dev**: 3 (@astrojs/tailwind, Sharp, Tailwind CSS)
-
-**Architettura:**
-
-- Framework: Astro 4.x SSG
-- Output: Static HTML + inline JS (~750 righe in index.astro)
-- Storage: localStorage per ordine template, YAML embedded per template default
-- Deployment: GitHub Pages con workflow automatizzato
-
-## Punti di Forza
-
-### Architettura e Design
-
-**Scelte tecnologiche solide:**
-
-- **Static-first**: zero backend, zero costi operativi, hosting gratis su GitHub Pages
-- **Offline-first**: Service Worker ben implementato con cache-first strategy
-- **Build-time template loading**: template YAML caricati a build time e embedded in HTML elimina problemi di sync e dependency da localStorage
-- **Mobile-first**: Android Share Target ben configurato, device detection modal per desktop
-
-**Qualità del codice:**
-
-- **Modularità eccellente**: logica separata in moduli `src/lib/` (templates.js, share.js, i18n.js, seo.js)
-- **Commenti JSDoc**: tutte le funzioni esportate ben documentate
-- **Security awareness**: commenti espliciti su innerHTML usage e quando è safe (build-time data) vs unsafe (user input)
-- **Graceful degradation**: fallback per Web Share API → Clipboard API → document.execCommand
-- **Error handling**: try-catch con console.warn, localStorage access protetto
-
-**Features implementate:**
-
-- ✅ Multi-lingua (italiano/inglese) con switching runtime
-- ✅ Drag-and-drop riordino template con persistenza localStorage
-- ✅ Reset ordine template a default YAML
-- ✅ Auto-increment cache SW version via prebuild hook
-- ✅ Template filtering per lingua
-- ✅ SEO completo con Open Graph multi-locale
-- ✅ PWA manifest con Share Target configurato
-- ✅ Device detection modal per non-Android users
-
-### Developer Experience
-
-**Workflow ottimizzato:**
-
-- `npm run dev` con hot reload
-- Prebuild hook automatico per cache busting
-- GitHub Actions per deploy automatico su push a main
-- Template YAML editing con reload istantaneo in dev mode
-- Documentazione CLAUDE.md molto completa (150+ righe, architectural flows, debugging tips)
-
-**Documentazione:**
-
-- CLAUDE.md: guida completa a workflow, architettura, testing, deployment
-- openspec/project.md: tech stack, conventions, constraints
-- LOG.md: changelog dettagliato per fase di sviluppo
-
-### Performance
-
-- **Minimal bundle**: solo 2 dipendenze production (Astro, js-yaml)
-- **No runtime overhead**: template embedded, nessun fetch/parse YAML a runtime
-- **Service Worker cache**: istantaneo dopo prima visita
-- **Tailwind JIT**: solo utility CSS effettivamente usate
-
-## Punti di Debolezza
-
-### Architettura e Scalabilità
-
-**Inline script bloat:**
-
-- **index.astro script block**: 570+ righe di JavaScript inline
-- **Problemi**:
-  - Difficile testare (no unit tests possibili)
-  - Difficile debuggare (no source maps per inline script)
-  - No tree-shaking possibile
-  - Codice duplicato tra pagine (templates.astro ha logica simile)
-- **Suggerimento**: estrarre logica app in moduli ES6 separati (`src/lib/app.js`, `src/lib/ui.js`)
-
-**State management rudimentale:**
-
-- Variabili globali (`currentTemplateId`, `currentData`, `orderedTemplates`)
-- Nessun pattern (Redux, Zustand, signals) per gestire stato complesso
-- Rischio bug se feature crescono (undo/redo template edits, history, sync cross-tab)
-
-**Template system limitato:**
-
-- Solo placeholders statici `{title}`, `{text}`, `{url}`
-- No logica condizionale (if/else)
-- No loop
-- No filtri (uppercase, trim, truncate)
-- Confronto: template engine come Handlebars/Nunjucks offrirebbero più flessibilità
-
-### Testing e Quality Assurance
-
-**Zero test automatizzati:**
-
-- No unit tests (Vitest/Jest)
-- No integration tests (Playwright/Cypress)
-- No E2E tests per Share Target flow
-- Solo manual testing su Android
-
-**Rischi:**
-
-- Refactor rischioso (nessuna safety net)
-- Regression difficili da catturare
-- Template YAML malformato scoperto solo a build time
-- No validazione schema YAML (potrebbe usare JSON Schema + Ajv)
-
-**Quality metrics assenti:**
-
-- No linting configurato (ESLint)
-- No formatting automatico (Prettier)
-- No type checking (TypeScript o JSDoc + tsc --checkJs)
-- No Lighthouse CI per performance tracking
-
-### User Experience
-
-**Limitazioni device:**
-
-- ~~App inutilizzabile su desktop~~ → **Risolto**: bookmarklet implementato per cattura URL desktop
-- **Desktop UX**: Esperienza limitata rispetto ad Android, ma funzionale (bookmarklet + copy-paste)
-- Solo Android supportato per Share Target nativo (iOS non ha Share Target API standard)
-
-**Template discovery:**
-
-- 12 template disponibili, ma solo grid di emoji + nome
-- No preview template prima di applicarlo
-- No search/filter template per categoria
-- No descrizione template visibile in UI (solo in YAML)
-
-**Feedback limitato:**
-
-- Feedback message sparisce dopo 3 secondi (potrebbe essere perso)
-- No conferma visiva su template applicato oltre a colore bottone
-- No undo/redo
-- No history condivisioni
-
-### Internazionalizzazione
-
-**I18n implementation fragile:**
-
-- Traduzioni hardcoded in `src/lib/translations.js`
-- Nessun sistema gestione traduzioni (i18next, Fluent)
-- No pluralization rules
-- No date/number formatting localizzato
-- Template in YAML mischiati (italiano/inglese nello stesso file)
-
-**Problemi:**
-
-- Aggiungere terza lingua (spagnolo) richiede refactor totale
-- Nessuna validazione completeness traduzioni (chiave mancante = crash)
-- Template filtering per lingua fragile (`!t.lang` fallback non chiaro)
-
-### Security
-
-**Potenziali vulnerabilità:**
-
-- **innerHTML usage**: seppur documentato come safe (build-time data), pattern rischioso se esteso a user data
-- **localStorage pollution**: nessuna validazione dati letti da localStorage
-- **Template injection**: se in futuro template permettessero JS eval (non ora, ma rischio design)
-- **No CSP headers**: Content Security Policy non configurato (GitHub Pages limitation)
-
-**Dependency security:**
-
-- No `npm audit` in CI
-- No Dependabot alerts check
-- No SRI (Subresource Integrity) per CDN assets (non usati, ma good practice)
-
-### Deployment e Monitoring
-
-**Nessun monitoring:**
-
-- No analytics (usage stats, template popularity, error tracking)
-- No error reporting (Sentry, Rollbar)
-- No performance monitoring (Web Vitals tracking)
-- No A/B testing framework
-
-**Deployment risks:**
-
-- Cache SW auto-increment funziona, ma nessun rollback strategy
-- Nessun staging environment (deploy diretto a production)
-- No smoke tests post-deploy
-- No canary/blue-green deployment
-
-## Raccomandazioni Prioritarie
-
-### Immediate (entro 1 settimana)
-
-1. **Estrarre logica da inline script**
-
-   - Creare `src/lib/app.js` con init, event handlers
-   - Creare `src/lib/ui.js` con DOM manipulation
-   - Mantenere solo bootstrapping in `<script>` tag
-
-2. **Setup testing framework**
-
-   - Installare Vitest
-   - Scrivere unit tests per `templates.js`, `share.js`
-   - Test per edge cases (localStorage disabled, Web Share API unavailable)
-
-3. **Template schema validation**
-
-   - Definire JSON Schema per templates.yaml
-   - Validare a build time con Ajv
-   - Fail build se schema invalido
-
-4. **Setup ESLint + Prettier**
-   - Configurazione base Astro + standard JS rules
-   - Pre-commit hook con Husky
-   - Auto-format on save
+_Aggiornamento del 13 novembre 2025_
+
+## 1. Sintesi
+ShareForge resta un PWA static-first ben documentato e distribuibile (la build `npm run build` passa senza errori). Il valore differenziante è nel ponte tra la condivisione Android e la generazione di prompt tramite template YAML precompilati. Tuttavia l’assenza totale di testing, la logica UI concentrata in un unico script inline e una strategia offline parziale rischiano di rallentare qualsiasi evoluzione futura. Questo documento riepiloga lo stato attuale e mette in fila le azioni prioritarie per preservare la qualità del progetto.
+
+## 2. Stato attuale del progetto
+- **Documentazione**: `README.md` spiega bene il problema e il flusso, `LOG.md` traccia ogni iterazione, `openspec/` dà il processo di change management.
+- **Codice**: template caricati da `src/data/templates.yaml` a build-time dentro `src/pages/index.astro`; componenti UI separati in `src/components`, logica condivisa in `src/lib/`.
+- **Build/Deploy**: script `npm run build` lancia `update-cache-version.js` e poi `astro build`, producendo output statico per GitHub Pages.
+- **PWA**: `public/manifest.webmanifest` definisce Share Target GET e icone; `public/sw.js` gestisce cache versionata manualmente.
+
+## 3. Punti di forza
+1. **Narrazione e onboarding** – Il README e le landing (desktop/mobile) comunicano in modo chiaro la value proposition e riducono lo sforzo di chi contribuisce.
+2. **Change log disciplinato** – `LOG.md` mantiene memoria delle decisioni, utile per regressioni e audit.
+3. **Architettura coerente con il target** – Static SSR con Astro, niente backend, ottimo per GitHub Pages e per l’uso offline su Android.
+4. **Template system semplice ma efficace** – YAML con flag `active`, placeholders `{title,text,url}` e drag & drop persistito in `localStorage` coprono i casi principali.
+5. **UX mobile curata** – Share Target, barra sticky per share/copy, device modal e bookmarklet desktop offrono un percorso pulito tra discovery e azione.
+
+## 4. Punti critici
+1. **Testing assente** – Non esiste lint, type-check, unit o E2E test. Ogni refactor è potenzialmente regressivo.
+2. **Script monolitico in `index.astro`** – Oltre 800 righe di JS inline gestiscono stato, i18n, drag-and-drop, share e menu. Difficile da testare, versionare e riusare.
+3. **YAML non validato** – `src/data/templates.yaml` accetta qualsiasi formato: basta un refuso per rompere la UI senza errori in build.
+4. **Cache offline limitata** – Il service worker pre-cacha solo `/in_due_tocchi/` e il manifest; tutte le altre risorse (JS, CSS, video) dipendono da cache lazy → utenti offline ricevono spesso “Offline - content not available”.
+5. **Branding incompleto** – `shareText()` usa ancora il titolo "Riformula", quindi Android mostra il vecchio nome nello sheet di condivisione.
+6. **Automazione cache rumorosa** – `update-cache-version.js` sovrascrive `public/sw.js` ad ogni build, sporcando la working tree e creando merge conflict potenziali.
+
+## 5. Roadmap consigliata
+### Brevissimo termine (entro 2 settimane)
+1. **Introdurre verifiche automatiche**
+   - Aggiungere `npm run lint` (ESLint base Astro) e `npm run check` (es. `astro check` o `tsc --noEmit`).
+   - Integrare Vitest per unit test di `src/lib/share.js`, `src/lib/templates.js` e `src/lib/i18n.js`.
+2. **Validare i template**
+   - Definire uno schema JSON (campi obbligatori, lunghezze massime, placeholder richiesti) e validarlo a build-time con Ajv.
+3. **Correggere il brand nello share**
+   - Aggiornare il default title di `shareText()` da "Riformula" a "ShareForge" e testare su un dispositivo Android reale.
 
 ### Breve termine (entro 1 mese)
-
-5. **Template preview UI**
-
-   - Modal preview prima di applicare template
-   - Mostrare descrizione YAML in UI
-   - Esempio output con dati fake
-
-6. **Migliorare i18n**
-
-   - Migrare a i18next o Fluent
-   - Separare template per lingua (templates-it.yaml, templates-en.yaml)
-   - Validazione completeness traduzioni a build time
-
-7. **Analytics base**
-
-   - Google Analytics o Plausible (privacy-friendly)
-   - Track: template usage, share success rate, language preference
-   - No PII collection
-
-8. **E2E tests**
-   - Playwright setup per Android emulator
-   - Test Share Target flow end-to-end
-   - Test template application + share/copy
+4. **Estrarre la logica UI in moduli**
+   - Spostare lo script inline di `index.astro` in moduli ES (`src/scripts/`) o componenti Astro/Islands per poterli testare e riusare.
+   - Introdurre una gestione stato più chiara (es. Preact Signals) per `currentTemplate`, `currentData`, feedback, i18n.
+5. **Rafforzare l’offline**
+   - Generare automaticamente la lista di asset (via manifest Vite) e precache nel service worker o adottare Workbox precache.
+   - Aggiungere fallback offline per pagine secondarie e per i video.
+6. **Automatizzare il cache versioning senza modificare i sorgenti**
+   - Passare `CACHE_VERSION` come variabile d’ambiente o generare il service worker nel passo di build per non toccare `public/sw.js`.
 
 ### Medio termine (entro 3 mesi)
+7. **Potenziare il template engine**
+   - Valutare Handlebars/Nunjucks o funzioni custom per supportare condizioni, cicli e filtri.
+8. **Copertura E2E**
+   - Aggiungere Playwright/Cypress per il flusso Share Target + share/copy + drag-&-drop.
+9. **Metriche e osservabilità**
+   - Integrare Sentry o Plausible per capire uso dei template, errori JS e share success rate.
 
-9. **Refactor state management**
-
-   - Adottare signals (Preact Signals o @vue/reactivity)
-   - Reactive state per currentTemplate, currentData
-   - Eliminate re-render manuale
-
-10. **Template engine upgrade**
-
-    - Valutare Handlebars o Nunjucks
-    - Aggiungere conditionals, loops, filters
-    - Backward compatible con template esistenti
-
-11. **Desktop fallback UX** ✅ **Parzialmente completato**
-
-    - ~~URL input manuale~~ (non necessario con bookmarklet)
-    - ✅ **Bookmarklet per desktop browser** (implementato 2025-11-10)
-    - Browser extension (Chrome/Firefox) - non prioritario ora che esiste bookmarklet
-
-12. **Monitoring e error tracking**
-    - Sentry integration
-    - Web Vitals tracking (CLS, LCP, FID)
-    - Alerting su error spike
-
-### Lungo termine (roadmap 2025)
-
-13. **Template marketplace**
-
-    - Community template sharing
-    - Import/export template custom (ripristinato)
-    - Template categories/tags
-
-14. **Advanced features**
-
-    - Multi-step template (wizard)
-    - Template variables con default
-    - Template preview con AI-generated examples
-
-15. **Cross-platform**
-    - iOS Shortcuts integration (workaround per Share Target)
-    - Desktop app (Tauri/Electron)
-    - Browser extension con right-click context menu
-
-## Valutazione Complessiva
-
-**Rating: 7.5/10**
-
-**Breakdown:**
-
-- **Architettura**: 8/10 (static-first eccellente, ma inline script bloat)
-- **Codice**: 7/10 (ben strutturato, ma no tests, no linting)
-- **UX**: 7/10 (funzionale ma limitata, desktop UX poor)
-- **Performance**: 9/10 (ottima, PWA + cache + minimal bundle)
-- **Security**: 6/10 (basic hygiene ok, ma no CSP, no audit)
-- **Documentazione**: 9/10 (CLAUDE.md eccellente)
-- **DX**: 8/10 (workflow solido, manca testing infra)
-- **Scalability**: 6/10 (ok per feature set attuale, limiti evidenti per crescita)
-
-**Verdetto:**
-
-ShareForge è un **progetto ben eseguito** per lo scope attuale (MVP funzionante, zero costi, deployment automatico). L'architettura static-first è una scelta brillante per questo use case.
-
-**Però** ha raggiunto un punto critico dove crescere oltre richiede refactoring significativo:
-
-- Testing infra necessaria prima di aggiungere feature
-- State management deve evolvere
-- Template system ha bisogno di più espressività
-
-**Prossimi passi consigliati:**
-
-1. Freeze nuove feature
-2. Settimana di "technical debt cleanup" (testing, linting, extract inline scripts)
-3. Poi riprendere feature development con foundation solida
-
-**Pro più significativi:**
-
-- Zero operational costs
-- Offline-first done right
-- Template YAML embedding pattern pulito
-- Documentazione top-tier
-
-**Contro più bloccanti:**
-
-- No testing (risk alto per refactor)
-- Inline script maintenance nightmare
-- ~~Desktop UX non indirizzata~~ → **Mitigato**: bookmarklet fornisce workaround funzionale
-- I18n fragile per scaling oltre 2 lingue
+## 6. Conclusione
+ShareForge è solido per lo scope corrente ma ha raggiunto il limite naturale del “solo build + deploy”. Prima di aggiungere altre feature conviene investire in fondazioni tecniche (testing, modularità, offline affidabile). Una settimana di debito tecnico dedicato sbloccherebbe la roadmap successiva senza compromettere la qualità.
