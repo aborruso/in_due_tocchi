@@ -130,21 +130,21 @@
 
     Esegui fact-checking strutturato:
 
-    1. **Estrai claim principali**: identifica le 5-7 affermazioni chiave (numeriche, scientifiche, di policy)
+    1. Estrai claim principali: identifica le 5-7 affermazioni chiave (numeriche, scientifiche, di policy)
 
-    2. **Per ogni claim**:
+    2. Per ogni claim:
        - Valuta il livello di evidenza (verifiable from URL source? Cita ricerche/dati?)
        - Verifica coerenza con fonti pubbliche affidabili (ISTAT, ricerche peer-review, organismi ufficiali)
        - Cita almeno una fonte esterna nel formato "Fonte: Nome – URL"; se manca una fonte affidabile indica "Fonte mancante"
        - Segnala se claim è opinione mascherata da fatto
 
-    3. **Identifica red flags**:
+    3. Identifica red flags:
        - Dati privi di fonte
        - Cherry-picking (dati veri ma fuori contesto)
        - Affermazioni non supportate
        - Conflitti di interesse impliciti
 
-    4. **Output finale**:
+    4. Output finale:
        - Claim verificati ✓
        - Claim dubbi/parziali ⚠️
        - Claim falsi ✗
@@ -162,33 +162,33 @@
 
     Produce un'analisi strutturata in italiano che faciliti comprensione e apprendimento:
 
-    1. **Sintesi esecutiva**: 3-5 frasi che catturano le idee fondamentali e il valore centrale del contenuto
+    1. Sintesi esecutiva: 3-5 frasi che catturano le idee fondamentali e il valore centrale del contenuto
 
-    2. **Concetti principali**: organizza gerarchicamente i concetti chiave
+    2. Concetti principali: organizza gerarchicamente i concetti chiave
        - Concetto primario
          - Sottoconcetti correlati
        - Ripeti per ogni area principale
 
-    3. **Terminologia e definizioni**: per ogni termine tecnico/specializzato presente
+    3. Terminologia e definizioni: per ogni termine tecnico/specializzato presente
        - Definizione chiara in linguaggio semplice
        - Contesto di utilizzo
 
-    4. **Contesto disciplinare/storico**:
+    4. Contesto disciplinare/storico:
        - Sfondo necessario per capire il contenuto
        - Evoluzione storica del tema (se rilevante)
        - Scuole di pensiero o correnti diverse
 
-    5. **Implicazioni e applicazioni pratiche**:
+    5. Implicazioni e applicazioni pratiche:
        - Come questi insegnamenti si applicano nella realtà
        - Conseguenze immediate e a lungo termine
        - Casi d'uso o esempi concreti
 
-    6. **Punti di collegamento interdisciplinari**:
+    6. Punti di collegamento interdisciplinari:
        - Connessioni con altri campi di conoscenza
        - Paralleli o contrasti con idee correlate
        - Dove approfondire ulteriormente
 
-    7. **Domande di riflessione**: 3-5 domande che stimolano pensiero critico e approfondimento successivo
+    7. Domande di riflessione: 3-5 domande che stimolano pensiero critico e approfondimento successivo
 
     Sii esaustivo ma organizzato. Output in italiano.
     Chiudi con una riga finale: "Fonte: {url}".
@@ -205,15 +205,15 @@
 
     Crea un SEO brief strutturato e presenta l'output in 5 sezioni numerate (1-5) con intestazioni in **grassetto**:
 
-    1. **Topic principale**: identifica l'argomento primario della pagina
-    2. **Keywords primarie e secondarie**: estrai le keyword più rilevanti (presenti nel titolo, headings, prime righe)
-    3. **Struttura contenuto**: analizza titoli, sottotitoli, lunghezza, presenza di liste/tabelle
-    4. **Valutazione on-page**:
+    1. Topic principale: identifica l'argomento primario della pagina
+    2. Keywords primarie e secondarie: estrai le keyword più rilevanti (presenti nel titolo, headings, prime righe)
+    3. Struttura contenuto: analizza titoli, sottotitoli, lunghezza, presenza di liste/tabelle
+    4. Valutazione on-page:
        - Qualità del titolo meta (lunghezza, keyword, appeal)
        - Meta description presente e ottimizzata?
        - Headings logici (H1, H2)?
        - Readability (lunghezza paragrafi, uso di formatting)
-    5. **Suggerimenti di ottimizzazione**:
+    5. Suggerimenti di ottimizzazione:
        - 3 keyword da aggiungere/enfatizzare
        - Miglioramenti strutturali (headings mancanti, sezioni da aggiungere)
        - Elementi mancanti (schema markup, immagini, internal links)
@@ -228,23 +228,23 @@
   template: |
     Analizza questo URL: {url}
 
-    1. **Estrai dati presenti**:
+    1. Estrai dati presenti:
        - Tabelle, grafici, numeri, elenchi
        - Riferimenti normativi, dataset citati
        - Formati visibili (PDF, HTML, Excel, immagini)
 
-    2. **Strutturazione e rilascio**:
+    2. Strutturazione e rilascio:
        - Livello di strutturazione (1=testo grezzo, 5=database strutturato)
        - Formato ideale per open data (CSV, JSON, RDF, API)
        - Licenza implicita e ostacoli legali (copyright, privacy)
        - Rischi specifici (PII, segreti commerciali, dati sensibili)
 
-    3. **Estrazione pratica**:
+    3. Estrazione pratica:
        - Strumenti per estrarre (web scraping, OCR, API)
        - Normalizzazione richiesta (encoding, pulizia, validazione)
        - Effort stimato (basso/medio/alto)
 
-    4. **Fonti correlate affidabili**:
+    4. Fonti correlate affidabili:
        - ISTAT, ANAC, ARERA, OpenStreetMap, Geoportali, ISPRA
        - Dati EU (data.europa.eu, Eurostat)
        - Alternative pubbliche già disponibili
@@ -303,9 +303,9 @@
 
     Analizza il contenuto e:
 
-    1. **Identifica tipo di prodotto/contenuto**: determina se si tratta di libro, film, serie TV, album musicale, videogioco, dispositivo elettronico, software, app, ristorante, hotel, corso online, o altro
+    1. Identifica tipo di prodotto/contenuto: determina se si tratta di libro, film, serie TV, album musicale, videogioco, dispositivo elettronico, software, app, ristorante, hotel, corso online, o altro
 
-    2. **Cerca recensioni aggregate**: consulta fino a 3 fonti pertinenti tra i siti più autorevoli per quella categoria (se non trovi dati indica "Dati non disponibili"):
+    2. Cerca recensioni aggregate: consulta fino a 3 fonti pertinenti tra i siti più autorevoli per quella categoria (se non trovi dati indica "Dati non disponibili"):
        - Libri: Goodreads, Amazon, Anobii
        - Film/Serie: IMDb, Rotten Tomatoes, Metacritic, FilmTV
        - Musica: AllMusic, Pitchfork, Metacritic
@@ -315,19 +315,19 @@
        - Ristoranti: TripAdvisor, Google Maps, Michelin
        - Hotel: Booking.com, TripAdvisor, Google Maps
 
-    3. **Valutazione**:
-       - **Punteggio medio aggregato**: [X/10 o X/5 o % secondo scala prevalente]
-       - **Range di voti raccolti**: [min - max]
-       - **Numero di recensioni totali**: [somma tra tutte le fonti]
-       - **Distribuzione**: [es. "80% positive, 15% miste, 5% negative"]
+    3. Valutazione:
+       - Punteggio medio aggregato: [X/10 o X/5 o % secondo scala prevalente]
+       - Range di voti raccolti: [min - max]
+       - Numero di recensioni totali: [somma tra tutte le fonti]
+       - Distribuzione: [es. "80% positive, 15% miste, 5% negative"]
        - Se alcuni dati non sono disponibili, dichiaralo esplicitamente
 
-    4. **Criterio di aggregazione**:
+    4. Criterio di aggregazione:
        - Spiega come hai calcolato la valutazione finale (media ponderata? mediana? consensus critica vs pubblico?)
        - Indica eventuali discrepanze significative tra fonti (es. critica alta ma pubblico basso)
        - Segnala bias evidenti (es. poche recensioni, campione geografico limitato)
 
-    5. **Sintesi qualitativa** (3-5 righe):
+    5. Sintesi qualitativa (3-5 righe):
        - Punti di forza ricorrenti nelle recensioni
        - Criticità comuni segnalate
        - A chi è particolarmente consigliato/sconsigliato
@@ -346,9 +346,9 @@
 
     Analyze the content and:
 
-    1. **Identify product/content type**: determine if it's a book, movie, TV series, music album, video game, electronic device, software, app, restaurant, hotel, online course, or other
+    1. Identify product/content type: determine if it's a book, movie, TV series, music album, video game, electronic device, software, app, restaurant, hotel, online course, or other
 
-    2. **Search for aggregated reviews**: consult up to 3 relevant sources among the authoritative review sites for that category (if no data exists, state "Data not available"):
+    2. Search for aggregated reviews: consult up to 3 relevant sources among the authoritative review sites for that category (if no data exists, state "Data not available"):
        - Books: Goodreads, Amazon, LibraryThing
        - Movies/Series: IMDb, Rotten Tomatoes, Metacritic
        - Music: AllMusic, Pitchfork, Metacritic
@@ -358,19 +358,19 @@
        - Restaurants: TripAdvisor, Google Maps, Michelin
        - Hotels: Booking.com, TripAdvisor, Google Maps
 
-    3. **Overall rating**:
-       - **Aggregated average score**: [X/10 or X/5 or % according to prevalent scale]
-       - **Vote range collected**: [min - max]
-       - **Total number of reviews**: [sum across all sources]
-       - **Distribution**: [e.g., "80% positive, 15% mixed, 5% negative"]
+    3. Overall rating:
+       - Aggregated average score: [X/10 or X/5 or % according to prevalent scale]
+       - Vote range collected: [min - max]
+       - Total number of reviews: [sum across all sources]
+       - Distribution: [e.g., "80% positive, 15% mixed, 5% negative"]
        - If any figures are missing, state it clearly
 
-    4. **Aggregation criterion**:
+    4. Aggregation criterion:
        - Explain how you calculated the final rating (weighted average? median? critics vs. public consensus?)
        - Indicate any significant discrepancies between sources (e.g., high critics but low public)
        - Flag evident biases (e.g., few reviews, limited geographic sample)
 
-    5. **Qualitative summary** (3-5 lines):
+    5. Qualitative summary (3-5 lines):
        - Recurring strengths in reviews
        - Common criticisms reported
        - Who is it particularly recommended/not recommended for
@@ -389,45 +389,45 @@
 
     Produci un'analisi strutturata in italiano seguendo questo schema:
 
-    1. **Metadati essenziali**:
+    1. Metadati essenziali:
        - Autori e affiliazioni principali
        - Anno di pubblicazione
        - Journal/Conferenza (con impact factor se disponibile)
        - Tipo di studio (sperimentale, review, meta-analisi, case study, survey)
 
-    2. **Abstract e domanda di ricerca**:
+    2. Abstract e domanda di ricerca:
        - Riassunto dell'abstract in 2-3 frasi
        - Domanda di ricerca principale (research question)
        - Ipotesi testate (se presenti)
 
-    3. **Metodologia**:
+    3. Metodologia:
        - Disegno dello studio (quantitativo/qualitativo/misto)
        - Campione: dimensione, criteri di selezione, rappresentatività
        - Strumenti di raccolta dati (questionari, interviste, esperimenti, dataset)
        - Metodi di analisi (statistici, qualitativi)
 
-    4. **Risultati principali**:
+    4. Risultati principali:
        - Findings chiave (max 5 punti)
        - Dati quantitativi salienti (p-value, effect size, confidence interval se rilevanti)
        - Supportano o confutano l'ipotesi?
 
-    5. **Validità e limiti**:
+    5. Validità e limiti:
        - Punti di forza metodologici
        - Limiti dichiarati dagli autori
        - Bias potenziali (selection bias, publication bias, conflitti di interesse)
        - Generalizzabilità dei risultati
 
-    6. **Contributo e rilevanza**:
+    6. Contributo e rilevanza:
        - Novità rispetto alla letteratura esistente
        - Implicazioni teoriche
        - Applicazioni pratiche immediate
        - Gap di ricerca aperti per studi futuri
 
-    7. **Citazioni chiave**:
+    7. Citazioni chiave:
        - 3-5 riferimenti bibliografici più rilevanti citati nel paper
        - Correnti di ricerca/scuole di pensiero a cui si collega
 
-    8. **Valutazione sintetica**:
+    8. Valutazione sintetica:
        - Rigore metodologico: [Alto/Medio/Basso]
        - Rilevanza pratica: [Alta/Media/Bassa]
        - Originalità: [Alta/Media/Bassa]
@@ -447,45 +447,45 @@
 
     Produce a structured analysis following this schema:
 
-    1. **Essential metadata**:
+    1. Essential metadata:
        - Main authors and affiliations
        - Year of publication
        - Journal/Conference (with impact factor if available)
        - Study type (experimental, review, meta-analysis, case study, survey)
 
-    2. **Abstract and research question**:
+    2. Abstract and research question:
        - Summary of abstract in 2-3 sentences
        - Main research question
        - Tested hypotheses (if present)
 
-    3. **Methodology**:
+    3. Methodology:
        - Study design (quantitative/qualitative/mixed)
        - Sample: size, selection criteria, representativeness
        - Data collection tools (questionnaires, interviews, experiments, datasets)
        - Analysis methods (statistical, qualitative)
 
-    4. **Main results**:
+    4. Main results:
        - Key findings (max 5 points)
        - Salient quantitative data (p-value, effect size, confidence interval if relevant)
        - Do they support or refute the hypothesis?
 
-    5. **Validity and limitations**:
+    5. Validity and limitations:
        - Methodological strengths
        - Limitations declared by authors
        - Potential biases (selection bias, publication bias, conflicts of interest)
        - Generalizability of results
 
-    6. **Contribution and relevance**:
+    6. Contribution and relevance:
        - Novelty compared to existing literature
        - Theoretical implications
        - Immediate practical applications
        - Open research gaps for future studies
 
-    7. **Key citations**:
+    7. Key citations:
        - 3-5 most relevant bibliographic references cited in the paper
        - Research streams/schools of thought it connects to
 
-    8. **Synthetic evaluation**:
+    8. Synthetic evaluation:
        - Methodological rigor: [High/Medium/Low]
        - Practical relevance: [High/Medium/Low]
        - Originality: [High/Medium/Low]
