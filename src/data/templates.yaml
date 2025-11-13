@@ -576,12 +576,12 @@
     Source: {url}
 
 - id: notizia-semplice
-  name: Notizia Semplice
+  name: Decifra la PA
   emoji: "📰"
   lang: it
   active: true
   description: |
-    **Notizia Semplice** trasforma notizie complesse (specie burocratiche o amministrative) in testi chiarissimi con linguaggio quotidiano. Spiega cosa cambia per le persone, chi è coinvolto, da quando, con obblighi ed eccezioni concrete. Chiude con una sezione "In pratica questo significa" per rendere tutto immediatamente applicabile alla vita reale.
+    **Decifra la PA** trasforma notizie complesse (specie burocratiche o amministrative) in testi chiarissimi con linguaggio quotidiano. Spiega cosa cambia per le persone, chi è coinvolto, da quando, con obblighi ed eccezioni concrete. Chiude con una sezione "In pratica questo significa" per rendere tutto immediatamente applicabile alla vita reale.
   template: |
     Trasforma questa notizia in un testo chiarissimo e in linguaggio quotidiano.
 
