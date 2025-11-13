@@ -44,6 +44,11 @@ const alternateLocales = Object.entries(OG_LOCALES)
     <meta name="twitter:title" content={data.title} lang={lang} key={`tw-title-${lang}`} />,
     <meta name="twitter:description" content={data.description} lang={lang} key={`tw-desc-${lang}`} />
   ])}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
   <link rel="manifest" href="/in_due_tocchi/manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="/in_due_tocchi/favicon.svg" />
 </head>
@@ -57,10 +62,10 @@ const alternateLocales = Object.entries(OG_LOCALES)
   <section class="bg-gradient-to-b from-slate-900 to-slate-800 text-white py-16 px-4">
     <div class="max-w-2xl mx-auto text-center">
       <div class="text-6xl mb-6">🤖</div>
-      <h1 class="text-5xl font-bold leading-tight mb-4" data-i18n-html="mobilePage.heroTitle">
+      <h1 class="text-5xl font-display font-extrabold leading-tight mb-4" data-i18n-html="mobilePage.heroTitle">
         Prepara il Contesto<br />per i tuoi LLM
       </h1>
-      <p class="text-xl text-slate-200 mb-8 leading-relaxed" data-i18n="mobilePage.heroSubtitle">
+      <p class="text-xl text-slate-200 mb-8 leading-relaxed font-medium" data-i18n="mobilePage.heroSubtitle">
         Su smartphone non puoi scrivere prompt prima di inviare l'URL. Con ShareForge, crei il contesto attorno al link e lo invii al miglior LLM per il tuo obiettivo.
       </p>
       <a href="/in_due_tocchi" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors" data-i18n="mobilePage.openAppCta">
@@ -71,7 +76,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
 
   <!-- Benefits Section -->
   <section class="max-w-2xl mx-auto py-16 px-4">
-    <h2 class="text-3xl font-bold text-center mb-12 text-slate-900" data-i18n="mobilePage.benefitsTitle">
+    <h2 class="text-3xl font-display font-extrabold text-center mb-12 text-slate-900" data-i18n="mobilePage.benefitsTitle">
       Perché ShareForge?
     </h2>
 
@@ -80,7 +85,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
       <div class="flex gap-4">
         <div class="text-4xl flex-shrink-0">💭</div>
         <div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit1Title">Crea il Contesto Prima</h3>
+          <h3 class="text-xl font-display font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit1Title">Crea il Contesto Prima</h3>
           <p class="text-slate-700" data-i18n="mobilePage.benefit1Text">Scegli un template e circonda l'URL con contesto strutturato. Così l'LLM capisce cosa vuoi, senza doverlo spiegare dopo.</p>
         </div>
       </div>
@@ -89,7 +94,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
       <div class="flex gap-4">
         <div class="text-4xl flex-shrink-0">⚡</div>
         <div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit2Title">Subito, Offline</h3>
+          <h3 class="text-xl font-display font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit2Title">Subito, Offline</h3>
           <p class="text-slate-700" data-i18n="mobilePage.benefit2Text">Zero server, zero connessione. Genera il contesto istantaneamente nel tuo smartphone, ovunque tu sia.</p>
         </div>
       </div>
@@ -98,7 +103,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
       <div class="flex gap-4">
         <div class="text-4xl flex-shrink-0">📋</div>
         <div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit3Title">Template = Prompt Strutturati</h3>
+          <h3 class="text-xl font-display font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit3Title">Template = Prompt Strutturati</h3>
           <p class="text-slate-700" data-i18n="mobilePage.benefit3Text">11 template per diversi LLM use case: SEO analysis, fact-check, sintesi, thread social. Ognuno è un prompt ottimizzato.</p>
         </div>
       </div>
@@ -107,7 +112,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
       <div class="flex gap-4">
         <div class="text-4xl flex-shrink-0">🎯</div>
         <div>
-          <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit4Title">Invia al Miglior LLM</h3>
+          <h3 class="text-xl font-display font-bold text-slate-900 mb-2" data-i18n="mobilePage.benefit4Title">Invia al Miglior LLM</h3>
           <p class="text-slate-700" data-i18n="mobilePage.benefit4Text">Condividi il contesto a ChatGPT, Claude, Gemini o altri. Scegli il modello migliore per il tuo template/obiettivo.</p>
         </div>
       </div>
@@ -117,7 +122,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
   <!-- Demo Section -->
   <section class="bg-slate-100 py-16 px-4">
     <div class="max-w-2xl mx-auto">
-      <h2 id="demo" class="text-3xl font-bold text-center mb-12 text-slate-900" data-i18n="mobilePage.demoTitle">
+      <h2 id="demo" class="text-3xl font-display font-extrabold text-center mb-12 text-slate-900" data-i18n="mobilePage.demoTitle">
         Il Flusso: URL → Contesto → LLM → Utente
       </h2>
 
@@ -155,7 +160,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
 
       <!-- Step-by-step flow explanation -->
       <div id="come-funziona" class="mt-12 max-w-xl mx-auto">
-        <h3 class="text-2xl font-bold text-slate-900 mb-6 text-center" data-i18n="mobilePage.flowTitle">
+        <h3 class="text-2xl font-display font-extrabold text-slate-900 mb-6 text-center" data-i18n="mobilePage.flowTitle">
           Come funziona (6 passi)
         </h3>
 
@@ -191,7 +196,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
 
   <!-- PWA Installation Guide -->
   <section class="max-w-2xl mx-auto py-16 px-4">
-    <h2 id="install" class="text-3xl font-bold text-center mb-4 text-slate-900" data-i18n="mobilePage.installTitle">
+    <h2 id="install" class="text-3xl font-display font-extrabold text-center mb-4 text-slate-900" data-i18n="mobilePage.installTitle">
       Installa come App
     </h2>
     <p class="text-center text-slate-600 mb-12" data-i18n-html="mobilePage.installSubtitle">
@@ -206,12 +211,12 @@ const alternateLocales = Object.entries(OG_LOCALES)
             1
           </div>
           <div>
-            <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.step1Title">Apri Chrome</h3>
+            <h3 class="text-xl font-display font-bold text-slate-900 mb-2" data-i18n="mobilePage.step1Title">Apri Chrome</h3>
             <p class="text-slate-700 mb-3" data-i18n="mobilePage.step1Text">
               Accedi a ShareForge tramite il browser Chrome del tuo Android
             </p>
             <div class="bg-slate-100 rounded-lg p-4 border border-slate-300">
-              <p class="text-sm text-slate-600 font-mono">
+              <p class="text-xs text-slate-600 font-mono">
                 https://aborruso.github.io/in_due_tocchi/
               </p>
             </div>
@@ -226,7 +231,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
             2
           </div>
           <div>
-            <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.step2Title">Tap Menu (⋮)</h3>
+            <h3 class="text-xl font-display font-bold text-slate-900 mb-2" data-i18n="mobilePage.step2Title">Tap Menu (⋮)</h3>
             <p class="text-slate-700 mb-3" data-i18n="mobilePage.step2Text">
               Premi i tre puntini in alto a destra del browser
             </p>
@@ -246,7 +251,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
             3
           </div>
           <div>
-            <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.step3Title">Tap "Installa app"</h3>
+            <h3 class="text-xl font-display font-bold text-slate-900 mb-2" data-i18n="mobilePage.step3Title">Tap "Installa app"</h3>
             <p class="text-slate-700 mb-3" data-i18n="mobilePage.step3Text">
               Seleziona l'opzione per aggiungere l'app alla schermata iniziale
             </p>
@@ -266,7 +271,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
             4
           </div>
           <div>
-            <h3 class="text-xl font-bold text-slate-900 mb-2" data-i18n="mobilePage.step4Title">Goditi l'app</h3>
+            <h3 class="text-xl font-display font-bold text-slate-900 mb-2" data-i18n="mobilePage.step4Title">Goditi l'app</h3>
             <p class="text-slate-700" data-i18n="mobilePage.step4Text">
               Ora puoi usarla offline, direttamente dalla tua schermata iniziale. Nessun browser necessario.
             </p>
@@ -278,7 +283,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
     <!-- Installation Video -->
     <div class="mt-12">
       <div class="border-l-4 border-blue-600 pl-6">
-        <h3 class="text-xl font-bold text-slate-900 mb-4" data-i18n="mobilePage.installVideoTitle">Video guida all'installazione</h3>
+        <h3 class="text-xl font-display font-bold text-slate-900 mb-4" data-i18n="mobilePage.installVideoTitle">Video guida all'installazione</h3>
         <div class="mx-auto max-w-sm">
           <div class="bg-white rounded-xl border-2 border-blue-200 overflow-hidden max-h-[500px]">
             <video
@@ -325,8 +330,8 @@ const alternateLocales = Object.entries(OG_LOCALES)
   <!-- CTA Section -->
   <section class="bg-slate-900 text-white py-16 px-4">
     <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-4" data-i18n="mobilePage.ctaTitle">Pronto a preparare il contesto?</h2>
-      <p class="text-slate-300 mb-8 text-lg" data-i18n="mobilePage.ctaSubtitle">
+      <h2 class="text-3xl font-display font-extrabold mb-4" data-i18n="mobilePage.ctaTitle">Pronto a preparare il contesto?</h2>
+      <p class="text-slate-300 mb-8 text-lg font-medium" data-i18n="mobilePage.ctaSubtitle">
         Apri ShareForge, scegli un template, e invia il contesto strutturato al tuo LLM preferito
       </p>
       <a href="/in_due_tocchi" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg text-lg transition-colors" data-i18n="mobilePage.openAppCta">
@@ -339,7 +344,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
   <section id="desktop" class="py-12 px-4 bg-slate-100 border-t-2 border-slate-300">
     <div class="max-w-2xl mx-auto">
       <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-amber-500">
-        <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
+        <h3 class="text-xl font-display font-bold text-slate-900 mb-3 flex items-center gap-2">
           <span>💻</span>
           <span>Usi un computer desktop?</span>
         </h3>
@@ -557,7 +562,6 @@ const alternateLocales = Object.entries(OG_LOCALES)
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
