@@ -11,7 +11,7 @@ export function canShare() {
  * @param {string} title - Optional title for the share
  * @returns {Promise<boolean>} - True if shared successfully, false otherwise
  */
-export async function shareText(text, title = 'Riformula') {
+export async function shareText(text, title = 'ShareForge') {
   if (!canShare()) {
     console.log('Web Share API not available');
     return false;
