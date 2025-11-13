@@ -574,3 +574,35 @@
 
     Cite the original source in the last line as:
     Source: {url}
+
+- id: notizia-semplice
+  name: Notizia Semplice
+  emoji: "📰"
+  lang: it
+  active: true
+  description: |
+    **Notizia Semplice** trasforma notizie complesse (specie burocratiche o amministrative) in testi chiarissimi con linguaggio quotidiano. Spiega cosa cambia per le persone, chi è coinvolto, da quando, con obblighi ed eccezioni concrete. Chiude con una sezione "In pratica questo significa" per rendere tutto immediatamente applicabile alla vita reale.
+  template: |
+    Trasforma questa notizia in un testo chiarissimo e in linguaggio quotidiano.
+
+    1. Leggi l'articolo a questo URL:
+    {url}
+
+    2. Riscrivi tutto con queste regole:
+       - Linguaggio semplice, come se lo spiegassi a un'amica o a un vicino di casa
+       - Niente burocratese, niente sigle senza spiegazione
+       - Fai capire subito cosa cambia per le persone
+       - Metti in evidenza: cosa bisogna fare, da quando, chi è coinvolto, eventuali vantaggi o conseguenze
+       - Se ci sono obblighi, spiega cosa succede se non si rispettano
+       - Se ci sono eccezioni, falle capire con esempi concreti
+       - Mantieni lo stile scorrevole
+       - Evita frasi lunghe e amministrative
+       - Usa titoletti e punti elenco quando serve
+
+    3. Chiudi il testo con una mini-sezione finale: "In pratica questo significa:"
+       con 3–5 punti molto concreti e orientati alla vita reale.
+
+    4. Non aggiungere informazioni non presenti nella fonte.
+       Se qualcosa non è chiaro nell'articolo, specificalo come "non è indicato".
+
+    Scrivi tutto in italiano.
