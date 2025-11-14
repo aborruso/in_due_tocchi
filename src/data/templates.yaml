@@ -224,7 +224,7 @@
   lang: it
   active: true
   description: |
-    Trasforma una pagina web in una versione pulita, leggibile e senza fronzoli.
+   Trasforma una pagina web in una **versione pulita e leggibile**: rimuove elementi non testuali e distrazioni mantenendo titoli, sottotitoli, paragrafi, elenchi e blocchi di codice quando presenti; se necessario, traduce il contenuto in italiano preservandone tono e struttura.
   template: |
     Voglio che tu agisca come uno strumento di *readability avanzata*.
 
