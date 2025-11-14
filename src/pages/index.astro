@@ -6,6 +6,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import LanguageSelector from '../components/LanguageSelector.astro';
 import yaml from 'js-yaml';
 import templatesYamlRaw from '../data/templates.yaml?raw';
+import releaseNotesYamlRaw from '../data/release-notes.yaml?raw';
 import { getSeoData, OG_LOCALES, OG_IMAGE_ALT } from '../lib/seo.js';
 
 // Load templates at build time (like pa_mi_senti)
@@ -17,6 +18,79 @@ const templates = (() => {
     return allTemplates.filter(template => template.active !== false);
   } catch (error) {
     console.error('Error parsing templates.yaml:', error);
+    return [];
+  }
+})();
+
+function escapeHtml(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function formatInlineMarkdown(text = '') {
+  const escaped = escapeHtml(text);
+  return escaped
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/`(.+?)`/g, '<code>$1</code>');
+}
+
+function simpleMarkdownToHtml(markdown = '') {
+  if (!markdown) return '';
+
+  const lines = markdown.split(/\r?\n/);
+  const htmlParts = [];
+  let inList = false;
+
+  const closeList = () => {
+    if (inList) {
+      htmlParts.push('</ul>');
+      inList = false;
+    }
+  };
+
+  lines.forEach(line => {
+    const trimmed = line.trim();
+
+    if (!trimmed) {
+      closeList();
+      return;
+    }
+
+    if (/^[-\u2022]\s+/.test(trimmed)) {
+      if (!inList) {
+        htmlParts.push('<ul class="release-modal-list">');
+        inList = true;
+      }
+      const content = formatInlineMarkdown(trimmed.replace(/^[-\u2022]\s+/, ''));
+      htmlParts.push(`<li>${content}</li>`);
+    } else {
+      closeList();
+      const content = formatInlineMarkdown(trimmed);
+      htmlParts.push(`<p>${content}</p>`);
+    }
+  });
+
+  closeList();
+  return htmlParts.join('');
+}
+
+const releaseNotes = (() => {
+  try {
+    const data = yaml.load(releaseNotesYamlRaw);
+    const rawNotes = Array.isArray(data) ? data : [];
+    return rawNotes
+      .filter(note => note && note.id && note.version && note.title)
+      .map(note => ({
+        id: note.id,
+        version: String(note.version),
+        title: note.title,
+        lang: note.lang || null,
+        bodyHtml: simpleMarkdownToHtml(note.body || '')
+      }));
+  } catch (error) {
+    console.error('Error parsing release-notes.yaml:', error);
     return [];
   }
 })();
@@ -70,6 +144,24 @@ const alternateLocales = Object.entries(OG_LOCALES)
 
   <link rel="manifest" href="/in_due_tocchi/manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="/in_due_tocchi/favicon.svg" />
+
+  <style>
+    #release-modal-body ul {
+      list-style: disc;
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    #release-modal-body li {
+      margin-bottom: 0.35rem;
+      line-height: 1.4;
+    }
+
+    #release-modal-body p {
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col pb-28">
   <div class="container mx-auto px-4 py-4 max-w-4xl flex-1">
@@ -221,10 +313,43 @@ const alternateLocales = Object.entries(OG_LOCALES)
     </div>
   </div>
 
+  <!-- Release Notes Modal -->
+  <div
+    id="release-modal"
+    class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 px-4 hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="release-modal-title"
+  >
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 flex flex-col gap-5">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wide text-blue-600 mb-1" data-i18n="releaseModal.badge">Novità</p>
+          <h3 id="release-modal-title" class="text-2xl font-display font-extrabold text-gray-900" data-i18n="releaseModal.placeholderTitle">
+            Cosa cambia in questa versione
+          </h3>
+          <p class="text-sm text-gray-500 mt-1">
+            <span data-i18n="releaseModal.versionLabel">Versione</span>
+            <span id="release-modal-version" class="font-semibold text-gray-800 ml-1">—</span>
+          </p>
+        </div>
+        <button id="release-modal-close" class="text-gray-400 hover:text-gray-600 text-2xl leading-none">
+          ×
+          <span class="sr-only" data-i18n="releaseModal.close">Chiudi</span>
+        </button>
+      </div>
+      <div id="release-modal-body" class="text-sm text-gray-700 space-y-4"></div>
+      <button id="release-modal-cta" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl px-4 py-3 transition-colors" data-i18n="releaseModal.cta">
+        Ho capito
+      </button>
+    </div>
+  </div>
+
   <script is:inline set:html={`
     // Templates loaded at build time, embedded as JSON
     // Using direct JSON assignment instead of define:vars for better Android compatibility
     window.DEFAULT_TEMPLATES = ${JSON.stringify(templates)};
+    window.RELEASE_NOTES = ${JSON.stringify(releaseNotes)};
   `}></script>
 
   <script>
@@ -257,7 +382,10 @@ const alternateLocales = Object.entries(OG_LOCALES)
 
     // Get templates from inline script
     const ALL_TEMPLATES = window.DEFAULT_TEMPLATES || [];
+    const ALL_RELEASE_NOTES = window.RELEASE_NOTES || [];
+    const RELEASE_STORAGE_KEY = 'shareforge-release-version';
     let DEFAULT_TEMPLATES = []; // Will be filtered by language
+    let activeReleaseNote = null;
 
     // Initialize i18n
     setTranslations(translations);
@@ -265,6 +393,102 @@ const alternateLocales = Object.entries(OG_LOCALES)
     // Function to filter templates by current language
     function getTemplatesForLanguage(lang) {
       return ALL_TEMPLATES.filter(t => t.lang === lang || !t.lang); // Include templates without lang field for backward compatibility
+    }
+
+    function getReleaseNotesForLanguage(lang) {
+      const localizedNotes = ALL_RELEASE_NOTES.filter(note => note.lang === lang);
+      if (localizedNotes.length) {
+        return localizedNotes;
+      }
+
+      return ALL_RELEASE_NOTES.filter(note => !note.lang);
+    }
+
+    function getLatestReleaseNote() {
+      const lang = getCurrentLanguage();
+      const notes = getReleaseNotesForLanguage(lang);
+      return notes.length ? notes[0] : null;
+    }
+
+    function hasSeenRelease(version) {
+      if (!version) return true;
+
+      try {
+        const storedVersion = localStorage.getItem(RELEASE_STORAGE_KEY);
+        return storedVersion === version;
+      } catch (error) {
+        console.warn('localStorage not available for release modal check:', error);
+        return false;
+      }
+    }
+
+    function markReleaseAsSeen(version) {
+      if (!version) return;
+
+      try {
+        localStorage.setItem(RELEASE_STORAGE_KEY, version);
+      } catch (error) {
+        console.warn('localStorage not available for release modal persistence:', error);
+      }
+    }
+
+    function renderReleaseModal(note) {
+      if (!note) return;
+
+      if (releaseModalTitle) {
+        releaseModalTitle.textContent = note.title;
+      }
+
+      if (releaseModalVersion) {
+        releaseModalVersion.textContent = note.version || '';
+      }
+
+      if (releaseModalBody) {
+        releaseModalBody.innerHTML = note.bodyHtml || '';
+      }
+    }
+
+    function openReleaseModal(note) {
+      if (!note || !releaseModal) return;
+      activeReleaseNote = note;
+      renderReleaseModal(note);
+      releaseModal.classList.remove('hidden');
+    }
+
+    function closeReleaseModal() {
+      if (releaseModal) {
+        releaseModal.classList.add('hidden');
+      }
+
+      if (activeReleaseNote && activeReleaseNote.version) {
+        markReleaseAsSeen(activeReleaseNote.version);
+      }
+
+      activeReleaseNote = null;
+    }
+
+    function syncReleaseModalWithLanguage() {
+      const note = getLatestReleaseNote();
+      if (!note) return;
+
+      if (
+        activeReleaseNote &&
+        activeReleaseNote.version === note.version &&
+        releaseModal &&
+        !releaseModal.classList.contains('hidden')
+      ) {
+        activeReleaseNote = note;
+        renderReleaseModal(note);
+        return;
+      }
+
+      if (!hasSeenRelease(note.version)) {
+        const deviceModalElement = document.getElementById('device-modal');
+        if (deviceModalElement && !deviceModalElement.classList.contains('hidden')) {
+          return;
+        }
+        openReleaseModal(note);
+      }
     }
 
     // Function to update all i18n elements
@@ -309,6 +533,9 @@ const alternateLocales = Object.entries(OG_LOCALES)
 
       // Update dynamic content
       updatePreview();
+
+      // Update release notes modal for current language/version
+      syncReleaseModalWithLanguage();
     }
 
     // Function to update language selector button states
@@ -458,6 +685,8 @@ const alternateLocales = Object.entries(OG_LOCALES)
         } catch (e) {
           console.warn('localStorage not available for dismissing device modal:', e);
         }
+
+        syncReleaseModalWithLanguage();
       }
     }
 
@@ -471,6 +700,28 @@ const alternateLocales = Object.entries(OG_LOCALES)
     document.addEventListener('click', (e) => {
       if (e.target && e.target.id === 'dismiss-modal') {
         hideDeviceModal();
+      }
+    });
+
+    if (releaseModalClose) {
+      releaseModalClose.addEventListener('click', () => closeReleaseModal());
+    }
+
+    if (releaseModalCta) {
+      releaseModalCta.addEventListener('click', () => closeReleaseModal());
+    }
+
+    if (releaseModal) {
+      releaseModal.addEventListener('click', (event) => {
+        if (event.target === releaseModal) {
+          closeReleaseModal();
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && releaseModal && !releaseModal.classList.contains('hidden')) {
+        closeReleaseModal();
       }
     });
 
@@ -530,6 +781,12 @@ const alternateLocales = Object.entries(OG_LOCALES)
     const shareBtn = document.getElementById('share-btn');
     const copyBtn = document.getElementById('copy-btn');
     const feedbackMessage = document.getElementById('feedback-message');
+    const releaseModal = document.getElementById('release-modal');
+    const releaseModalBody = document.getElementById('release-modal-body');
+    const releaseModalTitle = document.getElementById('release-modal-title');
+    const releaseModalVersion = document.getElementById('release-modal-version');
+    const releaseModalClose = document.getElementById('release-modal-close');
+    const releaseModalCta = document.getElementById('release-modal-cta');
 
     console.log('DOM elements:', {
       templateButtons: !!templateButtons,

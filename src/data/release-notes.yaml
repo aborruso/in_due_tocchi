@@ -1,0 +1,26 @@
+- id: release-2025-11-14-it
+  version: '2025.11.14'
+  lang: it
+  title: 'Ti raccontiamo le novità'
+  body: |
+    - ✨ Nuova modale "Novità" che appare dopo gli aggiornamenti importanti
+    - 📝 Le release notes vengono definite da questo file YAML (id, versione, titolo e markdown)
+    - 📌 Quando chiudi la modale salvi la versione e non la rivedi fino al prossimo rilascio
+
+- id: release-2025-11-14-en
+  version: '2025.11.14'
+  lang: en
+  title: 'November updates'
+  body: |
+    - ✨ New "What’s new" modal appears after important updates
+    - 📝 Release notes now live in this YAML file (id, version, title and markdown)
+    - 📌 Once dismissed, the modal stays hidden until the next tagged release
+
+- id: release-2025-11-08-it
+  version: '2025.11.08'
+  lang: it
+  title: 'Template statici e ordinamento'
+  body: |
+    - 📦 Template caricati solo da YAML e riordinabili localmente
+    - ♻️ Pulsante per ripristinare l'ordine originale
+    - ⚠️ Modale di avviso per chi usa ShareForge da desktop

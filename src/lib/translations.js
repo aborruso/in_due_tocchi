@@ -74,6 +74,15 @@ export const translations = {
       update: 'Aggiorna ora',
     },
 
+    // Release modal
+    releaseModal: {
+      badge: 'Novità',
+      placeholderTitle: 'Cosa cambia in questa versione',
+      versionLabel: 'Versione',
+      close: 'Chiudi',
+      cta: 'Ho capito',
+    },
+
     // Footer
     footer: {
       version: 'ShareForge v1.0 - PWA Offline-First',
@@ -224,6 +233,15 @@ export const translations = {
     updateBanner: {
       message: 'New version available!',
       update: 'Update now',
+    },
+
+    // Release modal
+    releaseModal: {
+      badge: "What's new",
+      placeholderTitle: 'What changed in this release',
+      versionLabel: 'Version',
+      close: 'Close',
+      cta: 'Got it',
     },
 
     // Footer
