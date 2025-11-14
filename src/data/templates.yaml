@@ -228,7 +228,7 @@
   template: |
     Voglio che tu agisca come uno strumento di *readability avanzata*.
 
-    1. Leggi il contenuto da questo URL: {{url}}
+    1. Leggi il contenuto da questo URL: {url}
 
     2. Estrai solo il contenuto principale dell’articolo/pagina, producendo una versione *pulita e leggibile* che:
        - mantenga tono e ordine dell’originale;
