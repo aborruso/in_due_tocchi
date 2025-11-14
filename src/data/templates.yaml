@@ -218,11 +218,46 @@
        - Miglioramenti strutturali (headings mancanti, sezioni da aggiungere)
        - Elementi mancanti (schema markup, immagini, internal links)
 
+- id: leggilo
+  name: Leggilo
+  emoji: "📖"
+  lang: it
+  active: true
+  description: |
+    Trasforma una pagina web in una versione pulita, leggibile e senza fronzoli.
+  template: |
+    Voglio che tu agisca come uno strumento di *readability avanzata*.
+
+    1. Leggi il contenuto da questo URL: {{url}}
+
+    2. Estrai solo il contenuto principale dell’articolo/pagina, producendo una versione *pulita e leggibile* che:
+       - mantenga tono e ordine dell’originale;
+       - mantenga titoli, sottotitoli, paragrafi, elenchi e codici se presenti;
+       - elimini menu, breadcrumb, footer, header, sidebar, cookie banner, pulsanti social, commenti, newsletter, "articoli correlati" e simili;
+       - elimini immagini, didascalie, box pubblicitari, promo, pop-up e ogni elemento non testuale;
+       - lo traduca in italiano
+
+    3. Riduci o rimuovi le parti di testo inutili:
+       - Taglia le lunghe premesse generiche che non aggiungono contenuto sostanziale al tema principale;
+       - rimuovi o accorcia digressioni off-topic, auto-promozione, disclaimer prolissi, ripetizioni;
+       - elimina CTA ("iscriviti alla newsletter", "scarica la nostra app", "seguici sui social") se non servono a capire il contenuto.
+
+    4. Conserva in forma chiara:
+       - spiegazioni, passaggi operativi, esempi, definizioni, avvertenze utili;
+       - eventuali link solo quando necessari alla comprensione (in caso di dubbio, puoi omettere l’URL ma mantenere il riferimento testuale).
+
+    5. Output:
+       - restituisci solo il testo ripulito;
+       - non aggiungere commenti, riassunti, valutazioni, note tue;
+       - non spiegare cosa hai fatto: mostra direttamente il testo finale, come se fosse una versione "reader mode" della pagina.
+
+    Se il contenuto è povero o composto quasi solo da elementi non testuali, esplicitalo brevemente e mostra comunque ciò che riesci a recuperare di utile.
+
 - id: open-data-analysis
   name: Dati aperti
   emoji: "📊"
   lang: it
-  active: true
+  active: false
   description: |
     **Dati aperti** guida un'analisi strutturata: elenca i dati presenti, valuta livello di strutturazione, licenze e rischi, e propone strumenti per l'estrazione. È utile quando devi capire se e come pubblicare un dataset in modo responsabile.
   template: |
