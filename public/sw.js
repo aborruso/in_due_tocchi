@@ -1,5 +1,5 @@
 // Dynamic cache name based on timestamp - changes with each deployment
-const CACHE_VERSION = '20251114-0717';  // Update this with each deployment
+const CACHE_VERSION = '20251114-0733';  // Update this with each deployment
 const CACHE_NAME = `shareforge-v${CACHE_VERSION}`;
 const ASSETS_TO_CACHE = [
   '/in_due_tocchi/',

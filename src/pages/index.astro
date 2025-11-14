@@ -381,14 +381,19 @@ const alternateLocales = Object.entries(OG_LOCALES)
     import QRCode from 'qrcode';
 
     // Get templates from inline script
-    const ALL_TEMPLATES = window.DEFAULT_TEMPLATES || [];
-    const ALL_RELEASE_NOTES = window.RELEASE_NOTES || [];
+    let ALL_TEMPLATES = [];
+    let ALL_RELEASE_NOTES = [];
     const RELEASE_STORAGE_KEY = 'shareforge-release-version';
     let DEFAULT_TEMPLATES = []; // Will be filtered by language
     let activeReleaseNote = null;
 
     // Initialize i18n
     setTranslations(translations);
+
+    function bootstrapStaticData() {
+      ALL_TEMPLATES = Array.isArray(window.DEFAULT_TEMPLATES) ? window.DEFAULT_TEMPLATES : [];
+      ALL_RELEASE_NOTES = Array.isArray(window.RELEASE_NOTES) ? window.RELEASE_NOTES : [];
+    }
 
     // Function to filter templates by current language
     function getTemplatesForLanguage(lang) {
@@ -822,6 +827,8 @@ const alternateLocales = Object.entries(OG_LOCALES)
 
     // Initialize
     function init() {
+      bootstrapStaticData();
+
       // Migrate old template IDs if needed
       migrateTemplateIds();
 
@@ -1157,11 +1164,21 @@ const alternateLocales = Object.entries(OG_LOCALES)
       });
     }
 
-    // Initialize app
-    try {
-      init();
-    } catch (error) {
-      console.error('Error during app initialization:', error);
+    // Initialize app once DOM is ready so inline data globals exist
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        try {
+          init();
+        } catch (error) {
+          console.error('Error during app initialization:', error);
+        }
+      });
+    } else {
+      try {
+        init();
+      } catch (error) {
+        console.error('Error during app initialization:', error);
+      }
     }
   </script>
 </body>
