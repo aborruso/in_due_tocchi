@@ -589,6 +589,9 @@ const alternateLocales = Object.entries(OG_LOCALES)
         shareBtn.style.display = 'none';
       }
 
+      // Update share buttons state based on URL
+      updateShareButtonsState();
+
       // Show mobile help banner if needed
       if (shouldShowMobileHelp()) {
         showMobileHelp();
@@ -702,6 +705,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
       inputText.value = currentData.text;
       inputUrl.value = currentData.url;
       isPopulating = false;
+      updateShareButtonsState();
     }
 
     // Update current data from inputs
@@ -760,6 +764,33 @@ const alternateLocales = Object.entries(OG_LOCALES)
       }, 3000);
     }
 
+    // Update share buttons state based on URL presence
+    function updateShareButtonsState() {
+      const hasUrl = currentData.url && currentData.url.trim() !== '';
+
+      if (shareBtn) {
+        shareBtn.disabled = !hasUrl;
+        if (!hasUrl) {
+          shareBtn.classList.add('opacity-50', 'cursor-not-allowed');
+          shareBtn.classList.remove('hover:bg-blue-600', 'hover:shadow-md');
+        } else {
+          shareBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+          shareBtn.classList.add('hover:bg-blue-600', 'hover:shadow-md');
+        }
+      }
+
+      if (copyBtn) {
+        copyBtn.disabled = !hasUrl;
+        if (!hasUrl) {
+          copyBtn.classList.add('opacity-50', 'cursor-not-allowed');
+          copyBtn.classList.remove('hover:bg-gray-600', 'hover:shadow-md');
+        } else {
+          copyBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+          copyBtn.classList.add('hover:bg-gray-600', 'hover:shadow-md');
+        }
+      }
+    }
+
 
     // Event listeners
 
@@ -786,6 +817,7 @@ const alternateLocales = Object.entries(OG_LOCALES)
         if (!isPopulating) {
           updateDataFromInputs();
           updatePreview();
+          updateShareButtonsState();
         }
       });
     }
