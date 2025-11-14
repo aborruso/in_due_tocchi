@@ -381,6 +381,9 @@ notifications/spec.md
 - Avoid frameworks without clear justification
 - Choose boring, proven patterns
 
+### Critical Pitfalls
+- Client logic that usa `window.DEFAULT_TEMPLATES` / `window.RELEASE_NOTES` **deve** iniziare solo dopo che lo `<script is:inline>` ha popolato queste variabili (es. dentro `DOMContentLoaded` o dopo aver richiamato una funzione di bootstrap). Se inizializzi prima, i template spariscono perché gli array risultano vuoti nelle release buildate. Controlla sempre che il bootstrap avvenga prima di chiamare `updateI18n()` o `loadTemplates()`.
+
 ### Complexity Triggers
 Only add complexity with:
 - Performance data showing current solution too slow
