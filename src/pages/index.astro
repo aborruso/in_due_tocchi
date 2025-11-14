@@ -701,6 +701,33 @@ const alternateLocales = Object.entries(OG_LOCALES)
       setTimeout(showDeviceModal, 1000);
     }
 
+    // App state
+    let currentTemplateId = null;
+    let currentData = { title: '', text: '', url: '' };
+    let isPopulating = false; // Flag to prevent event handlers during populate
+    let orderedTemplates = []; // Ordered templates from storage
+    let draggedElement = null;
+
+    // DOM elements - declare early before any usage
+    const templateButtons = document.getElementById('template-buttons');
+    const previewText = document.getElementById('preview-text');
+    const charCount = document.getElementById('char-count');
+    const appendUrlCheckbox = document.getElementById('append-url-checkbox');
+
+    const inputTitle = document.getElementById('input-title');
+    const inputText = document.getElementById('input-text');
+    const inputUrl = document.getElementById('input-url');
+
+    const shareBtn = document.getElementById('share-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const feedbackMessage = document.getElementById('feedback-message');
+    const releaseModal = document.getElementById('release-modal');
+    const releaseModalBody = document.getElementById('release-modal-body');
+    const releaseModalTitle = document.getElementById('release-modal-title');
+    const releaseModalVersion = document.getElementById('release-modal-version');
+    const releaseModalClose = document.getElementById('release-modal-close');
+    const releaseModalCta = document.getElementById('release-modal-cta');
+
     // Modal dismissal handler
     document.addEventListener('click', (e) => {
       if (e.target && e.target.id === 'dismiss-modal') {
@@ -766,47 +793,8 @@ const alternateLocales = Object.entries(OG_LOCALES)
       }
     });
 
-    // App state
-    let currentTemplateId = null;
-    let currentData = { title: '', text: '', url: '' };
-    let isPopulating = false; // Flag to prevent event handlers during populate
-    let orderedTemplates = []; // Ordered templates from storage
-    let draggedElement = null;
 
-    // DOM elements
-    const templateButtons = document.getElementById('template-buttons');
-    const previewText = document.getElementById('preview-text');
-    const charCount = document.getElementById('char-count');
-    const appendUrlCheckbox = document.getElementById('append-url-checkbox');
-
-    const inputTitle = document.getElementById('input-title');
-    const inputText = document.getElementById('input-text');
-    const inputUrl = document.getElementById('input-url');
-
-    const shareBtn = document.getElementById('share-btn');
-    const copyBtn = document.getElementById('copy-btn');
-    const feedbackMessage = document.getElementById('feedback-message');
-    const releaseModal = document.getElementById('release-modal');
-    const releaseModalBody = document.getElementById('release-modal-body');
-    const releaseModalTitle = document.getElementById('release-modal-title');
-    const releaseModalVersion = document.getElementById('release-modal-version');
-    const releaseModalClose = document.getElementById('release-modal-close');
-    const releaseModalCta = document.getElementById('release-modal-cta');
-
-    console.log('DOM elements:', {
-      templateButtons: !!templateButtons,
-      previewText: !!previewText,
-      charCount: !!charCount,
-      appendUrlCheckbox: !!appendUrlCheckbox,
-      inputTitle: !!inputTitle,
-      inputText: !!inputText,
-      inputUrl: !!inputUrl,
-      shareBtn: !!shareBtn,
-      copyBtn: !!copyBtn,
-      feedbackMessage: !!feedbackMessage
-    });
-
-    // Migrate old template IDs in localStorage
+    // Template selection    // Migrate old template IDs in localStorage
     function migrateTemplateIds() {
       try {
         const stored = localStorage.getItem('shareforge-template-order');

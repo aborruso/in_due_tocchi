@@ -18,7 +18,7 @@ Instructions for AI coding assistants using OpenSpec for spec-driven development
 Create proposal when you need to:
 - Add features or functionality
 - Make breaking changes (API, schema)
-- Change architecture or patterns  
+- Change architecture or patterns
 - Optimize performance (changes behavior)
 - Update security patterns
 
@@ -147,7 +147,7 @@ openspec/
 ```
 New request?
 ├─ Bug fix restoring spec behavior? → Fix directly
-├─ Typo/format/comment? → Fix directly  
+├─ Typo/format/comment? → Fix directly
 ├─ New feature/capability? → Create proposal
 ├─ Breaking change? → Create proposal
 ├─ Architecture change? → Create proposal
@@ -382,7 +382,22 @@ notifications/spec.md
 - Choose boring, proven patterns
 
 ### Critical Pitfalls
-- Client logic that usa `window.DEFAULT_TEMPLATES` / `window.RELEASE_NOTES` **deve** iniziare solo dopo che lo `<script is:inline>` ha popolato queste variabili (es. dentro `DOMContentLoaded` o dopo aver richiamato una funzione di bootstrap). Se inizializzi prima, i template spariscono perché gli array risultano vuoti nelle release buildate. Controlla sempre che il bootstrap avvenga prima di chiamare `updateI18n()` o `loadTemplates()`.
+
+**Template/Data Initialization**
+- Code that uses `window.DEFAULT_TEMPLATES` or `window.RELEASE_NOTES` MUST call `bootstrapStaticData()` **inside** the `init()` function, which runs after `DOMContentLoaded`
+- ❌ **NEVER** call `bootstrapStaticData()` at module top-level (outside functions)
+- ✅ **ALWAYS** call it as the first line of `init()`, before `updateI18n()` or `loadTemplates()`
+- **Why**: Bundled JS modules may execute before inline `<script is:inline>` populates `window` globals, causing empty arrays in production builds
+- **Symptom**: Templates disappear after build, but work in dev mode
+- **Location**: `src/pages/index.astro` - see `init()` function for correct pattern
+
+**DOM Variable Declaration Order**
+- All `const` variables used in event listeners or early in script MUST be declared before their first use
+- ❌ **NEVER** use a variable before its `const` declaration (temporal dead zone error)
+- ✅ **ALWAYS** declare all DOM element references and app state at the top of the script, right after imports
+- **Why**: `const` and `let` have temporal dead zones - they can't be accessed before declaration
+- **Symptom**: `ReferenceError: Cannot access 'variableName' before initialization`
+- **Location**: `src/pages/index.astro` - all DOM variables declared together at line ~704
 
 ### Complexity Triggers
 Only add complexity with:
