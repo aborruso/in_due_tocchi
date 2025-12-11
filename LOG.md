@@ -1,3 +1,15 @@
+## 2025-12-11
+
+**Fixed Italian translations: removed title case, improved wording (IT/EN)**
+- Removed all title case from Italian translations (sentence case is correct in Italian)
+- Examples: "Testo Generato" → "Testo generato", "Prepara il Contesto" → "Prepara il contesto"
+- Changed benefit title: "Subito, Offline" → "Pronto in un tap" (IT), "Instant, Offline" → "Ready in a Tap" (EN)
+- Changed benefit title: "Invia al miglior LLM" → "Invia all'LLM giusto" (IT), "Send to the Best LLM" → "Send to the Right LLM" (EN)
+- Updated benefit text: removed misleading "zero connessione" claim, clarified app has no backend but needs connection for LLM
+- Updated benefit text: "modello migliore" → "modello più adatto" (IT), "best model" → "most suitable model" (EN)
+- Removed hardcoded "11" from template count: "11 template" → "Template" (both IT/EN)
+- Changes in src/lib/translations.js (both IT and EN sections)
+
 ## 2025-11-10
 
 **Added heading anchor links with copy, scroll, and URL update**

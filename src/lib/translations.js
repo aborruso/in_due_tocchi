@@ -29,7 +29,7 @@ export const translations = {
 
     // Text preview section
     preview: {
-      title: 'Testo Generato',
+      title: 'Testo generato',
       placeholder: 'Il testo generato apparirà qui...',
       charCount: '{count} caratteri',
       appendUrl: 'Aggiungi URL in coda (se non già presente nel template)',
@@ -37,7 +37,7 @@ export const translations = {
 
     // Input section
     input: {
-      title: 'Dati in Ingresso',
+      title: 'Dati in ingresso',
       titleLabel: 'Titolo',
       titlePlaceholder: 'Titolo del contenuto',
       textLabel: 'Testo',
@@ -85,7 +85,7 @@ export const translations = {
 
     // Footer
     footer: {
-      version: 'ShareForge v1.0 - PWA Offline-First',
+      version: 'ShareForge v1.0 - PWA offline-first',
       github: 'Codice su GitHub',
     },
 
@@ -99,22 +99,22 @@ export const translations = {
 
     // Mobile page
     mobilePage: {
-      heroTitle: 'Prepara il Contesto<br />per i tuoi LLM',
+      heroTitle: 'Prepara il contesto<br />per i tuoi LLM',
       heroSubtitle: 'Su smartphone non puoi scrivere prompt prima di inviare l\'URL. Con ShareForge, crei il contesto attorno al link e lo invii al miglior LLM per il tuo obiettivo.',
       openApp: 'Apri ShareForge',
-      openAppCta: 'Apri ShareForge Ora →',
+      openAppCta: 'Apri ShareForge ora →',
 
       benefitsTitle: 'Perché ShareForge?',
-      benefit1Title: 'Crea il Contesto Prima',
+      benefit1Title: 'Crea il contesto prima',
       benefit1Text: 'Scegli un template e circonda l\'URL con contesto strutturato. Così l\'LLM capisce cosa vuoi, senza doverlo spiegare dopo.',
-      benefit2Title: 'Subito, Offline',
-      benefit2Text: 'Zero server, zero connessione. Genera il contesto istantaneamente nel tuo smartphone, ovunque tu sia.',
-      benefit3Title: 'Template = Prompt Strutturati',
-      benefit3Text: '11 template per diversi LLM use case: SEO analysis, fact-check, sintesi, thread social. Ognuno è un prompt ottimizzato.',
-      benefit4Title: 'Invia al Miglior LLM',
-      benefit4Text: 'Condividi il contesto a ChatGPT, Claude, Gemini o altri. Scegli il modello migliore per il tuo template/obiettivo.',
+      benefit2Title: 'Pronto in un tap',
+      benefit2Text: 'Nessun backend da contattare. L\'app si avvia istantaneamente e genera il contesto subito, pronto per essere inviato al tuo LLM.',
+      benefit3Title: 'Template = prompt strutturati',
+      benefit3Text: 'Template per diversi LLM use case: SEO analysis, fact-check, sintesi, thread social. Ognuno è un prompt ottimizzato.',
+      benefit4Title: 'Invia all\'LLM giusto',
+      benefit4Text: 'Condividi il contesto a ChatGPT, Claude, Gemini o altri. Scegli il modello più adatto al tuo template/obiettivo.',
 
-      demoTitle: 'Il Flusso: URL → Contesto → LLM → Utente',
+      demoTitle: 'Il flusso: URL → contesto → LLM → utente',
       demoPlaceholder: 'Video demo in arrivo',
       demoDescription: 'Mostra come: condividere URL → scegliere template → inviare a un LLM',
 
@@ -126,11 +126,11 @@ export const translations = {
       flow5: 'Fai click su Condividi',
       flow6: 'Invialo al tuo sistema LLM preferito',
 
-      installTitle: 'Installa come App',
+      installTitle: 'Installa come app',
       installSubtitle: 'Testata solo su Chrome per Android. Parti da <a href="https://aborruso.github.io/in_due_tocchi/" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-800">https://aborruso.github.io/in_due_tocchi/</a> e aggiungi ShareForge alla schermata iniziale in 30 secondi',
       step1Title: 'Apri Chrome',
       step1Text: 'Accedi a ShareForge tramite il browser Chrome del tuo Android',
-      step2Title: 'Tap Menu (⋮)',
+      step2Title: 'Tap menu (⋮)',
       step2Text: 'Premi i tre puntini in alto a destra del browser',
       step2Note: 'Vedrai il bottone <strong>"Installa app"</strong> o <strong>"Aggiungi a Home"</strong>',
       step3Title: 'Tap "Installa app"',
@@ -268,12 +268,12 @@ export const translations = {
       benefitsTitle: 'Why ShareForge?',
       benefit1Title: 'Create Context First',
       benefit1Text: 'Choose a template and surround the URL with structured context. The LLM understands what you want, without having to explain afterwards.',
-      benefit2Title: 'Instant, Offline',
-      benefit2Text: 'Zero servers, zero connection. Generate context instantly on your smartphone, wherever you are.',
+      benefit2Title: 'Ready in a Tap',
+      benefit2Text: 'No backend to contact. The app starts instantly and generates context immediately, ready to send to your LLM.',
       benefit3Title: 'Templates = Structured Prompts',
-      benefit3Text: '11 templates for different LLM use cases: SEO analysis, fact-checking, summaries, social threads. Each is an optimized prompt.',
-      benefit4Title: 'Send to the Best LLM',
-      benefit4Text: 'Share context to ChatGPT, Claude, Gemini or others. Choose the best model for your template/goal.',
+      benefit3Text: 'Templates for different LLM use cases: SEO analysis, fact-checking, summaries, social threads. Each is an optimized prompt.',
+      benefit4Title: 'Send to the Right LLM',
+      benefit4Text: 'Share context to ChatGPT, Claude, Gemini or others. Choose the most suitable model for your template/goal.',
 
       demoTitle: 'The Flow: URL → Context → LLM → User',
       demoPlaceholder: 'Video demo coming soon',
